@@ -87,7 +87,7 @@ export function AnimatedHero({ onOrderClick }: AnimatedHeroProps) {
           whileHover={{ rotate: 0, scale: 1.05 }}
           className="bg-white text-black px-8 py-3 rounded-2xl text-xl md:text-5xl font-black italic -rotate-2 transform shadow-xl shadow-white/10 cursor-default"
         >
-          Le Monde IPTV Abonnement
+          Match Ce Soir Fr
         </motion.div>
 
         {/* Description */}
@@ -95,8 +95,7 @@ export function AnimatedHero({ onOrderClick }: AnimatedHeroProps) {
           variants={itemVariants}
           className="text-lg md:text-xl text-gray-300 max-w-3xl mt-8 leading-relaxed font-medium"
         >
-          Découvrez le <strong className="text-white">Meilleur IPTV</strong> premium. Plus de 65 000 chaînes,
-          films et séries VOD en <strong className="text-white">Full HD et 4K</strong>. Zapping ultra-rapide, sans coupure.
+          Découvrez le <strong className="text-white">Meilleur IPTV premium</strong> avec <strong className="text-[#a855f7]">Match Ce Soir Fr</strong>. Choisissez le forfait idéal parmi nos offres <strong className="text-white">Standard, Premium 4K &amp; VIP+</strong>, et profitez d&apos;un service d&apos;exception stable à 100% avec zapping ultra-rapide. Accédez à plus de 75 000 chaînes &amp; VOD et un support réactif 24/7. <strong className="text-[#a855f7]">Démarrez votre test gratuit de 1H dès maintenant !</strong>
         </motion.p>
 
         {/* CTA Buttons */}
@@ -113,7 +112,7 @@ export function AnimatedHero({ onOrderClick }: AnimatedHeroProps) {
             </Button>
           </motion.div>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
-            <a href="#abonnements">
+            <a href="#tarifs">
               <Button
                 variant="outline"
                 className="w-full rounded-full px-10 py-7 text-xl font-bold border-white/20 hover:bg-white/5 text-white bg-transparent backdrop-blur-sm"
@@ -122,6 +121,20 @@ export function AnimatedHero({ onOrderClick }: AnimatedHeroProps) {
               </Button>
             </a>
           </motion.div>
+        </motion.div>
+
+        {/* Trust signals */}
+        <motion.div
+          variants={itemVariants}
+          className="flex items-center justify-center mt-2 text-sm"
+        >
+          {/* 7-day guarantee */}
+          <div className="flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-sm rounded-full px-5 py-2.5 text-gray-300">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-green-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <span><strong className="text-white">Garantie 7 jours</strong> — Remboursement intégral si vous n&apos;êtes pas satisfait</span>
+          </div>
         </motion.div>
       </motion.div>
     </section>
