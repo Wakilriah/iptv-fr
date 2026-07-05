@@ -17,6 +17,7 @@ import {
 } from "lucide-react"
 import { AnimatedHero } from "@/components/AnimatedHero"
 import { OrderModal } from "@/components/OrderModal"
+import { TrendingVOD } from "@/components/TrendingVOD"
 
 const WHATSAPP_NUMBER = "447848166907"
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`
@@ -345,56 +346,7 @@ export default function Home() {
             <p className="text-gray-400 text-lg">Accédez à une bibliothèque immense de <span className="text-white font-black">+120 000</span> contenus en VOD (Films &amp; Séries)</p>
           </div>
 
-          <style>{`
-            @keyframes scrollPosters {
-              0%   { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-            .posters-track { animation: scrollPosters 30s linear infinite; display:flex; gap:1rem; width:max-content; }
-            .posters-track:hover { animation-play-state: paused; }
-          `}</style>
-
-          <div className="bg-[#0d1929] rounded-3xl p-6 overflow-hidden border border-white/5">
-            <div className="posters-track">
-              {[
-                { title: "Fêlés", bg: "from-yellow-600 to-orange-500", label: "COMÉDIE" },
-                { title: "Santosh", bg: "from-red-800 to-red-600", label: "POLICIER" },
-                { title: "Anzu, Chat-fantôme", bg: "from-blue-900 to-purple-800", label: "ANIMATION" },
-                { title: "Super Papa", bg: "from-blue-600 to-cyan-500", label: "FAMILLE" },
-                { title: "Mon Ami le Petit Manchot", bg: "from-orange-500 to-yellow-400", label: "AVENTURE" },
-                { title: "Le Comte de Monte-Cristo", bg: "from-slate-800 to-slate-600", label: "DRAME" },
-                { title: "City of Darkness", bg: "from-gray-900 to-gray-700", label: "ACTION" },
-                { title: "Panique en Afrique", bg: "from-amber-700 to-yellow-500", label: "COMÉDIE" },
-                { title: "La Vénus d'Argent", bg: "from-indigo-800 to-purple-600", label: "THRILLER" },
-                { title: "Horizon", bg: "from-sky-800 to-blue-500", label: "WESTERN" },
-                { title: "Emilia Pérez", bg: "from-pink-700 to-rose-500", label: "DRAME" },
-                { title: "Alien: Romulus", bg: "from-zinc-900 to-zinc-700", label: "SCI-FI" },
-                { title: "Fêlés", bg: "from-yellow-600 to-orange-500", label: "COMÉDIE" },
-                { title: "Santosh", bg: "from-red-800 to-red-600", label: "POLICIER" },
-                { title: "Anzu, Chat-fantôme", bg: "from-blue-900 to-purple-800", label: "ANIMATION" },
-                { title: "Super Papa", bg: "from-blue-600 to-cyan-500", label: "FAMILLE" },
-                { title: "Mon Ami le Petit Manchot", bg: "from-orange-500 to-yellow-400", label: "AVENTURE" },
-                { title: "Le Comte de Monte-Cristo", bg: "from-slate-800 to-slate-600", label: "DRAME" },
-                { title: "City of Darkness", bg: "from-gray-900 to-gray-700", label: "ACTION" },
-                { title: "Panique en Afrique", bg: "from-amber-700 to-yellow-500", label: "COMÉDIE" },
-                { title: "La Vénus d'Argent", bg: "from-indigo-800 to-purple-600", label: "THRILLER" },
-                { title: "Horizon", bg: "from-sky-800 to-blue-500", label: "WESTERN" },
-                { title: "Emilia Pérez", bg: "from-pink-700 to-rose-500", label: "DRAME" },
-                { title: "Alien: Romulus", bg: "from-zinc-900 to-zinc-700", label: "SCI-FI" },
-              ].map((movie, i) => (
-                <div
-                  key={i}
-                  className={`shrink-0 w-36 h-52 rounded-2xl bg-gradient-to-b ${movie.bg} flex flex-col justify-end p-3 cursor-pointer hover:scale-105 transition-transform duration-300 border border-white/10 relative overflow-hidden`}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  <div className="relative z-10">
-                    <span className="text-[10px] font-black tracking-widest text-white/60 uppercase">{movie.label}</span>
-                    <p className="text-white font-black text-sm leading-tight mt-0.5">{movie.title}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <TrendingVOD />
         </div>
       </section>
 
