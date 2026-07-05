@@ -106,7 +106,7 @@ export default function ChannelsPage() {
             LISTE DES <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#d8b4fe]">CHAÎNES IPTV</span>
           </h1>
           <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
-            Recherchez et explorez nos milliers de chaînes internationales incluses dans tous nos forfaits d&apos;abonnement.
+            Recherchez et explorez nos +50 000 chaînes internationales incluses dans tous nos forfaits d&apos;abonnement.
           </p>
         </div>
 
