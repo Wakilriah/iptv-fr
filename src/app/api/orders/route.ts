@@ -74,10 +74,8 @@ export async function POST(request: Request) {
     // Get order number/count
     const orderCount = await prisma.order.count();
 
-    // Trigger Telegram notification asynchronously
-    sendTelegramNotification(order, orderCount).catch(err => 
-      console.error("Async Telegram Notification failed:", err)
-    );
+    // Trigger Telegram notification and await it to prevent Vercel serverless freeze
+    await sendTelegramNotification(order, orderCount);
 
     return NextResponse.json({ success: true, order }, { status: 201 });
   } catch (error) {
