@@ -195,7 +195,12 @@ export default function Home() {
       {/* Channels */}
       <section className="py-20 bg-[#0a0a0a] border-y border-white/5">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-12 text-white">Chaînes Populaires Incluses</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">Chaînes Populaires Incluses</h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Accédez en direct et en haute définition aux chaînes et plateformes majeures du sport, cinéma et divertissement.
+            </p>
+          </div>
 
           <div className="bg-[#0d1929] rounded-3xl p-6 border border-white/5">
             <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
