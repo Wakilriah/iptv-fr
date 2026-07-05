@@ -68,34 +68,34 @@ const badgeVariants = {
 }
 
 export function NeonChannelShowcase() {
-  const [visibleChannels, setVisibleChannels] = useState(() => ALL_CHANNELS.slice(0, 5))
+  const [visibleChannels, setVisibleChannels] = useState(() => ALL_CHANNELS.slice(0, 6))
   const [cycleKey, setCycleKey] = useState(0)
 
   const cycleChannels = useCallback(() => {
-    setVisibleChannels(shuffleAndPick(ALL_CHANNELS, 5))
+    setVisibleChannels(shuffleAndPick(ALL_CHANNELS, 6))
     setCycleKey((k) => k + 1)
   }, [])
 
   useEffect(() => {
     // Shuffle on client-side mount to immediately show random channels
-    setVisibleChannels(shuffleAndPick(ALL_CHANNELS, 5))
+    setVisibleChannels(shuffleAndPick(ALL_CHANNELS, 6))
     const interval = setInterval(cycleChannels, 3500)
     return () => clearInterval(interval)
   }, [cycleChannels])
 
   return (
-    <div className="flex flex-col items-center gap-6 w-full">
+    <div className="flex flex-col items-center gap-8 w-full">
       {/* Label */}
-      <p className="text-xs sm:text-sm text-gray-500 font-semibold uppercase tracking-[0.2em]">
+      <p className="text-sm sm:text-base text-gray-400 font-extrabold uppercase tracking-[0.25em]">
         Chaînes populaires en France
       </p>
 
       {/* Channel Badges Container */}
-      <div className="relative flex items-center justify-center min-h-[56px] sm:min-h-[64px] w-full max-w-3xl">
+      <div className="relative flex items-center justify-center min-h-[70px] sm:min-h-[80px] w-full max-w-5xl">
         <AnimatePresence mode="wait">
           <motion.div
             key={cycleKey}
-            className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3"
+            className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-5"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -113,15 +113,15 @@ export function NeonChannelShowcase() {
                 }
               >
                 {/* Inner badge */}
-                <div className="relative flex items-center gap-2.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#0a0f1e]/80 border border-white/[0.08] backdrop-blur-md cursor-default select-none">
+                <div className="relative flex items-center gap-3 px-5 py-3 sm:px-7 sm:py-3.5 rounded-full bg-[#0a0f1e]/90 border border-white/[0.1] backdrop-blur-md cursor-default select-none shadow-2xl">
                   {/* Channel logo image */}
                   <img
                     src={channel.logo}
                     alt={channel.name}
-                    className="w-5 h-5 rounded-md object-cover border border-white/10 shrink-0"
+                    className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg object-cover border border-white/10 shrink-0 shadow-lg"
                   />
                   {/* Channel name */}
-                  <span className="text-xs sm:text-sm font-bold text-white whitespace-nowrap">
+                  <span className="text-sm sm:text-base md:text-lg font-black text-white whitespace-nowrap tracking-wide">
                     {channel.name}
                   </span>
                 </div>
@@ -131,7 +131,7 @@ export function NeonChannelShowcase() {
                   className="absolute inset-0 rounded-full pointer-events-none"
                   initial={{ opacity: 0 }}
                   animate={{
-                    opacity: [0, 0.8, 0.4, 0.6, 0.4],
+                    opacity: [0, 0.9, 0.5, 0.75, 0.5],
                   }}
                   transition={{
                     duration: 2.5,
@@ -140,8 +140,8 @@ export function NeonChannelShowcase() {
                     repeatType: "reverse",
                   }}
                   style={{
-                    boxShadow: `0 0 8px ${channel.color}40, 0 0 20px ${channel.color}25, 0 0 40px ${channel.color}10, inset 0 0 12px ${channel.color}08`,
-                    border: `1px solid ${channel.color}30`,
+                    boxShadow: `0 0 12px ${channel.color}50, 0 0 28px ${channel.color}35, 0 0 55px ${channel.color}20, inset 0 0 16px ${channel.color}15`,
+                    border: `1px solid ${channel.color}40`,
                     borderRadius: "9999px",
                   }}
                 />
@@ -156,15 +156,15 @@ export function NeonChannelShowcase() {
         <motion.div
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
-          className="group inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#a855f7]/30 bg-[#a855f7]/5 backdrop-blur-sm text-sm font-bold text-[#c084fc] hover:text-white hover:bg-[#a855f7]/15 hover:border-[#a855f7]/50 hover:shadow-[0_0_25px_-5px_#a855f7] transition-all duration-300 cursor-pointer"
+          className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full border border-[#a855f7]/30 bg-[#a855f7]/5 backdrop-blur-sm text-sm sm:text-base font-extrabold text-[#c084fc] hover:text-white hover:bg-[#a855f7]/15 hover:border-[#a855f7]/50 hover:shadow-[0_0_30px_-5px_#a855f7] transition-all duration-300 cursor-pointer"
         >
           <span>Explorer toutes nos chaînes</span>
           <svg
-            className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+            className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2.5}
+            strokeWidth={3}
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>

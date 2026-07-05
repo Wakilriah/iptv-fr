@@ -51,7 +51,7 @@ export function AnimatedHero({ onOrderClick }: AnimatedHeroProps) {
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/40 via-[#050505]/70 to-[#050505]" />
         <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-[#a855f7]/20 blur-[120px] rounded-full pointer-events-none"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[900px] md:h-[900px] bg-[#a855f7]/25 blur-[150px] rounded-full pointer-events-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 0.5 }}
@@ -59,22 +59,22 @@ export function AnimatedHero({ onOrderClick }: AnimatedHeroProps) {
       </div>
 
       <motion.div
-        className="relative z-10 max-w-5xl mx-auto flex flex-col items-center space-y-8 mt-12"
+        className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center space-y-12 mt-12 px-4 md:px-8"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         {/* Badge */}
         <motion.div variants={itemVariants}>
-          <div className="inline-flex items-center gap-2 rounded-full border border-yellow-500/50 bg-yellow-500/10 px-5 py-2 text-sm font-semibold text-yellow-400 backdrop-blur-sm">
-            <Star className="w-4 h-4 fill-yellow-400" /> Meilleur IPTV Abonnement en France
+          <div className="inline-flex items-center gap-2 rounded-full border border-yellow-500/50 bg-yellow-500/10 px-6 py-2.5 text-base font-bold text-yellow-400 backdrop-blur-sm shadow-[0_0_15px_rgba(234,179,8,0.15)]">
+            <Star className="w-5 h-5 fill-yellow-400" /> Meilleur IPTV Abonnement en France
           </div>
         </motion.div>
 
         {/* Main Title */}
         <motion.h1
           variants={titleVariants}
-          className="text-4xl sm:text-5xl md:text-8xl font-black tracking-tighter text-white drop-shadow-2xl leading-[1.1]"
+          className="text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter text-white drop-shadow-2xl leading-[1.05]"
         >
           L&apos;Expérience{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#d8b4fe]">
@@ -86,7 +86,7 @@ export function AnimatedHero({ onOrderClick }: AnimatedHeroProps) {
         <motion.div
           variants={itemVariants}
           whileHover={{ rotate: 0, scale: 1.05 }}
-          className="bg-white text-black px-8 py-3 rounded-2xl text-lg sm:text-xl md:text-5xl font-black italic -rotate-2 transform shadow-xl shadow-white/10 cursor-default"
+          className="bg-white text-black px-10 py-4 rounded-3xl text-2xl sm:text-4xl md:text-6xl font-black italic -rotate-2 transform shadow-2xl shadow-white/10 cursor-default"
         >
           Match Ce Soir Fr
         </motion.div>
@@ -94,9 +94,9 @@ export function AnimatedHero({ onOrderClick }: AnimatedHeroProps) {
         {/* Description */}
         <motion.p
           variants={itemVariants}
-          className="text-base md:text-xl text-gray-300 max-w-3xl mt-6 md:mt-8 leading-relaxed font-medium px-2"
+          className="text-lg md:text-2xl text-gray-300 max-w-5xl mt-8 md:mt-12 leading-relaxed font-medium px-2"
         >
-          Découvrez le <strong className="text-white">Meilleur IPTV premium</strong> avec <strong className="text-[#a855f7]">Match Ce Soir Fr</strong>. Choisissez le forfait idéal parmi nos offres <strong className="text-white">Standard, Premium 4K &amp; VIP+</strong>, et profitez d&apos;un service d&apos;exception stable à 100% avec zapping ultra-rapide. Accédez à plus de 75 000 chaînes &amp; VOD et un support réactif 24/7. <strong className="text-[#a855f7]">Démarrez votre test gratuit de 1H dès maintenant !</strong>
+          Découvrez le <strong className="text-white font-bold">Meilleur IPTV premium</strong> avec <strong className="text-[#a855f7] font-bold">Match Ce Soir Fr</strong>. Choisissez le forfait idéal parmi nos offres <strong className="text-white font-bold">Standard, Premium 4K &amp; VIP+</strong>, et profitez d&apos;un service d&apos;exception stable à 100% avec zapping ultra-rapide. Accédez à plus de 75 000 chaînes &amp; VOD et un support réactif 24/7. <strong className="text-[#a855f7] font-bold">Démarrez votre test gratuit de 1H dès maintenant !</strong>
         </motion.p>
 
         {/* CTA Buttons */}
