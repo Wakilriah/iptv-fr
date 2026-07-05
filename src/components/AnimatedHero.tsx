@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { NeonChannelShowcase } from "@/components/NeonChannelShowcase"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -135,6 +136,11 @@ export function AnimatedHero({ onOrderClick }: AnimatedHeroProps) {
             </svg>
             <span><strong className="text-white">Garantie 7 jours</strong> — Remboursement intégral si vous n&apos;êtes pas satisfait</span>
           </div>
+        </motion.div>
+
+        {/* Neon Channel Showcase */}
+        <motion.div variants={itemVariants} className="w-full mt-8">
+          <NeonChannelShowcase />
         </motion.div>
       </motion.div>
     </section>
