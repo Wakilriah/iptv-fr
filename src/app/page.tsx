@@ -87,6 +87,7 @@ export default function Home() {
           <nav className="hidden xl:flex items-center gap-5 text-xs xl:text-sm text-gray-400 font-medium">
             <a href="#hero" className="hover:text-white transition-colors">Accueil</a>
             <a href="#films-series" className="hover:text-white transition-colors">Films &amp; Séries</a>
+            <a href="/chaines" className="hover:text-white transition-colors text-[#a855f7] font-semibold">Chaînes</a>
             <a href="#comment-installer" className="hover:text-white transition-colors">Installation</a>
             <a href="#abonnements" className="hover:text-white transition-colors">Nos Packs</a>
             <a href="#tarifs" className="hover:text-white transition-colors">Tarifs</a>
@@ -128,6 +129,7 @@ export default function Home() {
             <nav className="flex flex-col items-center gap-1 py-6 px-4">
               {[
                 { label: "Accueil", href: "#hero" },
+                { label: "Chaînes", href: "/chaines" },
                 { label: "Films & Séries", href: "#films-series" },
                 { label: "Installation", href: "#comment-installer" },
                 { label: "Nos Packs", href: "#abonnements" },
@@ -1020,14 +1022,15 @@ export default function Home() {
               <h4 className="text-white font-bold mb-4">Navigation</h4>
               <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-500">
                 <li><a href="#hero" className="hover:text-[#a855f7] transition-colors">Accueil</a></li>
+                <li><a href="/chaines" className="hover:text-[#a855f7] transition-colors text-[#a855f7] font-semibold">Chaînes</a></li>
                 <li><a href="#films-series" className="hover:text-[#a855f7] transition-colors">VOD</a></li>
                 <li><a href="#comment-installer" className="hover:text-[#a855f7] transition-colors">Installation</a></li>
                 <li><a href="#abonnements" className="hover:text-[#a855f7] transition-colors">Nos Packs</a></li>
-                <li><a href="#tarifs" className="hover:text-[#a855f7] transition-colors text-[#a855f7] font-semibold">Tarifs</a></li>
+                <li><a href="#tarifs" className="hover:text-[#a855f7] transition-colors">Tarifs</a></li>
                 <li><a href="#compatibilite" className="hover:text-[#a855f7] transition-colors">Compatibilité</a></li>
                 <li><a href="#fonctionnalites" className="hover:text-[#a855f7] transition-colors">Avantages</a></li>
                 <li><a href="#faq" className="hover:text-[#a855f7] transition-colors">FAQ</a></li>
-                <li><a href="#contact" className="hover:text-[#a855f7] transition-colors col-span-2">Contact</a></li>
+                <li><a href="#contact" className="hover:text-[#a855f7] transition-colors">Contact</a></li>
               </ul>
             </div>
 
