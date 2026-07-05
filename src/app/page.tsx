@@ -301,6 +301,24 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          <div className="text-center mt-12">
+            <a href="/chaines">
+              <Button className="bg-[#a855f7] hover:bg-[#9333ea] text-white rounded-full px-8 py-5 text-base md:text-lg font-bold shadow-[0_0_30px_rgba(168,85,247,0.3)] hover:shadow-[0_0_45px_rgba(168,85,247,0.5)] transition-all gap-2.5">
+                <span>Explorer toutes nos chaînes</span>
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={3}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </Button>
+            </a>
+          </div>
+
         </div>
       </section>
 
