@@ -867,7 +867,7 @@ export default function Home() {
             <div className="md:col-span-7 bg-[#0d121f] border border-white/5 rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-48 h-48 bg-[#e11d48]/5 blur-3xl rounded-full pointer-events-none" />
               
-              <Accordion type="single" collapsible className="w-full space-y-3 relative z-10">
+              <Accordion className="w-full space-y-3 relative z-10">
                 {[
                   { q: "Comment ça marche ?", a: "Après votre achat, vous recevez instantanément par email et WhatsApp vos identifiants de connexion. Il suffit de télécharger une application IPTV compatible (nous vous recommandons les meilleures), d'entrer vos identifiants, et de profiter de plus de 65 000 chaînes immédiatement." },
                   { q: "Modes de paiement disponibles ?", a: "Nous acceptons les modes de paiement sécurisés suivants : CashApp, PayPal, Credit Card (Cartes Bancaires) et Crypto." },
