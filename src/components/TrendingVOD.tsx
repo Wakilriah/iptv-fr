@@ -52,6 +52,7 @@ export function TrendingVOD() {
   }, [])
 
   const currentItems = activeTab === "movies" ? (movies.length > 0 ? movies : FALLBACK_MOVIES) : series
+  const doubledItems = [...currentItems, ...currentItems]
 
   return (
     <div className="space-y-8 w-full">
@@ -93,66 +94,76 @@ export function TrendingVOD() {
           <div className="absolute -inset-4 bg-gradient-to-r from-[#a855f7]/5 to-transparent blur-3xl pointer-events-none rounded-3xl" />
 
           {/* Carousel Wrapper */}
-          <div className="bg-[#0c101d] rounded-3xl p-6 sm:p-8 border border-white/5 overflow-x-auto scrollbar-hide">
-            <div className="flex gap-6 min-w-max pb-2">
-              <AnimatePresence mode="popLayout">
-                {currentItems.map((item, idx) => (
-                  <motion.div
-                    key={item.id || idx}
-                    initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.9, y: -10 }}
-                    transition={{ duration: 0.3, delay: Math.min(idx * 0.04, 0.4) }}
-                    className="w-[180px] sm:w-[220px] flex flex-col gap-3 group/card cursor-pointer relative"
-                  >
-                    {/* Poster Card */}
-                    <div className="aspect-[2/3] w-full rounded-2xl bg-[#0f172a] border border-white/5 relative overflow-hidden shadow-lg group-hover/card:border-[#a855f7]/40 transition-all duration-300">
-                      {item.poster ? (
-                        <img
-                          src={item.poster}
-                          alt={item.title}
-                          className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-[#1a1c29] to-[#0d0e15] text-center gap-2">
-                          <Film className="w-8 h-8 text-[#a855f7]/50" />
-                          <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">Affiche Indisponible</span>
-                        </div>
-                      )}
-
-                      {/* Top Overlay Badges */}
-                      <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10 pointer-events-none">
-                        <span className="bg-black/60 backdrop-blur-md text-[10px] font-black uppercase text-gray-300 px-2.5 py-1 rounded-full border border-white/5 tracking-wider">
-                          {item.type}
-                        </span>
-                        <div className="bg-black/60 backdrop-blur-md text-[10px] font-black text-yellow-400 px-2 py-0.5 rounded-full border border-yellow-400/20 flex items-center gap-1 shadow-md">
-                          <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
-                          {item.rating}
-                        </div>
+          <div className="bg-[#0c101d] rounded-3xl p-6 sm:p-8 border border-white/5 overflow-hidden">
+            <style>{`
+              @keyframes scrollVOD {
+                0%   { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+              }
+              .vod-track {
+                display: flex;
+                gap: 1.5rem;
+                width: max-content;
+                animation: scrollVOD 45s linear infinite;
+              }
+              .vod-track:hover {
+                animation-play-state: paused;
+              }
+            `}</style>
+            
+            <div className="vod-track pb-2">
+              {doubledItems.map((item, idx) => (
+                <div
+                  key={`${item.id || idx}-${idx}`}
+                  className="w-[180px] sm:w-[220px] flex flex-col gap-3 group/card cursor-pointer relative shrink-0"
+                >
+                  {/* Poster Card */}
+                  <div className="aspect-[2/3] w-full rounded-2xl bg-[#0f172a] border border-white/5 relative overflow-hidden shadow-lg group-hover/card:border-[#a855f7]/40 transition-all duration-300">
+                    {item.poster ? (
+                      <img
+                        src={item.poster}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-[#1a1c29] to-[#0d0e15] text-center gap-2">
+                        <Film className="w-8 h-8 text-[#a855f7]/50" />
+                        <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">Affiche Indisponible</span>
                       </div>
+                    )}
 
-                      {/* Play Hover Overlay */}
-                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/card:opacity-100 transition-opacity flex items-center justify-center gap-2 z-10 duration-300">
-                        <div className="w-12 h-12 rounded-full bg-[#a855f7] flex items-center justify-center text-white shadow-lg transform scale-90 group-hover/card:scale-100 transition-transform duration-300 shadow-[#a855f7]/30">
-                          <Play className="w-5 h-5 fill-white ml-0.5" />
-                        </div>
+                    {/* Top Overlay Badges */}
+                    <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10 pointer-events-none">
+                      <span className="bg-black/60 backdrop-blur-md text-[10px] font-black uppercase text-gray-300 px-2.5 py-1 rounded-full border border-white/5 tracking-wider">
+                        {item.type}
+                      </span>
+                      <div className="bg-black/60 backdrop-blur-md text-[10px] font-black text-yellow-400 px-2 py-0.5 rounded-full border border-yellow-400/20 flex items-center gap-1 shadow-md">
+                        <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                        {item.rating}
                       </div>
                     </div>
 
-                    {/* Metadata */}
-                    <div className="px-1 space-y-1">
-                      <div className="flex justify-between items-center text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-                        <span>VOD Premium</span>
-                        {item.year && <span>{item.year}</span>}
+                    {/* Play Hover Overlay */}
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/card:opacity-100 transition-opacity flex items-center justify-center gap-2 z-10 duration-300">
+                      <div className="w-12 h-12 rounded-full bg-[#a855f7] flex items-center justify-center text-white shadow-lg transform scale-90 group-hover/card:scale-100 transition-transform duration-300 shadow-[#a855f7]/30">
+                        <Play className="w-5 h-5 fill-white ml-0.5" />
                       </div>
-                      <h4 className="font-extrabold text-sm sm:text-base text-white truncate group-hover/card:text-[#a855f7] transition-colors leading-tight" title={item.title}>
-                        {item.title}
-                      </h4>
                     </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
+                  </div>
+
+                  {/* Metadata */}
+                  <div className="px-1 space-y-1">
+                    <div className="flex justify-between items-center text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                      <span>VOD Premium</span>
+                      {item.year && <span>{item.year}</span>}
+                    </div>
+                    <h4 className="font-extrabold text-sm sm:text-base text-white truncate group-hover/card:text-[#a855f7] transition-colors leading-tight" title={item.title}>
+                      {item.title}
+                    </h4>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
