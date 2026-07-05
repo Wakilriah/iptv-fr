@@ -337,7 +337,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-4xl md:text-6xl font-black text-white mb-4">Films &amp; Séries Disponibles</h2>
-            <p className="text-gray-400 text-lg">Accédez à une bibliothèque immense de contenus en VOD</p>
+            <p className="text-gray-400 text-lg">Accédez à une bibliothèque immense de <span className="text-white font-black">+120 000</span> contenus en VOD (Films &amp; Séries)</p>
           </div>
 
           <style>{`
