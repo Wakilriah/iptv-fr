@@ -5,16 +5,16 @@ import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 
 const ALL_CHANNELS = [
-  { name: "beIN Sports", color: "#ff6b00" },
-  { name: "Canal+", color: "#00d4ff" },
-  { name: "RMC Sport", color: "#e63946" },
-  { name: "TF1", color: "#ff2d55" },
-  { name: "France 2", color: "#f72585" },
-  { name: "M6", color: "#ff9500" },
-  { name: "BFM TV", color: "#00b4d8" },
-  { name: "OCS", color: "#7b2ff7" },
-  { name: "Arte", color: "#ff6f61" },
-  { name: "Eurosport", color: "#3a86ff" },
+  { name: "beIN Sports", color: "#ff6b00", logo: "/channels/bein-sports.jpg" },
+  { name: "Canal+", color: "#00d4ff", logo: "/channels/canal-plus.jpg" },
+  { name: "RMC Sport", color: "#e63946", logo: "/channels/rmc-sport.jpg" },
+  { name: "TF1", color: "#ff2d55", logo: "/channels/tf1.jpg" },
+  { name: "France 2", color: "#f72585", logo: "/channels/france-2.jpg" },
+  { name: "M6", color: "#ff9500", logo: "/channels/m6.jpg" },
+  { name: "BFM TV", color: "#00b4d8", logo: "/channels/bfm-tv.jpg" },
+  { name: "OCS", color: "#7b2ff7", logo: "/channels/ocs.jpg" },
+  { name: "Arte", color: "#ff6f61", logo: "/channels/arte.jpg" },
+  { name: "Eurosport", color: "#3a86ff", logo: "/channels/eurosport.jpg" },
 ]
 
 function shuffleAndPick(arr: typeof ALL_CHANNELS, count: number): typeof ALL_CHANNELS {
@@ -68,7 +68,7 @@ const badgeVariants = {
 }
 
 export function NeonChannelShowcase() {
-  const [visibleChannels, setVisibleChannels] = useState(() => shuffleAndPick(ALL_CHANNELS, 5))
+  const [visibleChannels, setVisibleChannels] = useState(() => ALL_CHANNELS.slice(0, 5))
   const [cycleKey, setCycleKey] = useState(0)
 
   const cycleChannels = useCallback(() => {
@@ -77,6 +77,8 @@ export function NeonChannelShowcase() {
   }, [])
 
   useEffect(() => {
+    // Shuffle on client-side mount to immediately show random channels
+    setVisibleChannels(shuffleAndPick(ALL_CHANNELS, 5))
     const interval = setInterval(cycleChannels, 3500)
     return () => clearInterval(interval)
   }, [cycleChannels])
@@ -111,11 +113,12 @@ export function NeonChannelShowcase() {
                 }
               >
                 {/* Inner badge */}
-                <div className="relative flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#0a0f1e]/80 border border-white/[0.08] backdrop-blur-md cursor-default select-none">
-                  {/* Live dot */}
-                  <span
-                    className="w-2 h-2 rounded-full animate-pulse shrink-0"
-                    style={{ backgroundColor: channel.color }}
+                <div className="relative flex items-center gap-2.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#0a0f1e]/80 border border-white/[0.08] backdrop-blur-md cursor-default select-none">
+                  {/* Channel logo image */}
+                  <img
+                    src={channel.logo}
+                    alt={channel.name}
+                    className="w-5 h-5 rounded-md object-cover border border-white/10 shrink-0"
                   />
                   {/* Channel name */}
                   <span className="text-xs sm:text-sm font-bold text-white whitespace-nowrap">

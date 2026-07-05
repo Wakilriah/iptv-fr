@@ -2,9 +2,25 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, Globe, Tv, Film, Compass, User, ArrowLeft, Check, AlertCircle } from "lucide-react"
+import { Search, Globe, Tv, Film, Compass, User, ArrowLeft, Check, AlertCircle, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import channelsData from "@/data/channels.json"
+
+const CHANNEL_LOGOS: Record<string, string> = {
+  "bein sports": "/channels/bein-sports.jpg",
+  "canal+": "/channels/canal-plus.jpg",
+  "canal+ sport": "/channels/canal-plus.jpg",
+  "canal+ cinéma": "/channels/canal-plus.jpg",
+  "rmc sport": "/channels/rmc-sport.jpg",
+  "rmc découverte": "/channels/rmc-sport.jpg",
+  "tf1": "/channels/tf1.jpg",
+  "france 2": "/channels/france-2.jpg",
+  "m6": "/channels/m6.jpg",
+  "bfm tv": "/channels/bfm-tv.jpg",
+  "ocs": "/channels/ocs.jpg",
+  "arte": "/channels/arte.jpg",
+  "eurosport": "/channels/eurosport.jpg"
+}
 
 export default function ChannelsPage() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -156,12 +172,19 @@ export default function ChannelsPage() {
                     </div>
 
                     <ul className="space-y-2.5">
-                      {result.channels.map((chan, idx) => (
-                        <li key={idx} className="flex items-center gap-3 text-sm text-gray-200 font-semibold bg-black/20 p-2.5 rounded-xl border border-white/[0.02]">
-                          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                          {chan}
-                        </li>
-                      ))}
+                      {result.channels.map((chan, idx) => {
+                        const logoUrl = CHANNEL_LOGOS[chan.toLowerCase()]
+                        return (
+                          <li key={idx} className="flex items-center gap-3 text-sm text-gray-200 font-semibold bg-black/20 p-2.5 rounded-xl border border-white/[0.02]">
+                            {logoUrl ? (
+                              <img src={logoUrl} alt={chan} className="w-5 h-5 rounded-md object-cover border border-white/10 shrink-0" />
+                            ) : (
+                              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shrink-0" />
+                            )}
+                            {chan}
+                          </li>
+                        )
+                      })}
                     </ul>
                   </motion.div>
                 ))}
@@ -217,17 +240,24 @@ export default function ChannelsPage() {
                     </div>
 
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
-                      {channels.map((channel, i) => (
-                        <li
-                          key={i}
-                          className="flex items-center gap-2.5 text-xs sm:text-sm text-gray-300 font-semibold bg-black/20 p-2.5 rounded-xl border border-white/[0.02]"
-                        >
-                          <div className="w-5 h-5 rounded-md bg-[#a855f7]/10 flex items-center justify-center shrink-0">
-                            <Check className="w-3.5 h-3.5 text-[#a855f7]" />
-                          </div>
-                          <span className="truncate" title={channel}>{channel}</span>
-                        </li>
-                      ))}
+                      {channels.map((channel, i) => {
+                        const logoUrl = CHANNEL_LOGOS[channel.toLowerCase()]
+                        return (
+                          <li
+                            key={i}
+                            className="flex items-center gap-2.5 text-xs sm:text-sm text-gray-300 font-semibold bg-black/20 p-2.5 rounded-xl border border-white/[0.02]"
+                          >
+                            {logoUrl ? (
+                              <img src={logoUrl} alt={channel} className="w-5 h-5 rounded-md object-cover border border-white/10 shrink-0" />
+                            ) : (
+                              <div className="w-5 h-5 rounded-md bg-[#a855f7]/10 flex items-center justify-center shrink-0">
+                                <Check className="w-3.5 h-3.5 text-[#a855f7]" />
+                              </div>
+                            )}
+                            <span className="truncate" title={channel}>{channel}</span>
+                          </li>
+                        )
+                      })}
                     </ul>
                   </motion.div>
                 ))}
