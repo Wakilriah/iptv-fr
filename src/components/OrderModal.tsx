@@ -28,7 +28,7 @@ export function OrderModal({ isOpen, onClose, planName, planPrice }: OrderModalP
     return errs
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const errs = validate()
     if (Object.keys(errs).length > 0) {
@@ -38,35 +38,50 @@ export function OrderModal({ isOpen, onClose, planName, planPrice }: OrderModalP
     setLoading(true)
     setErrors({})
 
+    try {
+      // Save to database via API
+      await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullname: form.fullname,
+          email: form.email,
+          phone: form.phone,
+          planName: planName,
+          planPrice: planPrice,
+        }),
+      })
+    } catch (err) {
+      console.error("Failed to save order to database:", err)
+    }
+
+    setLoading(false)
+    setSubmitted(true)
+
+    // Build WhatsApp message
+    const isTest = planPrice === "0" || planName.toLowerCase().includes("test")
+    const message = encodeURIComponent(
+      isTest
+        ? `Bonjour Match Ce Soir Fr 👋\n\nJe souhaite demander un test gratuit de 1 heure :\n\n` +
+          `📦 Forfait : ${planName}\n` +
+          `👤 Nom complet : ${form.fullname}\n` +
+          `📧 Email : ${form.email}\n` +
+          `📱 Téléphone : ${form.phone}\n\n` +
+          `Merci de m'envoyer mes accès de test !`
+        : `Bonjour Match Ce Soir Fr 👋\n\nJe souhaite commander l'abonnement suivant :\n\n` +
+          `📦 Forfait : ${planName} (${planPrice}€)\n` +
+          `👤 Nom complet : ${form.fullname}\n` +
+          `📧 Email : ${form.email}\n` +
+          `📱 Téléphone : ${form.phone}\n\n` +
+          `Merci de confirmer ma commande !`
+    )
+
     setTimeout(() => {
-      setLoading(false)
-      setSubmitted(true)
-
-      // Build WhatsApp message
-      const isTest = planPrice === "0" || planName.toLowerCase().includes("test")
-      const message = encodeURIComponent(
-        isTest
-          ? `Bonjour Match Ce Soir Fr 👋\n\nJe souhaite demander un test gratuit de 1 heure :\n\n` +
-            `📦 Forfait : ${planName}\n` +
-            `👤 Nom complet : ${form.fullname}\n` +
-            `📧 Email : ${form.email}\n` +
-            `📱 Téléphone : ${form.phone}\n\n` +
-            `Merci de m'envoyer mes accès de test !`
-          : `Bonjour Match Ce Soir Fr 👋\n\nJe souhaite commander l'abonnement suivant :\n\n` +
-            `📦 Forfait : ${planName} (${planPrice}€)\n` +
-            `👤 Nom complet : ${form.fullname}\n` +
-            `📧 Email : ${form.email}\n` +
-            `📱 Téléphone : ${form.phone}\n\n` +
-            `Merci de confirmer ma commande !`
-      )
-
-      setTimeout(() => {
-        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank")
-        onClose()
-        setSubmitted(false)
-        setForm({ fullname: "", email: "", phone: "" })
-      }, 1500)
-    }, 1000)
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank")
+      onClose()
+      setSubmitted(false)
+      setForm({ fullname: "", email: "", phone: "" })
+    }, 1500)
   }
 
   return (

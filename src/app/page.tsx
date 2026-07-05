@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -13,7 +13,7 @@ import {
 import {
   CheckCircle2, MessageCircle, Tv, MonitorPlay, HeadphonesIcon,
   Activity, Shield, Zap, Globe, Mail, Phone, Smartphone, Laptop, Monitor, Boxes,
-  ArrowRight, Clock
+  ArrowRight, Clock, Menu, X
 } from "lucide-react"
 import { AnimatedHero } from "@/components/AnimatedHero"
 import { OrderModal } from "@/components/OrderModal"
@@ -62,6 +62,7 @@ const vipFeatures = [
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedPlan, setSelectedPlan] = useState({ name: "", price: "" })
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const openModal = (name: string, price: string) => {
     setSelectedPlan({ name, price })
@@ -74,7 +75,7 @@ export default function Home() {
       {/* Navbar */}
       <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#050505]/80 backdrop-blur-md">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <a href="#hero" className="flex items-center gap-2 text-2xl font-extrabold tracking-tight hover:opacity-90 transition-opacity">
+          <a href="#hero" className="flex items-center gap-2 text-lg md:text-2xl font-extrabold tracking-tight hover:opacity-90 transition-opacity">
             <img src="/logo.png" alt="Match Ce Soir Fr Logo" className="h-9 w-auto object-contain" />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
               MATCH CE SOIR
@@ -94,16 +95,73 @@ export default function Home() {
             <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
             <a href="#contact" className="hover:text-white transition-colors">Contact</a>
           </nav>
-          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
-            <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}>
-              <Button className="bg-[#25D366] hover:bg-[#25D366]/90 text-white gap-2 rounded-full font-semibold shadow-[0_0_15px_-3px_#25D366] hover:shadow-[0_0_25px_5px_#25D366] transition-shadow duration-300">
-                <MessageCircle className="w-5 h-5" />
-                WhatsApp
-              </Button>
-            </motion.div>
-          </a>
+          <div className="flex items-center gap-2">
+            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+              <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}>
+                <Button className="bg-[#25D366] hover:bg-[#25D366]/90 text-white gap-2 rounded-full font-semibold shadow-[0_0_15px_-3px_#25D366] hover:shadow-[0_0_25px_5px_#25D366] transition-shadow duration-300">
+                  <MessageCircle className="w-5 h-5" />
+                  <span className="hidden sm:inline">WhatsApp</span>
+                </Button>
+              </motion.div>
+            </a>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="xl:hidden p-2 text-gray-400 hover:text-white transition-colors"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </header>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="fixed top-16 left-0 right-0 bottom-0 z-40 bg-[#050505]/95 backdrop-blur-lg xl:hidden overflow-y-auto"
+          >
+            <nav className="flex flex-col items-center gap-1 py-6 px-4">
+              {[
+                { label: "Accueil", href: "#hero" },
+                { label: "Films & Séries", href: "#films-series" },
+                { label: "Installation", href: "#comment-installer" },
+                { label: "Nos Packs", href: "#abonnements" },
+                { label: "Tarifs", href: "#tarifs" },
+                { label: "Compatibilité", href: "#compatibilite" },
+                { label: "Avantages", href: "#fonctionnalites" },
+                { label: "FAQ", href: "#faq" },
+                { label: "Contact", href: "#contact" },
+              ].map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full text-center py-3 text-lg text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors font-medium"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mt-4 w-full"
+              >
+                <Button className="w-full bg-[#25D366] hover:bg-[#25D366]/90 text-white gap-2 rounded-full font-semibold shadow-[0_0_15px_-3px_#25D366] py-3 text-base">
+                  <MessageCircle className="w-5 h-5" />
+                  Contactez-nous sur WhatsApp
+                </Button>
+              </a>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Hero */}
       <div id="hero">
@@ -120,11 +178,11 @@ export default function Home() {
             { icon: <Activity className="w-8 h-8" />, value: "99.9%", label: "Disponibilité" },
           ].map((stat, i) => (
             <div key={i} className="flex flex-col items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#a855f7]/20 to-transparent border border-[#a855f7]/30 flex items-center justify-center text-[#a855f7]">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-[#a855f7]/20 to-transparent border border-[#a855f7]/30 flex items-center justify-center text-[#a855f7]">
                 {stat.icon}
               </div>
               <div>
-                <h3 className="text-4xl font-black text-white">{stat.value}</h3>
+                <h3 className="text-2xl sm:text-4xl font-black text-white">{stat.value}</h3>
                 <p className="text-sm text-gray-400 font-medium mt-1">{stat.label}</p>
               </div>
             </div>
@@ -134,7 +192,7 @@ export default function Home() {
 
       {/* Channels */}
       <section className="py-20 bg-[#0a0a0a] border-y border-white/5">
-        <div className="container mx-auto px-4 max-w-6xl">
+        <div className="container mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-bold text-center mb-12 text-white">Chaînes Populaires Incluses</h2>
 
           <div className="bg-[#0d1929] rounded-3xl p-6 border border-white/5">
@@ -248,7 +306,7 @@ export default function Home() {
       <section id="films-series" className="py-20 bg-[#050505] scroll-mt-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-6xl font-black text-white mb-4">Films &amp; Séries Disponibles</h2>
+            <h2 className="text-2xl sm:text-4xl md:text-6xl font-black text-white mb-4">Films &amp; Séries Disponibles</h2>
             <p className="text-gray-400 text-lg">Accédez à une bibliothèque immense de contenus en VOD</p>
           </div>
 
@@ -336,14 +394,14 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
 
           {/* Main Pricing Introduction */}
-          <div className="text-center mb-20 max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 text-white tracking-tight uppercase">
+          <div className="text-center mb-20 mx-auto">
+            <h2 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-black mb-6 text-white tracking-tight uppercase">
               NOS PACKS ABONNEMENT IPTV
             </h2>
-            <p className="text-gray-300 text-lg md:text-xl leading-relaxed font-medium">
+            <p className="text-gray-300 text-base md:text-xl leading-relaxed font-medium">
               Choisissez notre abonnement IPTV Premium 4K <strong className="text-[#a855f7]">Match Ce Soir Fr</strong> et plongez dans une expérience de divertissement totale. Accédez en illimité à des milliers de chaînes, films et séries récentes, le tout en qualité exceptionnelle HD, UHD et 4K. Conçu pour les utilisateurs exigeants, cet abonnement vous offre une stabilité parfaite, une qualité d’image irréprochable et une variété de contenus sans aucun compromis.
             </p>
-            <div className="mt-12 relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl group max-w-3xl mx-auto">
+            <div className="mt-12 relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl group max-w-2xl mx-auto">
               <img 
                 src="/packs-banner.png" 
                 alt="Nos Packs Abonnement IPTV - Match Ce Soir Fr" 
@@ -429,7 +487,7 @@ export default function Home() {
                     <div className="flex justify-center items-start gap-0.5">
                       <span className={`text-2xl font-bold mt-2 ${plan.highlighted ? "text-white" : "text-white/90"}`}>€</span>
                       <span className={`font-black leading-none tracking-tighter ${
-                        plan.highlighted ? "text-7xl text-white" : "text-6xl text-white"
+                        plan.highlighted ? "text-6xl sm:text-7xl text-white" : "text-5xl sm:text-6xl text-white"
                       }`}>{plan.price.split('.')[0]}</span>
                       {plan.price.includes('.') && (
                         <span className={`text-2xl font-bold mt-2 ${plan.highlighted ? "text-white" : "text-white/90"}`}>
@@ -540,7 +598,7 @@ export default function Home() {
                     <div className="flex justify-center items-start gap-0.5">
                       <span className={`text-2xl font-bold mt-2 ${plan.highlighted ? "text-white" : "text-white/90"}`}>€</span>
                       <span className={`font-black leading-none tracking-tighter ${
-                        plan.highlighted ? "text-7xl text-white" : "text-6xl text-white"
+                        plan.highlighted ? "text-6xl sm:text-7xl text-white" : "text-5xl sm:text-6xl text-white"
                       }`}>{plan.price.split('.')[0]}</span>
                       {plan.price.includes('.') && (
                         <span className={`text-2xl font-bold mt-2 ${plan.highlighted ? "text-white" : "text-white/90"}`}>
@@ -600,7 +658,7 @@ export default function Home() {
             <div className="inline-flex items-center gap-2 rounded-full border border-[#f59e0b]/30 bg-[#f59e0b]/10 px-4 py-1.5 text-sm font-semibold text-[#f59e0b] mb-4">
               ✨ OFFRE ÉLITE
             </div>
-            <h2 className="text-4xl md:text-6xl font-black mb-4 text-white tracking-tight">IPTV VIP +</h2>
+            <h2 className="text-2xl sm:text-4xl md:text-6xl font-black mb-4 text-white tracking-tight">IPTV VIP +</h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               Le meilleur abonnement IPTV en France pour regarder la TV en direct et VOD en 4K/FHD, films, séries et sport en streaming fluide.
             </p>
@@ -677,11 +735,11 @@ export default function Home() {
 
       {/* Device Compatibility */}
       <section id="compatibilite" className="py-20 bg-black text-center border-b border-white/5 scroll-mt-16">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">Compatible avec tous vos appareils</h2>
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">Compatible avec tous vos appareils</h2>
           <p className="text-gray-400 text-lg mb-12">Profitez de votre service IPTV sur n&apos;importe quel appareil, n&apos;importe où</p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 max-w-6xl mx-auto mb-10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 mx-auto mb-10">
             {[
               { name: "Android", icon: <Smartphone className="w-7 h-7 text-white" /> },
               { name: "iOS", icon: <Smartphone className="w-7 h-7 text-white" /> },
@@ -709,16 +767,16 @@ export default function Home() {
 
       {/* Features Detail — single merged card */}
       <section id="fonctionnalites" className="py-24 bg-[#070707] scroll-mt-16">
-        <div className="container mx-auto px-4 max-w-5xl">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-6">Fonctionnalités Premium</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white mb-6">Fonctionnalités Premium</h2>
             <p className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
               Découvrez pourquoi <strong className="text-white">Match Ce Soir Fr</strong> est le service IPTV de référence en Europe. En tant que fournisseur du <strong className="text-white">meilleur abonnement IPTV en France</strong>, nous vous offrons une qualité de diffusion exceptionnelle, un accès illimité à des milliers de chaînes en direct, films, séries et événements sportifs. Que vous soyez passionné de football, de cinéma, de documentaires ou de divertissement, profitez d&apos;une expérience fluide, stable et d&apos;une immense bibliothèque de contenus du monde entier, réunie sur une seule plateforme.
             </p>
           </div>
 
           {/* One big feature card */}
-          <div className="group relative bg-[#0d1929] border border-white/5 rounded-3xl p-10 hover:border-[#a855f7]/30 transition-all duration-500 overflow-hidden">
+          <div className="group relative bg-[#0d1929] border border-white/5 rounded-3xl p-5 sm:p-10 hover:border-[#a855f7]/30 transition-all duration-500 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[#a855f7]/5 via-transparent to-[#7c3aed]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
             <div className="absolute top-0 right-0 w-72 h-72 bg-[#a855f7]/5 blur-[80px] rounded-full pointer-events-none" />
             <div className="relative z-10">
@@ -803,7 +861,7 @@ export default function Home() {
       <section id="faq" className="py-24 bg-[#050505] border-t border-white/5 scroll-mt-16">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">Questions Fréquentes</h2>
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-white mb-4">Questions Fréquentes</h2>
             <p className="text-gray-400">Tout ce que vous devez savoir sur notre service IPTV.</p>
           </div>
 
@@ -832,8 +890,8 @@ export default function Home() {
                   { q: "Que faire si mon abonnement ne fonctionne pas ?", a: "Notre équipe support est disponible 24/7 pour vous aider. Contactez-nous par WhatsApp, email ou via notre formulaire de contact. Nous résolvons généralement les problèmes en quelques minutes." },
                   { q: "Combien d'appareils puis-je utiliser simultanément ?", a: "Chaque abonnement permet une seule connexion simultanée. Vous pouvez installer l'application sur plusieurs appareils, mais vous ne pouvez utiliser qu'un seul appareil à la fois. Si vous essayez de vous connecter sur un second appareil, la première connexion sera automatiquement déconnectée." },
                 ].map((item, i) => (
-                  <AccordionItem key={i} value={`item-${i}`} className="bg-[#050505] border border-white/5 rounded-2xl px-6 data-[state=open]:border-[#e11d48]/30 transition-colors">
-                    <AccordionTrigger className="text-[#e11d48] font-bold hover:no-underline py-5 text-left text-base md:text-lg w-full">
+                  <AccordionItem key={i} value={`item-${i}`} className="bg-[#050505] border border-white/5 rounded-2xl px-6 data-[state=open]:border-[#a855f7]/30 transition-colors">
+                    <AccordionTrigger className="text-[#a855f7] font-bold hover:no-underline py-5 text-left text-base md:text-lg w-full">
                       {item.q}
                     </AccordionTrigger>
                     <AccordionContent className="text-gray-300 pb-6 leading-relaxed text-sm">
@@ -862,7 +920,7 @@ export default function Home() {
             <div className="inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/10 px-4 py-1.5 text-sm font-semibold text-sky-400 mb-6">
               <HeadphonesIcon className="w-4 h-4" /> Contact & Support
             </div>
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">Besoin d'aide ?</h2>
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-white mb-4">Besoin d'aide ?</h2>
             <p className="text-gray-400 text-lg">Choisissez votre moyen de contact préféré</p>
           </div>
 
