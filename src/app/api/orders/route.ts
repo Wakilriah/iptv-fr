@@ -13,26 +13,40 @@ async function sendTelegramNotification(order: any, orderCount: number) {
   const isTest = parseFloat(order.planPrice) === 0 || order.planName.toLowerCase().includes("test");
   const priceDisplay = isTest ? "Offert (Test 1H)" : `${order.planPrice}€`;
 
+  const escapeHtml = (unsafe: string) => {
+    if (!unsafe) return "";
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  };
+
   const text = 
-    `🔔 *Nouvelle commande sur Match Ce Soir FR !*\n\n` +
-    `🔢 *Commande N°* : ${orderCount}\n` +
-    `📦 *Forfait* : ${order.planName}\n` +
-    `💰 *Prix* : ${priceDisplay}\n` +
-    `👤 *Nom complet* : ${order.fullname}\n` +
-    `📧 *Email* : ${order.email}\n` +
-    `📱 *Téléphone* : ${order.phone}\n` +
-    `📅 *Date* : ${new Date(order.createdAt).toLocaleString("fr-FR")}`;
+    `🔔 <b>Nouvelle commande sur Match Ce Soir FR !</b>\n\n` +
+    `🔢 <b>Commande N°</b> : ${orderCount}\n` +
+    `📦 <b>Forfait</b> : ${escapeHtml(order.planName)}\n` +
+    `💰 <b>Prix</b> : ${escapeHtml(priceDisplay)}\n` +
+    `👤 <b>Nom complet</b> : ${escapeHtml(order.fullname)}\n` +
+    `📧 <b>Email</b> : ${escapeHtml(order.email)}\n` +
+    `📱 <b>Téléphone</b> : ${escapeHtml(order.phone)}\n` +
+    `📅 <b>Date</b> : ${new Date(order.createdAt).toLocaleString("fr-FR")}`;
 
   try {
-    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         chat_id: chatId,
         text: text,
-        parse_mode: "Markdown",
+        parse_mode: "HTML",
       }),
     });
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error(`Telegram sendMessage failed. Status: ${res.status}, Response: ${errorText}`);
+    } else {
+      console.log(`Telegram notification successfully sent for order #${orderCount}`);
+    }
   } catch (error) {
     console.error("Failed to send Telegram notification:", error);
   }
