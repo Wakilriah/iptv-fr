@@ -23,7 +23,7 @@ const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`
 const features = [
   "Qualité HD / Full HD / 4K",
   "+35 000 Chaînes",
-  "+20 000 Vidéos et Programmes",
+  "+20 000 Films, Séries & Famille",
   "Compatible avec toutes les applications",
   "Stable 100%",
   "Support 24/7"
@@ -37,7 +37,7 @@ const plans = [
 const premiumFeatures = [
   "Qualité HD / Full HD / 4K",
   "+75 000 Chaînes",
-  "+35 000 Vidéos et Programmes",
+  "+35 000 Films, Séries & Famille",
   "Compatible avec toutes les applications",
   "Stable 100%",
   "Support 24/7"
@@ -51,7 +51,7 @@ const premiumPlans = [
 
 const vipFeatures = [
   "+160 000 Chaînes TV",
-  "+100 000 Vidéos & Programmes",
+  "+100 000 Films, Séries, Sports",
   "Qualité d'image 4K / Ultra HD",
   "Catch Up / EPG",
   "Mise à jour automatique",
@@ -74,7 +74,7 @@ export default function Home() {
       <section className="py-16 border-b border-white/5 bg-[#0a0a0a]">
         <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
-            { icon: <Tv className="w-8 h-8" />, value: "+65K", label: "Chaînes, Vidéos & Programmes" },
+            { icon: <Tv className="w-8 h-8" />, value: "+65K", label: "Sports en Direct, Films & Séries" },
             { icon: <MonitorPlay className="w-8 h-8" />, value: "4K UHD", label: "Qualité d'image" },
             { icon: <HeadphonesIcon className="w-8 h-8" />, value: "24/7", label: "Support Client" },
             { icon: <Activity className="w-8 h-8" />, value: "99.9%", label: "Disponibilité" },
@@ -108,7 +108,7 @@ export default function Home() {
                   {[
                     { id: 'sports', name: 'Sports en Direct', color: '#a855f7', src: '/channels/logo_sports.webp' },
                     { id: 'cinema', name: 'Cinéma Premium', color: '#00d4ff', src: '/channels/logo_cinema.webp' },
-                    { id: 'series', name: 'Programmes', color: '#e63946', src: '/channels/logo_series.webp' },
+                    { id: 'series', name: 'Séries TV', color: '#e63946', src: '/channels/logo_series.webp' },
                     { id: 'general', name: 'Généraliste', color: '#ff2d55', src: '/channels/logo_generaliste.webp' },
                     { id: 'info', name: 'Information', color: '#f72585', src: '/channels/logo_info.webp' },
                     { id: 'docs', name: 'Documentaires', color: '#ff9500', src: '/channels/logo_docs.webp' },
@@ -213,7 +213,7 @@ export default function Home() {
               NOS OFFRES DE DIVERTISSEMENT
             </h2>
             <p className="text-gray-300 text-base md:text-xl leading-relaxed font-medium">
-              Choisissez notre abonnement Premium 4K <strong className="text-[#a855f7]">Match Ce Soir Fr</strong> et plongez dans une expérience de divertissement totale. Accédez en illimité à des milliers de chaînes, vidéos et programmes récentes, le tout en qualité exceptionnelle HD, UHD et 4K. Conçu pour les utilisateurs exigeants, cet abonnement vous offre une stabilité parfaite, une qualité d’image irréprochable et une variété de contenus sans aucun compromis.
+              Choisissez notre abonnement Premium 4K <strong className="text-[#a855f7]">Match Ce Soir Fr</strong> et plongez dans une expérience de divertissement total. Profitez d'un accès à des milliers de chaînes de Sport en Direct, Films Récents, Séries TV, et Divertissement en Famille, le tout en qualité exceptionnelle HD, UHD et 4K. Conçu pour les utilisateurs exigeants, cet abonnement vous offre une stabilité parfaite, une qualité d’image irréprochable et une grande variété de contenus.
             </p>
             <div className="mt-12 relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl group max-w-2xl mx-auto">
               <img 
@@ -620,8 +620,8 @@ export default function Home() {
                   <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0 transition-all duration-300 group-hover:bg-[#a855f7] group-hover:text-white group-hover:scale-110 group-hover:rotate-6">
                     <Tv className="w-5 h-5" />
                   </div>
-                  <h4 className="feature-title text-white font-bold text-lg">+65K Chaînes, Vidéos & Programmes</h4>
-                  <p className="text-gray-700 text-sm leading-relaxed">Chaînes françaises, belges, suisses, arabes, sportives, cinéma, documentaires et programmes enfants — un sélection pour chacun. Notre bibliothèque de vidéos et programmes est mise à jour quotidiennement en VF et VOSTFR.</p>
+                  <h4 className="feature-title text-white font-bold text-lg">+65K Chaînes: Sports, Films, Famille</h4>
+                  <p className="text-gray-700 text-sm leading-relaxed">Chaînes françaises, belges, suisses, arabes, sportives, documentaires et programmes enfants — une sélection pour chacun. Notre bibliothèque de Films et Séries TV est mise à jour quotidiennement en VF et VOSTFR.</p>
                 </div>
 
                 {/* HD & Stabilité */}

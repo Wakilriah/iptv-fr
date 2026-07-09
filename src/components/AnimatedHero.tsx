@@ -111,13 +111,12 @@ export function AnimatedHero() {
           Match Ce Soir Fr
         </m.div>
 
-        {/* Description */}
         <m.p
           variants={itemVariants}
           className="text-lg md:text-2xl text-gray-300 max-w-5xl mt-8 md:mt-12 leading-relaxed font-medium px-2"
         >
-          Découvrez <strong className="text-white font-bold">Votre Portail Divertissement</strong> avec <strong className="text-[#a855f7] font-black">Match Ce Soir Fr</strong>.<br />
-          Vidéos, programmes, et événements en direct réunis en un seul endroit. Explorez nos forfaits <strong className="text-white font-bold">Standard, Premium 4K &amp; VIP+</strong>, et profitez d&apos;un service d&apos;exception avec zapping rapide. Un vaste sélection et un support réactif 24/7. <strong className="text-[#a855f7] font-bold">Demandez un essai dès maintenant !</strong>
+          Découvrez <strong className="text-white font-bold">Votre Portail de Divertissement en Famille</strong> avec <strong className="text-[#a855f7] font-black">Match Ce Soir Fr</strong>.<br />
+          <strong className="text-white font-bold">Football, Sports en Direct, Films, et Séries TV</strong> réunis en un seul endroit. Profitez d'un <strong className="text-[#a855f7]">Streaming Haute Qualité</strong> avec une <strong>Activation Rapide</strong>, un <strong>Paiement Sécurisé</strong> et un <strong>Support 24/7</strong>. Demandez un essai dès maintenant !
         </m.p>
 
         {/* CTA Buttons */}

@@ -8,7 +8,7 @@
         "actualités": ["CNN", "Fox News", "MSNBC", "Actualités locales"],
         "divertissement": ["ABC", "NBC", "CBS", "AMC", "Comedy Central"],
         "documentaires": ["National Geographic", "Discovery Channel", "History Channel"],
-        "enfants": ["Disney Channel", "Nickelodeon", "Cartoon Network"]
+        "enfants": ["Kids Channel", "Nickelodeon", "Cartoon Network"]
       }
     },
     {
@@ -37,7 +37,7 @@
       "name": "Germany",
       "channelTypes": {
         "sports": ["Sky Sport", "DAZN", "Bundesliga"],
-        "vidéos": ["Sky Cinema", "Prime Video Channels"],
+        "vidéos": ["Sky Cinema", "Premium Video Channels"],
         "actualités": ["ARD", "ZDF", "DW News"],
         "divertissement": ["ARD", "ZDF", "RTL"],
         "documentaires": ["N24 Doku", "ZDFinfo"],
@@ -52,7 +52,7 @@
         "actualités": ["TF1", "France 2", "BFM TV"],
         "divertissement": ["TF1", "France 2", "M6"],
         "documentaires": ["RMC Découverte", "Arte"],
-        "enfants": ["Gulli", "Disney Channel France"]
+        "enfants": ["Gulli", "Kids Channel France"]
       }
     },
     {
@@ -74,7 +74,7 @@
         "actualités": ["Aaj Tak", "NDTV", "India Today"],
         "divertissement": ["Star Plus", "Sony Entertainment Television", "Colors TV"],
         "documentaires": ["National Geographic India", "Discovery Channel India"],
-        "enfants": ["Pogo", "Cartoon Network India", "Disney India"]
+        "enfants": ["Pogo", "Cartoon Network India", "Kids India"]
       }
     },
     {
@@ -85,7 +85,7 @@
         "actualités": ["GloboNews", "BandNews TV"],
         "divertissement": ["Globo", "RecordTV", "SBT"],
         "documentaires": ["National Geographic Brasil", "Discovery Brasil"],
-        "enfants": ["Cartoon Network Brasil", "Disney Channel Brasil", "Nickelodeon Brasil"]
+        "enfants": ["Cartoon Network Brasil", "Kids Channel Brasil", "Nickelodeon Brasil"]
       }
     },
     {
@@ -118,7 +118,7 @@
         "actualités": ["Noticieros Televisa", "Azteca Noticias", "Milenio TV"],
         "divertissement": ["Las Estrellas", "Azteca Uno", "Canal 5", "Imagen Televisión"],
         "documentaires": ["National Geographic Latin America", "Discovery Channel Latin America", "History Channel Latin America"],
-        "enfants": ["Canal 5", "Cartoon Network Mexico", "Disney Channel Mexico", "Nickelodeon Latin America"]
+        "enfants": ["Canal 5", "Cartoon Network Mexico", "Kids Channel Mexico", "Nickelodeon Latin America"]
       }
     },
     {
@@ -140,7 +140,7 @@
         "actualités": ["RTVE Noticias", "Antena 3 Noticias", "La Sexta Noticias", "24 Horas"],
         "divertissement": ["La 1", "Antena 3", "Telecinco", "Cuatro", "La Sexta"],
         "documentaires": ["Documental", "Historia", "National Geographic Spain"],
-        "enfants": ["Clan", "Boing", "Disney Channel Spain", "Nickelodeon Spain"]
+        "enfants": ["Clan", "Boing", "Kids Channel Spain", "Nickelodeon Spain"]
       }
     },
     {
@@ -151,7 +151,7 @@
         "actualités": ["Rai News24", "Sky TG24", "TGCOM24"],
         "divertissement": ["Rai 1", "Canale 5", "Italia 1", "Sky Uno"],
         "documentaires": ["Rai Storia", "Focus", "National Geographic Italy"],
-        "enfants": ["Rai Yoyo", "Cartoonito", "Disney Channel Italy", "Nickelodeon Italy"]
+        "enfants": ["Rai Yoyo", "Cartoonito", "Kids Channel Italy", "Nickelodeon Italy"]
       }
     },
     {
@@ -162,7 +162,7 @@
         "actualités": ["NOS Nieuws", "RTL Nieuws"],
         "divertissement": ["NPO 1", "RTL 4", "SBS 6"],
         "documentaires": ["NPO Documentaires", "National Geographic Netherlands", "Discovery Channel Netherlands"],
-        "enfants": ["Zappelin", "Nickelodeon Netherlands", "Disney Channel Netherlands"]
+        "enfants": ["Zappelin", "Nickelodeon Netherlands", "Kids Channel Netherlands"]
       }
     },
     {
@@ -173,7 +173,7 @@
         "actualités": ["SVT Nyheter", "TV4 Nyheterna"],
         "divertissement": ["SVT1", "TV4", "TV3"],
         "documentaires": ["SVT Dokumentär", "National Geographic Sweden", "Discovery Channel Sweden"],
-        "enfants": ["SVT Barn", "Nickelodeon Sweden", "Disney Channel Sweden"]
+        "enfants": ["SVT Barn", "Nickelodeon Sweden", "Kids Channel Sweden"]
       }
     },
     {
@@ -184,7 +184,7 @@
         "actualités": ["DR Nyheder", "TV 2 Nyhederne"],
         "divertissement": ["DR1", "TV 2"],
         "documentaires": ["DR2 Dokumentar", "National Geographic Denmark", "Discovery Channel Denmark"],
-        "enfants": ["DR Ramasjang", "Nickelodeon Denmark", "Disney Channel Denmark"]
+        "enfants": ["DR Ramasjang", "Nickelodeon Denmark", "Kids Channel Denmark"]
       }
     },
     {
@@ -195,7 +195,7 @@
         "actualités": ["NRK Nyheter", "TV 2 Nyhetene"],
         "divertissement": ["NRK1", "TV 2"],
         "documentaires": ["NRK Dokumentar", "National Geographic Norway", "Discovery Channel Norway"],
-        "enfants": ["NRK Super", "Nickelodeon Norway", "Disney Channel Norway"]
+        "enfants": ["NRK Super", "Nickelodeon Norway", "Kids Channel Norway"]
       }
     }
   ]
