@@ -22,8 +22,8 @@ const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`
 
 const features = [
   "Qualité HD / Full HD / 4K",
-  "+35 000 Chaînes",
-  "+20 000 Films, Séries & Famille",
+  "Chaînes Premium en direct",
+  "Vaste catalogue Films, Séries & Famille",
   "Compatible avec toutes les applications",
   "Stable 100%",
   "Support 24/7"
@@ -36,8 +36,8 @@ const plans = [
 
 const premiumFeatures = [
   "Qualité HD / Full HD / 4K",
-  "+75 000 Chaînes",
-  "+35 000 Films, Séries & Famille",
+  "Grand choix de Chaînes en direct",
+  "Large sélection Films, Séries & Famille",
   "Compatible avec toutes les applications",
   "Stable 100%",
   "Support 24/7"
@@ -50,8 +50,8 @@ const premiumPlans = [
 ]
 
 const vipFeatures = [
-  "+160 000 Chaînes TV",
-  "+100 000 Films, Séries, Sports",
+  "Toutes vos Chaînes TV préférées",
+  "Le meilleur des Films, Séries, Sports",
   "Qualité d'image 4K / Ultra HD",
   "Catch Up / EPG",
   "Mise à jour automatique",
@@ -74,7 +74,7 @@ export default function Home() {
       <section className="py-16 border-b border-white/5 bg-[#0a0a0a]">
         <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
-            { icon: <Tv className="w-8 h-8" />, value: "+65K", label: "Sports en Direct, Films & Séries" },
+            { icon: <Tv className="w-8 h-8" />, value: "Premium", label: "Sports en Direct, Films & Séries" },
             { icon: <MonitorPlay className="w-8 h-8" />, value: "4K UHD", label: "Qualité d'image" },
             { icon: <HeadphonesIcon className="w-8 h-8" />, value: "24/7", label: "Support Client" },
             { icon: <Activity className="w-8 h-8" />, value: "99.9%", label: "Disponibilité" },
@@ -620,7 +620,7 @@ export default function Home() {
                   <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0 transition-all duration-300 group-hover:bg-[#a855f7] group-hover:text-white group-hover:scale-110 group-hover:rotate-6">
                     <Tv className="w-5 h-5" />
                   </div>
-                  <h4 className="feature-title text-white font-bold text-lg">+65K Chaînes: Sports, Films, Famille</h4>
+                  <h4 className="feature-title text-white font-bold text-lg">Chaînes Premium: Sports, Films, Famille</h4>
                   <p className="text-gray-700 text-sm leading-relaxed">Chaînes françaises, belges, suisses, arabes, sportives, documentaires et programmes enfants — une sélection pour chacun. Notre bibliothèque de Films et Séries TV est mise à jour quotidiennement en VF et VOSTFR.</p>
                 </div>
 
@@ -687,9 +687,9 @@ export default function Home() {
               
               <Accordion className="w-full space-y-3 relative z-10">
                 {[
-                  { q: "Comment ça marche ?", a: "Après votre achat, vous recevez instantanément par email et WhatsApp vos identifiants de connexion. Il suffit de télécharger une application de lecture compatible (nous vous recommandons les meilleures), d'entrer vos identifiants, et de profiter de plus de 65 000 chaînes immédiatement." },
+                  { q: "Comment ça marche ?", a: "Après votre achat, vous recevez instantanément par email et WhatsApp vos identifiants de connexion. Il suffit de télécharger une application de lecture compatible (nous vous recommandons les meilleures), d'entrer vos identifiants, et de profiter de vos chaînes préférées immédiatement." },
                   { q: "Modes de paiement disponibles ?", a: "Nous acceptons les modes de paiement sécurisés suivants : CashApp, PayPal, Credit Card (Cartes Bancaires) et Crypto." },
-                  { q: "NOS OFFRES DE DIVERTISSEMENT", a: "Nos abonnements vous donnent accès à plus de 75 000 chaînes en direct et une immense bibliothèque de vidéos et programmes mis à jour quotidiennement en Full HD et 4K, sans engagement." },
+                  { q: "NOS OFFRES DE DIVERTISSEMENT", a: "Nos abonnements vous donnent accès à un large choix de chaînes en direct et une immense bibliothèque de Films, Séries et Sports mis à jour quotidiennement en Full HD et 4K, sans engagement." },
                   { q: "Compatibilité Smart TV", a: "Compatible avec toutes les Smart TV (Samsung, LG, Sony, etc.). Il vous suffit d'installer une application de lecture (comme Smart One, IBO Player ou similaires) et d'entrer vos identifiants." },
                   { q: "Comment je reçois mon abonnement ?", a: "Après validation de votre paiement, vous recevez immédiatement un email contenant vos identifiants de connexion (nom d'utilisateur, mot de passe et URL du serveur). La livraison est instantanée." },
                   { q: "Que faire si mon abonnement ne fonctionne pas ?", a: "Notre équipe support est disponible 24/7 pour vous aider. Contactez-nous par WhatsApp, email ou via notre formulaire de contact. Nous résolvons généralement les problèmes en quelques minutes." },
@@ -809,7 +809,7 @@ export default function Home() {
                 </span>
               </a>
               <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
-                Le service de streaming premium #1 en France et en Europe. Plus de 65 000 chaînes et VOD en Full HD et 4K.
+                Le service de streaming premium #1 en France et en Europe. Une sélection Premium de chaînes et contenus en Full HD et 4K.
               </p>
               <p className="text-gray-400 text-sm font-semibold mt-1">
                 Support disponible 24/7 pour tous nos clients.
