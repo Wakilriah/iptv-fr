@@ -14,7 +14,7 @@ import {
   ArrowRight, Clock, Menu, X
 } from "lucide-react"
 import { AnimatedHero } from "@/components/AnimatedHero"
-import { TrendingVOD } from "@/components/TrendingVOD"
+
 import * as tiktokPixel from "@/lib/tiktokPixel"
 
 const WHATSAPP_NUMBER = "213781858983"
@@ -174,18 +174,6 @@ export default function Home() {
             </a>
           </div>
 
-        </div>
-      </section>
-
-      {/* Vidéos & Programmes */}
-      <section id="vidéos-series" className="py-20 bg-[#050505] scroll-mt-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-4xl md:text-6xl font-black text-white mb-4">Vidéos &amp; Programmes Disponibles</h2>
-            <p className="text-gray-400 text-lg">Accédez à une bibliothèque immense de <span className="text-white font-black">+120 000</span> contenus en VOD (Vidéos &amp; Programmes)</p>
-          </div>
-
-          <TrendingVOD />
         </div>
       </section>
 
@@ -834,7 +822,7 @@ export default function Home() {
               <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-500">
                 <li><a href="#hero" className="hover:text-[#a855f7] transition-colors">Accueil</a></li>
                 <li><a href="/chaines" className="hover:text-[#a855f7] transition-colors text-[#a855f7] font-semibold">Chaînes</a></li>
-                <li><a href="#vidéos-series" className="hover:text-[#a855f7] transition-colors">Vidéos & Programmes</a></li>
+
                 <li><a href="#comment-installer" className="hover:text-[#a855f7] transition-colors">Installation</a></li>
                 <li><a href="#abonnements" className="hover:text-[#a855f7] transition-colors">Nos Packs</a></li>
                 <li><a href="#tarifs" className="hover:text-[#a855f7] transition-colors">Tarifs</a></li>

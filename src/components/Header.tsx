@@ -27,7 +27,7 @@ export function Header() {
           
           <nav className="hidden xl:flex items-center gap-5 text-xs xl:text-sm text-gray-400 font-medium">
             <a href="#hero" className="hover:text-white transition-colors">Accueil</a>
-            <a href="#vidéos-series" className="hover:text-white transition-colors">Vidéos &amp; Programmes</a>
+
             <a href="/chaines" onClick={() => tiktokPixel.searchChannels()} className="hover:text-white transition-colors text-[#a855f7] font-semibold">Chaînes</a>
             <a href="#comment-installer" className="hover:text-white transition-colors">Installation</a>
             <a href="#abonnements" className="hover:text-white transition-colors">Nos Packs</a>
@@ -77,7 +77,7 @@ export function Header() {
               {[
                 { label: "Accueil", href: "#hero" },
                 { label: "Chaînes", href: "/chaines" },
-                { label: "Vidéos & Programmes", href: "#vidéos-series" },
+
                 { label: "Installation", href: "#comment-installer" },
                 { label: "Nos Packs", href: "#abonnements" },
                 { label: "Tarifs", href: "#tarifs" },
