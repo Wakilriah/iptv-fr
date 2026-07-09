@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
+import { m, AnimatePresence } from "framer-motion"
 import {
   TrendingUp, Users, Clock, Search, Trash2,
   LogOut, MessageCircle, Mail, Filter, Loader2, ShieldAlert,
@@ -378,13 +378,13 @@ export default function AdminDashboard() {
   return (
     <main className="min-h-screen bg-[#050505] text-white p-4 md:p-8 relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#a855f7]/5 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-[#9333ea]/5 blur-[80px] md:blur-[150px] rounded-full pointer-events-none" />
 
       {/* Toast Notification Container */}
       <div className="fixed top-6 right-6 z-50 flex flex-col gap-3 max-w-sm w-full">
         <AnimatePresence>
           {toasts.map(toast => (
-            <motion.div
+            <m.div
               key={toast.id}
               initial={{ opacity: 0, x: 50, scale: 0.9 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -394,14 +394,14 @@ export default function AdminDashboard() {
                   ? "bg-red-500/10 border-red-500/30 text-red-400"
                   : toast.type === "info"
                   ? "bg-sky-500/10 border-sky-500/30 text-sky-400"
-                  : "bg-green-500/10 border-green-500/30 text-green-400"
+                  : "bg-green-500/10 border-green-500/30 text-green-300"
               }`}
             >
               <span>{toast.message}</span>
-              <button onClick={() => setToasts(prev => prev.filter(t => t.id !== toast.id))} className="text-gray-500 hover:text-white transition-colors">
+              <button onClick={() => setToasts(prev => prev.filter(t => t.id !== toast.id))} className="text-gray-400 hover:text-white transition-colors" aria-label="Fermer">
                 <X className="w-4 h-4" />
               </button>
-            </motion.div>
+            </m.div>
           ))}
         </AnimatePresence>
       </div>
@@ -412,7 +412,7 @@ export default function AdminDashboard() {
           <h1 className="text-3xl md:text-4xl font-black tracking-tight uppercase">
             Dashboard <span className="text-[#a855f7]">Match Ce Soir</span>
           </h1>
-          <p className="text-gray-400 text-sm mt-1">Console d&apos;administration et suivi des abonnements clients</p>
+          <p className="text-gray-300 text-sm mt-1">Console d&apos;administration et suivi des abonnements clients</p>
         </div>
         
         <div className="flex flex-wrap gap-3">
@@ -426,7 +426,7 @@ export default function AdminDashboard() {
           </Button>
           <Button
             onClick={() => setIsAddModalOpen(true)}
-            className="bg-[#a855f7] hover:bg-[#9333ea] text-white rounded-full px-5 py-2.5 flex items-center gap-2 text-sm font-bold transition-all shadow-[0_0_15px_-5px_#a855f7]"
+            className="bg-[#9333ea] hover:bg-[#7e22ce] text-white rounded-full px-5 py-2.5 flex items-center gap-2 text-sm font-bold transition-all shadow-[0_0_15px_-5px_#a855f7]"
           >
             <Plus className="w-4 h-4" />
             Nouvelle Commande
@@ -434,7 +434,7 @@ export default function AdminDashboard() {
           <Button
             onClick={handleLogout}
             variant="outline"
-            className="border-red-500/20 hover:bg-red-500/5 hover:text-red-400 rounded-full px-5 py-2.5 flex items-center gap-2 text-sm text-gray-400 font-bold transition-all bg-transparent"
+            className="border-red-500/20 hover:bg-red-500/5 hover:text-red-400 rounded-full px-5 py-2.5 flex items-center gap-2 text-sm text-gray-300 font-bold transition-all bg-transparent"
           >
             <LogOut className="w-4 h-4" />
             Déconnexion
@@ -445,7 +445,7 @@ export default function AdminDashboard() {
       {loading ? (
         <div className="min-h-[50vh] bg-[#050505] flex flex-col items-center justify-center gap-4">
           <Loader2 className="w-8 h-8 text-[#a855f7] animate-spin" />
-          <p className="text-gray-400 text-sm">Chargement des données...</p>
+          <p className="text-gray-300 text-sm">Chargement des données...</p>
         </div>
       ) : (
         <div className="max-w-7xl mx-auto space-y-8 relative z-10">
@@ -461,7 +461,7 @@ export default function AdminDashboard() {
                   value: `${totalRevenue.toFixed(2)}€`,
                   desc: `${confirmedPaidOrders.length} abonnements confirmés/livrés`,
                   icon: <TrendingUp className="w-6 h-6" />,
-                  color: "from-green-500/20 to-transparent border-green-500/30 text-green-400"
+                  color: "from-green-500/20 to-transparent border-green-500/30 text-green-300"
                 },
                 {
                   title: "Commandes Payantes",
@@ -473,7 +473,7 @@ export default function AdminDashboard() {
                 {
                   title: "Demandes de Test 1H",
                   value: trialRequests,
-                  desc: "Demandes gratuites soumises",
+                  desc: "Demandes d'essai soumises",
                   icon: <Clock className="w-6 h-6" />,
                   color: "from-sky-500/20 to-transparent border-sky-500/30 text-sky-400"
                 },
@@ -484,7 +484,7 @@ export default function AdminDashboard() {
                   icon: <ShieldAlert className="w-6 h-6" />,
                   color: pendingCount > 0 
                     ? "from-amber-500/20 to-transparent border-amber-500/30 text-amber-400 animate-pulse" 
-                    : "from-gray-500/20 to-transparent border-gray-500/10 text-gray-400"
+                    : "from-gray-500/20 to-transparent border-gray-500/10 text-gray-300"
                 }
               ].map((stat, i) => (
                 <div
@@ -492,9 +492,9 @@ export default function AdminDashboard() {
                   className={`bg-[#0d121f] border rounded-2xl p-5 flex items-start justify-between bg-gradient-to-br ${stat.color}`}
                 >
                   <div className="space-y-1.5">
-                    <p className="text-gray-400 text-xs font-black uppercase tracking-wider">{stat.title}</p>
-                    <h3 className="text-2xl md:text-3xl font-black tracking-tight">{stat.value}</h3>
-                    <p className="text-gray-500 text-xs font-semibold">{stat.desc}</p>
+                    <p className="text-gray-300 text-xs font-black uppercase tracking-wider">{stat.title}</p>
+                    <h2 className="text-2xl md:text-3xl font-black tracking-tight">{stat.value}</h2>
+                    <p className="text-gray-400 text-xs font-semibold">{stat.desc}</p>
                   </div>
                   <div className="p-2.5 bg-white/5 rounded-lg border border-white/5 shrink-0">
                     {stat.icon}
@@ -506,11 +506,11 @@ export default function AdminDashboard() {
             {/* Premium Activity SVG Chart */}
             <div className="bg-[#0d121f] border border-white/10 rounded-2xl p-5 flex flex-col justify-between">
               <div>
-                <h4 className="text-xs font-black uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#a855f7] inline-block animate-ping" />
+                <h3 className="text-xs font-black uppercase tracking-wider text-gray-300 flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#9333ea] inline-block animate-ping" />
                   Activité des 7 Derniers Jours
-                </h4>
-                <p className="text-gray-500 text-xs mt-0.5">Nombre total de leads par jour</p>
+                </h3>
+                <p className="text-gray-400 text-xs mt-0.5">Nombre total de leads par jour</p>
               </div>
               
               {/* SVG visual chart */}
@@ -532,7 +532,7 @@ export default function AdminDashboard() {
                           </div>
                         </div>
                       </div>
-                      <span className="text-[10px] text-gray-500 font-bold group-hover:text-white transition-colors">{d.date}</span>
+                      <span className="text-[10px] text-gray-400 font-bold group-hover:text-white transition-colors">{d.date}</span>
                     </div>
                   )
                 })}
@@ -547,19 +547,19 @@ export default function AdminDashboard() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 pb-6 border-b border-white/5">
               {/* Search input */}
               <div className="relative">
-                <Search className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-500 w-5 h-5" />
+                <Search className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 w-5 h-5" />
                 <input
                   type="text"
                   placeholder="Rechercher par nom, email, tél..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-12 pr-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#a855f7] transition-all text-sm font-semibold"
+                  className="w-full pl-12 pr-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent transition-all text-sm font-semibold"
                 />
               </div>
 
               {/* Status Select */}
               <div className="flex items-center bg-[#070b14] border border-white/10 rounded-xl px-3.5">
-                <span className="text-[11px] font-black uppercase text-gray-500 shrink-0 mr-2">Statut:</span>
+                <span className="text-[11px] font-black uppercase text-gray-400 shrink-0 mr-2">Statut:</span>
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
@@ -575,7 +575,7 @@ export default function AdminDashboard() {
 
               {/* Plan Select */}
               <div className="flex items-center bg-[#070b14] border border-white/10 rounded-xl px-3.5">
-                <span className="text-[11px] font-black uppercase text-gray-500 shrink-0 mr-2">Forfait:</span>
+                <span className="text-[11px] font-black uppercase text-gray-400 shrink-0 mr-2">Forfait:</span>
                 <select
                   value={planFilter}
                   onChange={(e) => setPlanFilter(e.target.value)}
@@ -591,7 +591,7 @@ export default function AdminDashboard() {
 
               {/* Date Select */}
               <div className="flex items-center bg-[#070b14] border border-white/10 rounded-xl px-3.5">
-                <span className="text-[11px] font-black uppercase text-gray-500 shrink-0 mr-2">Période:</span>
+                <span className="text-[11px] font-black uppercase text-gray-400 shrink-0 mr-2">Période:</span>
                 <select
                   value={dateFilter}
                   onChange={(e) => setDateFilter(e.target.value)}
@@ -608,14 +608,14 @@ export default function AdminDashboard() {
             {/* Bulk actions bar (shows when selectedIds has items) */}
             <AnimatePresence>
               {selectedIds.length > 0 && (
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="bg-[#a855f7]/10 border border-[#a855f7]/30 rounded-xl p-4 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 z-20"
+                  className="bg-[#9333ea]/10 border border-[#a855f7]/30 rounded-xl p-4 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 z-20"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="bg-[#a855f7] text-white text-[11px] font-black px-2.5 py-1 rounded-full">
+                    <span className="bg-[#9333ea] text-white text-[11px] font-black px-2.5 py-1 rounded-full">
                       {selectedIds.length} sélectionné(s)
                     </span>
                     <span className="text-xs text-gray-300 font-semibold">Actions groupées :</span>
@@ -646,27 +646,27 @@ export default function AdminDashboard() {
                     
                     <button
                       onClick={() => setSelectedIds([])}
-                      className="text-gray-400 hover:text-white text-xs font-bold px-2 py-1 transition-colors"
+                      className="text-gray-300 hover:text-white text-xs font-bold px-2 py-1 transition-colors"
                     >
                       Annuler
                     </button>
                   </div>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
 
             {/* Table */}
             {filteredOrders.length === 0 ? (
-              <div className="py-20 text-center text-gray-500 flex flex-col items-center justify-center gap-2">
-                <Info className="w-8 h-8 text-gray-600" />
+              <div className="py-20 text-center text-gray-400 flex flex-col items-center justify-center gap-2">
+                <Info className="w-8 h-8 text-gray-400" />
                 <p className="text-base font-bold">Aucune commande ou demande trouvée</p>
-                <p className="text-xs text-gray-600">Ajustez vos filtres de recherche ou de période</p>
+                <p className="text-xs text-gray-400">Ajustez vos filtres de recherche ou de période</p>
               </div>
             ) : (
               <div className="overflow-x-auto -mx-6 md:-mx-8">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="border-b border-white/5 text-[11px] font-black uppercase tracking-wider text-gray-500">
+                    <tr className="border-b border-white/5 text-[11px] font-black uppercase tracking-wider text-gray-400">
                       {/* Checkbox select all */}
                       <th className="px-6 md:px-8 pb-4 w-12">
                         <input
@@ -682,7 +682,7 @@ export default function AdminDashboard() {
                       <th className="px-4 pb-4 cursor-pointer hover:text-white transition-colors" onClick={() => toggleSort("planPrice")}>
                         <div className="flex items-center gap-1">
                           Tarif
-                          <ArrowUpDown className="w-3 h-3 text-gray-500" />
+                          <ArrowUpDown className="w-3 h-3 text-gray-400" />
                         </div>
                       </th>
                       
@@ -691,7 +691,7 @@ export default function AdminDashboard() {
                       <th className="px-4 pb-4 cursor-pointer hover:text-white transition-colors" onClick={() => toggleSort("createdAt")}>
                         <div className="flex items-center gap-1">
                           Date
-                          <ArrowUpDown className="w-3 h-3 text-gray-500" />
+                          <ArrowUpDown className="w-3 h-3 text-gray-400" />
                         </div>
                       </th>
                       
@@ -728,7 +728,7 @@ export default function AdminDashboard() {
                               <p className="font-bold text-white text-[15px] group-hover:text-[#a855f7] transition-colors">
                                 {order.fullname}
                               </p>
-                              <p className="text-[11px] text-gray-500 font-semibold mt-0.5">{order.email}</p>
+                              <p className="text-[11px] text-gray-400 font-semibold mt-0.5">{order.email}</p>
                             </div>
                           </td>
                           
@@ -739,9 +739,9 @@ export default function AdminDashboard() {
                                 {order.planName}
                               </p>
                               <span className={`text-xs font-black inline-block px-2 py-0.5 rounded-full ${
-                                isTest ? "bg-sky-500/10 text-sky-400" : "bg-[#a855f7]/10 text-[#a855f7]"
+                                isTest ? "bg-sky-500/10 text-sky-400" : "bg-[#9333ea]/10 text-[#a855f7]"
                               }`}>
-                                {isTest ? "Test Gratuit" : `${order.planPrice}€`}
+                                {isTest ? "Essai" : `${order.planPrice}€`}
                               </span>
                             </div>
                           </td>
@@ -757,7 +757,7 @@ export default function AdminDashboard() {
                                   : order.status === "CONFIRMED"
                                   ? "text-[#a855f7] border-[#a855f7]/20"
                                   : order.status === "COMPLETED"
-                                  ? "text-green-400 border-green-400/20"
+                                  ? "text-green-300 border-green-400/20"
                                   : "text-red-400 border-red-400/20"
                               }`}
                             >
@@ -769,7 +769,7 @@ export default function AdminDashboard() {
                           </td>
                           
                           {/* Date */}
-                          <td className="px-4 py-4.5 text-xs text-gray-400 font-medium">
+                          <td className="px-4 py-4.5 text-xs text-gray-300 font-medium">
                             {new Date(order.createdAt).toLocaleDateString("fr-FR", {
                               day: "2-digit",
                               month: "short",
@@ -785,13 +785,13 @@ export default function AdminDashboard() {
                                 href={`https://wa.me/${order.phone.replace(/[^0-9]/g, "")}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-8.5 h-8.5 rounded-lg bg-green-500/10 hover:bg-green-500 text-green-400 hover:text-white border border-green-500/20 flex items-center justify-center transition-all"
+                                className="w-8.5 h-8.5 rounded-lg bg-green-500/10 hover:bg-green-500 text-green-300 hover:text-white border border-green-500/20 flex items-center justify-center transition-all"
                                 title="WhatsApp"
                               >
                                 <MessageCircle className="w-4 h-4" />
                               </a>
                               <a
-                                href={`mailto:${order.email}?subject=IPTV Match Ce Soir&body=Bonjour ${order.fullname},`}
+                                href={`mailto:${order.email}?subject=Premium Match Ce Soir&body=Bonjour ${order.fullname},`}
                                 className="w-8.5 h-8.5 rounded-lg bg-sky-500/10 hover:bg-sky-500 text-sky-400 hover:text-white border border-sky-500/20 flex items-center justify-center transition-all"
                                 title="Email"
                               >
@@ -824,7 +824,7 @@ export default function AdminDashboard() {
       <AnimatePresence>
         {isAddModalOpen && (
           <>
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -832,7 +832,7 @@ export default function AdminDashboard() {
               className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
             />
             <div className="fixed inset-0 z-50 flex items-center justify-center px-4 pointer-events-none">
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, scale: 0.95, y: 30 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 30 }}
@@ -841,15 +841,15 @@ export default function AdminDashboard() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-0.5 bg-gradient-to-r from-transparent via-[#a855f7] to-transparent" />
                 
                 <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-xl font-black text-white uppercase">Ajouter manuellement</h3>
-                  <button onClick={() => setIsAddModalOpen(false)} className="text-gray-500 hover:text-white p-1">
+                  <h2 className="text-xl font-black text-white uppercase">Ajouter manuellement</h2>
+                  <button onClick={() => setIsAddModalOpen(false)} className="text-gray-400 hover:text-white p-1" aria-label="Fermer">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
 
                 <form onSubmit={handleCreateOrder} className="space-y-4">
                   <div>
-                    <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 block mb-1">
+                    <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
                       Nom complet
                     </label>
                     <input
@@ -858,12 +858,12 @@ export default function AdminDashboard() {
                       value={newOrderForm.fullname}
                       onChange={(e) => setNewOrderForm(prev => ({ ...prev, fullname: e.target.value }))}
                       placeholder="Jean Dupont"
-                      className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#a855f7] text-sm font-semibold"
+                      className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-sm font-semibold"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 block mb-1">
+                    <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
                       Adresse Email
                     </label>
                     <input
@@ -872,12 +872,12 @@ export default function AdminDashboard() {
                       value={newOrderForm.email}
                       onChange={(e) => setNewOrderForm(prev => ({ ...prev, email: e.target.value }))}
                       placeholder="jean.dupont@email.com"
-                      className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#a855f7] text-sm font-semibold"
+                      className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-sm font-semibold"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 block mb-1">
+                    <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
                       Téléphone (ex: +33600000000)
                     </label>
                     <input
@@ -886,13 +886,13 @@ export default function AdminDashboard() {
                       value={newOrderForm.phone}
                       onChange={(e) => setNewOrderForm(prev => ({ ...prev, phone: e.target.value }))}
                       placeholder="+33 6 12 34 56 78"
-                      className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#a855f7] text-sm font-semibold"
+                      className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-sm font-semibold"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 block mb-1">
+                      <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
                         Forfait
                       </label>
                       <select
@@ -910,9 +910,9 @@ export default function AdminDashboard() {
                           
                           setNewOrderForm(prev => ({ ...prev, planName: name, planPrice: price }))
                         }}
-                        className="w-full px-3 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white focus:outline-none focus:border-[#a855f7] text-xs font-bold"
+                        className="w-full px-3 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-xs font-bold"
                       >
-                        <option value="Test Gratuit 1H">Test Gratuit 1H</option>
+                        <option value="Essai Découverte 1H">Essai Découverte 1H</option>
                         <option value="Abonnement Standard (3 mois)">Standard (3 mois)</option>
                         <option value="Abonnement Standard (6 mois)">Standard (6 mois)</option>
                         <option value="Abonnement Standard (12 mois)">Standard (12 mois)</option>
@@ -924,7 +924,7 @@ export default function AdminDashboard() {
                     </div>
 
                     <div>
-                      <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 block mb-1">
+                      <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
                         Tarif (€)
                       </label>
                       <input
@@ -932,19 +932,19 @@ export default function AdminDashboard() {
                         required
                         value={newOrderForm.planPrice}
                         onChange={(e) => setNewOrderForm(prev => ({ ...prev, planPrice: e.target.value }))}
-                        className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#a855f7] text-sm font-semibold"
+                        className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-sm font-semibold"
                       />
                     </div>
                   </div>
 
                   <Button
                     type="submit"
-                    className="w-full py-5 font-bold bg-[#a855f7] hover:bg-[#9333ea] text-white rounded-xl mt-4"
+                    className="w-full py-5 font-bold bg-[#9333ea] hover:bg-[#7e22ce] text-white rounded-xl mt-4"
                   >
                     Ajouter le Lead
                   </Button>
                 </form>
-              </motion.div>
+              </m.div>
             </div>
           </>
         )}
@@ -954,14 +954,14 @@ export default function AdminDashboard() {
       <AnimatePresence>
         {selectedOrder && (
           <>
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedOrder(null)}
               className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40"
             />
-            <motion.div
+            <m.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -971,10 +971,10 @@ export default function AdminDashboard() {
               <div>
                 <div className="flex justify-between items-center mb-8 pb-4 border-b border-white/5">
                   <div>
-                    <h3 className="text-lg font-black uppercase text-[#a855f7]">Détails du Lead</h3>
-                    <p className="text-[10px] text-gray-500 font-bold font-mono">ID: {selectedOrder.id}</p>
+                    <h2 className="text-lg font-black uppercase text-[#a855f7]">Détails du Lead</h2>
+                    <p className="text-[10px] text-gray-400 font-bold font-mono">ID: {selectedOrder.id}</p>
                   </div>
-                  <button onClick={() => setSelectedOrder(null)} className="text-gray-500 hover:text-white p-1 rounded-full hover:bg-white/5">
+                  <button onClick={() => setSelectedOrder(null)} className="text-gray-400 hover:text-white p-1 rounded-full hover:bg-white/5" aria-label="Fermer">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
@@ -982,21 +982,21 @@ export default function AdminDashboard() {
                 <div className="space-y-6">
                   {/* Client Info Card */}
                   <div className="space-y-4">
-                    <h4 className="text-xs font-black uppercase tracking-wider text-gray-400">Informations Client</h4>
+                    <h3 className="text-xs font-black uppercase tracking-wider text-gray-300">Informations Client</h3>
                     
                     <div className="bg-[#070b14] border border-white/5 rounded-2xl p-4 space-y-3">
                       <div>
-                        <span className="text-[10px] uppercase text-gray-500 font-bold block">Nom complet</span>
+                        <span className="text-[10px] uppercase text-gray-400 font-bold block">Nom complet</span>
                         <span className="text-white font-bold text-base">{selectedOrder.fullname}</span>
                       </div>
                       
                       <div>
-                        <span className="text-[10px] uppercase text-gray-500 font-bold block">Adresse e-mail</span>
+                        <span className="text-[10px] uppercase text-gray-400 font-bold block">Adresse e-mail</span>
                         <span className="text-white font-semibold text-sm">{selectedOrder.email}</span>
                       </div>
 
                       <div>
-                        <span className="text-[10px] uppercase text-gray-500 font-bold block">Numéro de téléphone</span>
+                        <span className="text-[10px] uppercase text-gray-400 font-bold block">Numéro de téléphone</span>
                         <span className="text-white font-semibold text-sm">{selectedOrder.phone}</span>
                       </div>
                     </div>
@@ -1004,25 +1004,25 @@ export default function AdminDashboard() {
 
                   {/* Order Details Card */}
                   <div className="space-y-4">
-                    <h4 className="text-xs font-black uppercase tracking-wider text-gray-400">Détails de la Demande</h4>
+                    <h3 className="text-xs font-black uppercase tracking-wider text-gray-300">Détails de la Demande</h3>
                     
                     <div className="bg-[#070b14] border border-white/5 rounded-2xl p-4 space-y-3">
                       <div>
-                        <span className="text-[10px] uppercase text-gray-500 font-bold block">Forfait</span>
+                        <span className="text-[10px] uppercase text-gray-400 font-bold block">Forfait</span>
                         <span className="text-white font-bold text-sm">{selectedOrder.planName}</span>
                       </div>
                       
                       <div>
-                        <span className="text-[10px] uppercase text-gray-500 font-bold block">Prix</span>
+                        <span className="text-[10px] uppercase text-gray-400 font-bold block">Prix</span>
                         <span className="text-[#a855f7] font-black text-lg">
                           {parseFloat(selectedOrder.planPrice) === 0 ? "Offert (Test 1H)" : `${selectedOrder.planPrice}€`}
                         </span>
                       </div>
 
                       <div>
-                        <span className="text-[10px] uppercase text-gray-500 font-bold block">Date de création</span>
+                        <span className="text-[10px] uppercase text-gray-400 font-bold block">Date de création</span>
                         <span className="text-gray-300 font-semibold text-xs flex items-center gap-1.5 mt-0.5">
-                          <Calendar className="w-3.5 h-3.5 text-gray-500" />
+                          <Calendar className="w-3.5 h-3.5 text-gray-400" />
                           {new Date(selectedOrder.createdAt).toLocaleString("fr-FR", {
                             weekday: "long",
                             day: "2-digit",
@@ -1035,7 +1035,7 @@ export default function AdminDashboard() {
                       </div>
 
                       <div>
-                        <span className="text-[10px] uppercase text-gray-500 font-bold block mb-1">Modifier le Statut</span>
+                        <span className="text-[10px] uppercase text-gray-400 font-bold block mb-1">Modifier le Statut</span>
                         <select
                           value={selectedOrder.status}
                           onChange={(e) => {
@@ -1048,7 +1048,7 @@ export default function AdminDashboard() {
                               : selectedOrder.status === "CONFIRMED"
                               ? "text-[#a855f7] border-[#a855f7]/20"
                               : selectedOrder.status === "COMPLETED"
-                              ? "text-green-400 border-green-400/20"
+                              ? "text-green-300 border-green-400/20"
                               : "text-red-400 border-red-400/20"
                           }`}
                         >
@@ -1076,7 +1076,7 @@ export default function AdminDashboard() {
                 </a>
                 
                 <a
-                  href={`mailto:${selectedOrder.email}?subject=Abonnement IPTV Match Ce Soir&body=Bonjour ${selectedOrder.fullname},`}
+                  href={`mailto:${selectedOrder.email}?subject=Abonnement Premium Match Ce Soir&body=Bonjour ${selectedOrder.fullname},`}
                   className="w-full py-4.5 rounded-xl bg-sky-500 text-white font-black text-center flex items-center justify-center gap-2 hover:bg-sky-600 transition-colors shadow-lg shadow-sky-500/10"
                 >
                   <Mail className="w-5 h-5" />
@@ -1090,7 +1090,7 @@ export default function AdminDashboard() {
                   Supprimer ce Lead
                 </button>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

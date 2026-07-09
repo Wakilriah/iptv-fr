@@ -1,20 +1,19 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { m, AnimatePresence } from "framer-motion"
 import Link from "next/link"
+import Image from "next/image"
 
 const ALL_CHANNELS = [
-  { name: "beIN Sports", color: "#ff6b00", logo: "/channels/bein-sports.jpg" },
-  { name: "Canal+", color: "#00d4ff", logo: "/channels/canal-plus.jpg" },
-  { name: "RMC Sport", color: "#e63946", logo: "/channels/rmc-sport.jpg" },
-  { name: "TF1", color: "#ff2d55", logo: "/channels/tf1.jpg" },
-  { name: "France 2", color: "#f72585", logo: "/channels/france-2.jpg" },
-  { name: "M6", color: "#ff9500", logo: "/channels/m6.jpg" },
-  { name: "BFM TV", color: "#00b4d8", logo: "/channels/bfm-tv.jpg" },
-  { name: "OCS", color: "#7b2ff7", logo: "/channels/ocs.jpg" },
-  { name: "Arte", color: "#ff6f61", logo: "/channels/arte.jpg" },
-  { name: "Eurosport", color: "#3a86ff", logo: "/channels/eurosport.jpg" },
+  { name: "Sports en Direct", color: "#ff6b00", logo: "/channels/logo_sports.webp" },
+  { name: "Cinéma Premium", color: "#00d4ff", logo: "/channels/logo_cinema.webp" },
+  { name: "Programmes", color: "#e63946", logo: "/channels/logo_series.webp" },
+  { name: "Généraliste", color: "#ff2d55", logo: "/channels/logo_generaliste.webp" },
+  { name: "Information", color: "#f72585", logo: "/channels/logo_info.webp" },
+  { name: "Documentaires", color: "#ff9500", logo: "/channels/logo_docs.webp" },
+  { name: "Jeunesse", color: "#00b4d8", logo: "/channels/logo_jeunesse.webp" },
+  { name: "Musique", color: "#7b2ff7", logo: "/channels/logo_musique.webp" },
 ]
 
 function shuffleAndPick(arr: typeof ALL_CHANNELS, count: number): typeof ALL_CHANNELS {
@@ -41,13 +40,11 @@ const badgeVariants = {
   hidden: {
     opacity: 0,
     scale: 0.6,
-    filter: "blur(12px)",
     y: 10,
   },
   visible: {
     opacity: 1,
     scale: 1,
-    filter: "blur(0px)",
     y: 0,
     transition: {
       type: "spring" as const,
@@ -58,7 +55,6 @@ const badgeVariants = {
   exit: {
     opacity: 0,
     scale: 0.7,
-    filter: "blur(10px)",
     y: -8,
     transition: {
       duration: 0.3,
@@ -86,14 +82,14 @@ export function NeonChannelShowcase() {
   return (
     <div className="flex flex-col items-center gap-8 w-full">
       {/* Label */}
-      <p className="text-sm sm:text-base text-gray-400 font-extrabold uppercase tracking-[0.25em]">
+      <p className="text-sm sm:text-base text-gray-300 font-extrabold uppercase tracking-[0.25em]">
         Chaînes populaires en France
       </p>
 
       {/* Channel Badges Container */}
       <div className="relative flex items-center justify-center min-h-[70px] sm:min-h-[80px] w-full max-w-5xl">
         <AnimatePresence mode="wait">
-          <motion.div
+          <m.div
             key={cycleKey}
             className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-5"
             variants={containerVariants}
@@ -102,7 +98,7 @@ export function NeonChannelShowcase() {
             exit="exit"
           >
             {visibleChannels.map((channel) => (
-              <motion.div
+              <m.div
                 key={channel.name}
                 variants={badgeVariants}
                 className="neon-badge relative"
@@ -115,9 +111,11 @@ export function NeonChannelShowcase() {
                 {/* Inner badge */}
                 <div className="relative flex items-center gap-3 px-5 py-3 sm:px-7 sm:py-3.5 rounded-full bg-[#0a0f1e]/90 border border-white/[0.1] backdrop-blur-md cursor-default select-none shadow-2xl">
                   {/* Channel logo image */}
-                  <img
+                  <Image
                     src={channel.logo}
                     alt={channel.name}
+                    width={32}
+                    height={32}
                     className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg object-cover border border-white/10 shrink-0 shadow-lg"
                   />
                   {/* Channel name */}
@@ -127,7 +125,7 @@ export function NeonChannelShowcase() {
                 </div>
 
                 {/* Neon glow layer (animated) */}
-                <motion.div
+                <m.div
                   className="absolute inset-0 rounded-full pointer-events-none"
                   initial={{ opacity: 0 }}
                   animate={{
@@ -145,21 +143,21 @@ export function NeonChannelShowcase() {
                     borderRadius: "9999px",
                   }}
                 />
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
         </AnimatePresence>
       </div>
 
       {/* CTA Link to channels page */}
       <Link href="/chaines">
-        <motion.div
+        <m.div
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
-          className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full border border-[#a855f7]/30 bg-[#a855f7]/5 backdrop-blur-sm text-sm sm:text-base font-extrabold text-[#c084fc] hover:text-white hover:bg-[#a855f7]/15 hover:border-[#a855f7]/50 hover:shadow-[0_0_30px_-5px_#a855f7] transition-all duration-300 cursor-pointer"
+          className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full border border-[#a855f7]/30 bg-[#9333ea]/5 backdrop-blur-sm text-sm sm:text-base font-extrabold text-[#c084fc] hover:text-white hover:bg-[#7e22ce]/15 hover:border-[#a855f7]/50 hover:shadow-[0_0_30px_-5px_#a855f7] transition-all duration-300 cursor-pointer"
         >
           <span>Explorer toutes nos chaînes</span>
-          <svg
+          <svg aria-hidden="true"
             className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
             fill="none"
             viewBox="0 0 24 24"
@@ -168,7 +166,7 @@ export function NeonChannelShowcase() {
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
-        </motion.div>
+        </m.div>
       </Link>
     </div>
   )

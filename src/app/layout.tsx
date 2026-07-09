@@ -5,29 +5,30 @@ import "./globals.css";
 const outfit = Outfit({
   variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const baseUrl = "https://lemondeiptv.fr"
+const baseUrl = "https://matchcesoir.fr"
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Meilleur IPTV en France | Match Ce Soir Fr",
+    default: "Match Ce Soir Fr — Votre Portail de Divertissement & Streaming Premium",
     template: "%s | Match Ce Soir Fr",
   },
   description:
-    "Match Ce Soir Fr — Meilleur abonnement IPTV en France avec plus de 65 000 chaînes et VOD en Full HD & 4K. Anti-freeze, support 24/7, garantie 7 jours. Dès 25€.",
+    "Match Ce Soir Fr — Votre Portail de Divertissement & Streaming Premium en Full HD & 4K. Support 24/7. Dès 25€.",
   keywords: [
-    "IPTV France",
-    "meilleur IPTV",
-    "abonnement IPTV",
-    "IPTV 4K",
-    "IPTV français",
-    "chaînes IPTV",
-    "IPTV pas cher",
-    "VOD IPTV",
-    "IPTV streaming",
-    "abonnement IPTV France",
+    "Plateforme de divertissement",
+    "Streaming premium",
+    "Abonnement TV",
+    "Divertissement 4K",
+    "Vidéos et Programmes en direct",
+    "Télévision numérique",
+    "Streaming de sport",
+    "Cinéma à la maison",
+    "Sélection multimédia",
+    "Accès Premium France",
   ],
   authors: [{ name: "Match Ce Soir Fr" }],
   creator: "Match Ce Soir Fr",
@@ -40,24 +41,23 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: baseUrl,
     siteName: "Match Ce Soir Fr",
-    title: "Meilleur IPTV en France | Match Ce Soir Fr — 65 000 Chaînes 4K",
+    title: "Match Ce Soir Fr — Votre Portail de Divertissement & Streaming Premium",
     description:
-      "Profitez du meilleur abonnement IPTV en France avec Match Ce Soir Fr. Plus de 65 000 chaînes, films et séries VOD en 4K. Zapping ultra-rapide, anti-freeze, support 24/7.",
+      "Profitez de votre portail de divertissement avec Match Ce Soir Fr. Vidéos et programmes en 4K. Support 24/7.",
     images: [
       {
-        url: "/hero-psg.jpg",
+        url: "/hero-psg.webp",
         width: 1200,
         height: 630,
-        alt: "Match Ce Soir Fr - Meilleur IPTV en France",
+        alt: "Match Ce Soir Fr - Portail de divertissement",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Meilleur IPTV en France | Match Ce Soir Fr",
-    description:
-      "65 000 chaînes & VOD en 4K. Abonnement IPTV dès 25€. Garantie 7 jours. Anti-freeze. Support 24/7.",
-    images: ["/hero-psg.jpg"],
+    title: "Match Ce Soir Fr — Votre Portail de Divertissement VOD & TV en Full HD",
+    description: "Vaste sélection de vidéos, programmes et TV en 4K. Abonnement dès 25€. Qualité Full HD. Support 24/7.",
+    images: ["/hero-psg.webp"],
   },
   robots: {
     index: true,
@@ -72,6 +72,11 @@ export const metadata: Metadata = {
   },
 };
 
+import { MotionProvider } from "@/components/MotionProvider";
+import { OrderModalProvider } from "@/context/OrderModalContext";
+import TikTokPixel from "@/components/TikTokPixel";
+import { Suspense } from "react";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -79,8 +84,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`dark ${outfit.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+      </head>
       <body className="min-h-full flex flex-col bg-[#050505] text-white font-sans">
-        {children}
+        <Suspense fallback={null}>
+          <TikTokPixel />
+        </Suspense>
+        <MotionProvider>
+          <OrderModalProvider>
+            {children}
+          </OrderModalProvider>
+        </MotionProvider>
       </body>
     </html>
   );

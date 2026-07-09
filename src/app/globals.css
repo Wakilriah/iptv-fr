@@ -208,3 +208,21 @@
 .btn-glow-email:hover {
   box-shadow: 0 0 35px 5px rgba(59, 130, 246, 0.65) !important;
 }
+
+/* Global responsive layout fixes */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  min-width: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}

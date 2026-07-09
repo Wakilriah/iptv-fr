@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://lemondeiptv.fr/sitemap.xml",
+    sitemap: "https://matchcesoir.fr/sitemap.xml",
   }
 }
