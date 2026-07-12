@@ -44,6 +44,58 @@ const premiumFeatures = [
   "Support 24/7"
 ]
 
+const POPULAR_CHANNELS = [
+  { name: "beIN SPORTS", category: "Sport", badge: true },
+  { name: "CANAL+", category: "Premium", badge: true },
+  { name: "Disney+", category: "Enfants", badge: true },
+  { name: "CNN", category: "Actualités", badge: false },
+  { name: "FOX", category: "International", badge: false },
+  { name: "TF1", category: "Généraliste", badge: true },
+  { name: "France 2", category: "Généraliste", badge: true },
+  { name: "M6", category: "Généraliste", badge: true },
+  { name: "Arte", category: "Culture", badge: false },
+  { name: "National Geographic", category: "Documentaire", badge: true },
+]
+
+const renderChannelIcon = (name: string) => {
+  switch (name) {
+    case "beIN SPORTS":
+      return <span className="text-4xl">🏆</span>
+    case "CANAL+":
+      return <span className="text-4xl">📺</span>
+    case "Disney+":
+      return <span className="text-4xl">🏰</span>
+    case "CNN":
+      return <span className="text-4xl">📰</span>
+    case "FOX":
+      return <span className="text-4xl">🦊</span>
+    case "TF1":
+      return (
+        <div className="w-10 h-10 rounded-lg bg-[#0055ff] flex items-center justify-center text-white font-extrabold text-2xl shadow-md select-none">
+          1
+        </div>
+      )
+    case "France 2":
+      return (
+        <div className="w-10 h-10 rounded-lg bg-[#0055ff] flex items-center justify-center text-white font-extrabold text-2xl shadow-md select-none">
+          2
+        </div>
+      )
+    case "M6":
+      return (
+        <div className="w-10 h-10 rounded-lg bg-[#0055ff] flex items-center justify-center text-white font-extrabold text-2xl shadow-md select-none">
+          6
+        </div>
+      )
+    case "Arte":
+      return <span className="text-4xl">🎨</span>
+    case "National Geographic":
+      return <span className="text-4xl">🌍</span>
+    default:
+      return null
+  }
+}
+
 const premiumPlans = [
   { name: "3 mois",  price: "25.99", duration: "3 mois",  features: premiumFeatures, highlighted: false },
   { name: "6 mois",  price: "35.99", duration: "6 mois",  features: premiumFeatures, highlighted: false },
@@ -103,59 +155,38 @@ export default function Home() {
             </p>
           </div>
 
-                                            {/* Desktop Category Grid */}
-              <div className="hidden md:block bg-[#0d1929] rounded-3xl p-6 border border-white/5">
-                <div className="grid grid-cols-4 gap-4">
-                  {[
-                    { id: 'sports', name: 'Sports en Direct', color: '#a855f7', src: '/channels/logo_sports.webp' },
-                    { id: 'cinema', name: 'Cinéma Premium', color: '#00d4ff', src: '/channels/logo_cinema.webp' },
-                    { id: 'series', name: 'Séries TV', color: '#e63946', src: '/channels/logo_series.webp' },
-                    { id: 'general', name: 'Généraliste', color: '#ff2d55', src: '/channels/logo_generaliste.webp' },
-                    { id: 'info', name: 'Information', color: '#f72585', src: '/channels/logo_info.webp' },
-                    { id: 'docs', name: 'Documentaires', color: '#ff9500', src: '/channels/logo_docs.webp' },
-                    { id: 'jeunesse', name: 'Jeunesse', color: '#00b4d8', src: '/channels/logo_jeunesse.webp' },
-                    { id: 'musique', name: 'Musique', color: '#7b2ff7', src: '/channels/logo_musique.webp' }
-                  ].map((cat) => (
-                    <div
-                      key={cat.id}
-                      className="channel-card group relative bg-black rounded-2xl border border-white/10 aspect-video flex items-center justify-center overflow-hidden cursor-pointer transition-all duration-300 shadow-md hover:border-[var(--hover-color)]"
-                      style={{ '--hover-color': cat.color } as React.CSSProperties}
-                    >
-                      <img src={cat.src} alt={cat.name} width={400} height={225} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center pb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span className="text-white font-bold text-sm">{cat.name}</span>
-                      </div>
+            <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-3">
+              {POPULAR_CHANNELS.map((ch) => (
+                <div
+                  key={ch.name}
+                  className="relative flex flex-col items-center justify-center bg-[#0d121f]/60 border border-white/5 rounded-2xl p-5 text-center min-h-[160px] select-none hover:border-[#a855f7]/30 transition-colors"
+                >
+                  {/* Top-right Star Badge */}
+                  {ch.badge && (
+                    <div className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full bg-[#9333ea]/20 border border-[#a855f7]/40 flex items-center justify-center text-[#c084fc]">
+                      <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
                     </div>
-                  ))}
-                </div>
-              </div>
+                  )}
 
-              {/* Mobile Category Grid */}
-              <div className="block md:hidden bg-[#0d1929] rounded-2xl p-3 border border-white/5 mx-2 shadow-inner">
-                <div className="grid grid-cols-2 gap-2.5">
-                  {[
-                    { id: 'sports', src: '/channels/logo_sports_mobile.webp' },
-                    { id: 'cinema', src: '/channels/logo_cinema_mobile.webp' },
-                    { id: 'series', src: '/channels/logo_series_mobile.webp' },
-                    { id: 'general', src: '/channels/logo_generaliste_mobile.webp' },
-                    { id: 'info', src: '/channels/logo_info_mobile.webp' },
-                    { id: 'docs', src: '/channels/logo_docs_mobile.webp' },
-                    { id: 'jeunesse', src: '/channels/logo_jeunesse_mobile.webp' },
-                    { id: 'musique', src: '/channels/logo_musique_mobile.webp' }
-                  ].map((cat) => (
-                    <div
-                      key={cat.id}
-                      className="relative bg-[#0d121f] rounded-xl border border-white/10 aspect-square overflow-hidden shadow-lg"
-                    >
-                      <img
-                        src={cat.src}
-                        alt={cat.id}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  ))}
+                  {/* Icon */}
+                  <div className="h-12 flex items-center justify-center mb-4">
+                    {renderChannelIcon(ch.name)}
+                  </div>
+
+                  {/* Name */}
+                  <span className="text-white font-extrabold text-xs sm:text-sm leading-tight tracking-tight mb-2">
+                    {ch.name}
+                  </span>
+
+                  {/* Category */}
+                  <span className="text-gray-400 font-semibold text-[10px] mt-auto uppercase tracking-wider">
+                    {ch.category}
+                  </span>
                 </div>
-              </div>
+              ))}
+            </div>
           <div className="text-center mt-12">
             <a
               href="/chaines"

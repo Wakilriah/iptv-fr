@@ -1,85 +1,81 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
-import Image from "next/image"
 
-const ALL_CHANNELS = [
-  { name: "Sports en Direct", color: "#ff6b00", logo: "/channels/logo_sports.webp" },
-  { name: "Cinéma Premium", color: "#00d4ff", logo: "/channels/logo_cinema.webp" },
-  { name: "Programmes", color: "#e63946", logo: "/channels/logo_series.webp" },
-  { name: "Généraliste", color: "#ff2d55", logo: "/channels/logo_generaliste.webp" },
-  { name: "Information", color: "#f72585", logo: "/channels/logo_info.webp" },
-  { name: "Documentaires", color: "#ff9500", logo: "/channels/logo_docs.webp" },
-  { name: "Jeunesse", color: "#00b4d8", logo: "/channels/logo_jeunesse.webp" },
-  { name: "Musique", color: "#7b2ff7", logo: "/channels/logo_musique.webp" },
+const POPULAR_BRANDS = [
+  {
+    name: "beIN SPORTS",
+    logo: (
+      <div className="flex flex-col items-center">
+        <span className="text-[#4b0082] font-black text-2xl sm:text-3xl tracking-tight leading-none italic">beIN</span>
+        <span className="text-[#4b0082] font-black text-[9px] sm:text-[10px] tracking-[0.25em] leading-none mt-1">SPORTS</span>
+      </div>
+    )
+  },
+  {
+    name: "RMC SPORT",
+    logo: (
+      <div className="flex flex-col items-center">
+        <span className="text-[#e11d48] font-black text-2xl sm:text-3xl tracking-tight leading-none">RMC</span>
+        <span className="text-[#1e3a8a] font-black text-[10px] sm:text-[11px] tracking-wider leading-none mt-0.5 border-t border-gray-200 pt-0.5">SPORT</span>
+      </div>
+    )
+  },
+  {
+    name: "NETFLIX",
+    logo: (
+      <span className="text-[#E50914] font-black text-2xl sm:text-3xl tracking-tighter scale-y-110">NETFLIX</span>
+    )
+  },
+  {
+    name: "Disney+",
+    logo: (
+      <div className="relative flex items-center justify-center">
+        <span className="text-[#0063e5] font-black text-2xl sm:text-3xl italic tracking-tight">Disney<span className="text-[#00a8e1]">+</span></span>
+      </div>
+    )
+  },
+  {
+    name: "HBO max",
+    logo: (
+      <div className="flex items-center gap-0.5 font-sans">
+        <span className="text-black font-black text-2xl sm:text-3xl tracking-tight">HBO</span>
+        <span className="text-[#9933ff] font-extrabold text-2xl sm:text-3xl tracking-tighter">max</span>
+      </div>
+    )
+  },
+  {
+    name: "Prime Video",
+    logo: (
+      <div className="flex flex-col items-center select-none">
+        <span className="text-[#00a8e1] font-black text-2xl sm:text-3xl tracking-tight leading-none">prime</span>
+        {/* Smile arrow */}
+        <svg className="w-14 h-2.5 text-[#00a8e1] -mt-0.5" viewBox="0 0 50 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 2C15 7 35 7 45 2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M41 1C43 2.5 45.5 2.5 45.5 2.5C45.5 2.5 44.5 5 43.5 6.5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+    )
+  }
 ]
 
-function shuffleAndPick(arr: typeof ALL_CHANNELS, count: number): typeof ALL_CHANNELS {
-  const shuffled = [...arr].sort(() => Math.random() - 0.5)
-  return shuffled.slice(0, count)
-}
-
 export function NeonChannelShowcase() {
-  const [visibleChannels, setVisibleChannels] = useState(() => ALL_CHANNELS.slice(0, 6))
-  const [, setCycleKey] = useState(0)
-
-  const cycleChannels = useCallback(() => {
-    setVisibleChannels(shuffleAndPick(ALL_CHANNELS, 6))
-    setCycleKey((k) => k + 1)
-  }, [])
-
-  useEffect(() => {
-    setVisibleChannels(shuffleAndPick(ALL_CHANNELS, 6))
-    const interval = setInterval(cycleChannels, 3500)
-    return () => clearInterval(interval)
-  }, [cycleChannels])
-
   return (
     <div className="flex flex-col items-center gap-8 w-full">
       {/* Label */}
-      <p className="text-sm sm:text-base text-gray-300 font-extrabold uppercase tracking-[0.25em]">
+      <p className="text-sm sm:text-base text-gray-300 font-extrabold uppercase tracking-[0.25em] text-center">
         Chaînes populaires en France
       </p>
 
       {/* Channel Badges Container */}
-      <div className="relative flex items-center justify-center min-h-[70px] sm:min-h-[80px] w-full max-w-5xl">
-        <div className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-5">
-          {visibleChannels.map((channel) => (
+      <div className="w-full max-w-5xl px-4">
+        <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+          {POPULAR_BRANDS.map((brand) => (
             <div
-              key={channel.name}
-              className="neon-badge relative"
-              style={
-                {
-                  "--neon-color": channel.color,
-                } as React.CSSProperties
-              }
+              key={brand.name}
+              className="bg-white rounded-3xl py-6 px-8 flex items-center justify-center shadow-lg w-[140px] sm:w-[180px] h-[80px] sm:h-[90px] border border-gray-100 select-none"
             >
-              {/* Inner badge */}
-              <div className="relative flex items-center gap-3 px-5 py-3 sm:px-7 sm:py-3.5 rounded-full bg-[#0a0f1e]/90 border border-white/[0.1] backdrop-blur-md cursor-default select-none shadow-2xl">
-                {/* Channel logo image */}
-                <Image
-                  src={channel.logo}
-                  alt={channel.name}
-                  width={32}
-                  height={32}
-                  className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg object-cover border border-white/10 shrink-0 shadow-lg"
-                />
-                {/* Channel name */}
-                <span className="text-sm sm:text-base md:text-lg font-black text-white whitespace-nowrap tracking-wide">
-                  {channel.name}
-                </span>
-              </div>
-
-              {/* Neon glow layer (static) */}
-              <div
-                className="absolute inset-0 rounded-full pointer-events-none"
-                style={{
-                  boxShadow: `0 0 12px ${channel.color}50, 0 0 28px ${channel.color}35, 0 0 55px ${channel.color}20, inset 0 0 16px ${channel.color}15`,
-                  border: `1px solid ${channel.color}40`,
-                  borderRadius: "9999px",
-                }}
-              />
+              {brand.logo}
             </div>
           ))}
         </div>
@@ -88,7 +84,7 @@ export function NeonChannelShowcase() {
       {/* CTA Link to channels page */}
       <Link href="/chaines">
         <div
-          className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full border border-[#a855f7]/30 bg-[#9333ea]/5 backdrop-blur-sm text-sm sm:text-base font-extrabold text-[#c084fc] hover:text-white hover:bg-[#7e22ce]/15 hover:border-[#a855f7]/50 hover:shadow-[0_0_30px_-5px_#a855f7] transition-all duration-300 cursor-pointer"
+          className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full border border-[#a855f7]/30 bg-[#9333ea]/5 backdrop-blur-sm text-sm sm:text-base font-extrabold text-[#c084fc] hover:text-white hover:bg-[#7e22ce]/15 hover:border-[#a855f7]/50 transition-all duration-300 cursor-pointer"
         >
           <span>Explorer toutes nos chaînes</span>
           <svg aria-hidden="true"

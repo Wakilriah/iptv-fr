@@ -85,7 +85,7 @@ export function TrendingVOD() {
           }`}
         >
           <Film className="w-4 h-4" />
-          Vidéos Tendances
+          Films Tendances
         </button>
         <button
           onClick={() => setActiveTab("series")}
@@ -96,7 +96,7 @@ export function TrendingVOD() {
           }`}
         >
           <Tv className="w-4 h-4" />
-          Programmes Tendances
+          Séries Tendances
         </button>
       </div>
 
