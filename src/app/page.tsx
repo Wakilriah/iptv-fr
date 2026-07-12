@@ -555,7 +555,7 @@ export default function Home() {
               { name: "MAG", icon: <Boxes className="w-7 h-7 text-white" /> },
               { name: "Enigma2", icon: <Boxes className="w-7 h-7 text-white" /> },
             ].map((device, i) => (
-              <div key={i} className="feature-card bg-white rounded-2xl py-6 px-4 flex flex-col items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+              <div key={i} className="feature-card bg-white rounded-2xl py-6 px-4 flex flex-col items-center justify-center shadow-lg">
                 <div className="feature-icon w-14 h-14 rounded-2xl bg-[#8c52ff] flex items-center justify-center shadow-[0_8px_24px_rgba(140,82,255,0.45)] mb-4">
                   {device.icon}
                 </div>
@@ -581,8 +581,8 @@ export default function Home() {
           </div>
 
           {/* One big feature card */}
-          <div className="group relative bg-[#0d1929] border border-white/5 rounded-3xl p-5 sm:p-10 hover:border-[#a855f7]/30 transition-all duration-500 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#a855f7]/5 via-transparent to-[#7c3aed]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
+          <div className="relative bg-[#0d1929] border border-white/5 rounded-3xl p-5 sm:p-10 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#a855f7]/5 via-transparent to-[#7c3aed]/5 rounded-3xl" />
             <div className="hidden md:block absolute top-0 right-0 w-72 h-72 bg-[#a855f7]/5 blur-[80px] rounded-full pointer-events-none" />
             <div className="relative z-10">
 
@@ -596,8 +596,8 @@ export default function Home() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
                 {/* Prix */}
-                <div className="feature-card group flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5 hover:scale-[1.02] transition-all duration-300">
-                  <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0 transition-all duration-300 group-hover:bg-[#a855f7] group-hover:text-white group-hover:scale-110 group-hover:rotate-6">
+                <div className="feature-card flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5">
+                  <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -607,8 +607,8 @@ export default function Home() {
                 </div>
 
                 {/* Support 24/7 */}
-                <div className="feature-card group flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5 hover:scale-[1.02] transition-all duration-300">
-                  <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0 transition-all duration-300 group-hover:bg-[#a855f7] group-hover:text-white group-hover:scale-110 group-hover:rotate-6">
+                <div className="feature-card flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5">
+                  <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0">
                     <HeadphonesIcon className="w-5 h-5" />
                   </div>
                   <h4 className="feature-title text-white font-bold text-lg">Support 24/7</h4>
@@ -616,8 +616,8 @@ export default function Home() {
                 </div>
 
                 {/* Chaînes & VOD */}
-                <div className="feature-card group flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5 hover:scale-[1.02] transition-all duration-300">
-                  <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0 transition-all duration-300 group-hover:bg-[#a855f7] group-hover:text-white group-hover:scale-110 group-hover:rotate-6">
+                <div className="feature-card flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5">
+                  <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0">
                     <Tv className="w-5 h-5" />
                   </div>
                   <h4 className="feature-title text-white font-bold text-lg">Chaînes Premium: Sports, Films, Famille</h4>
@@ -625,8 +625,8 @@ export default function Home() {
                 </div>
 
                 {/* HD & Stabilité */}
-                <div className="feature-card group flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5 hover:scale-[1.02] transition-all duration-300">
-                  <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0 transition-all duration-300 group-hover:bg-[#a855f7] group-hover:text-white group-hover:scale-110 group-hover:rotate-6">
+                <div className="feature-card flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5">
+                  <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0">
                     <MonitorPlay className="w-5 h-5" />
                   </div>
                   <h4 className="feature-title text-white font-bold text-lg">Qualité HD & 4K UHD</h4>
@@ -634,8 +634,8 @@ export default function Home() {
                 </div>
 
                 {/* Anti-Freeze */}
-                <div className="feature-card group flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5 hover:scale-[1.02] transition-all duration-300">
-                  <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0 transition-all duration-300 group-hover:bg-[#a855f7] group-hover:text-white group-hover:scale-110 group-hover:rotate-6">
+                <div className="feature-card flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5">
+                  <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0">
                     <Shield className="w-5 h-5" />
                   </div>
                   <h4 className="feature-title text-white font-bold text-lg">Technologie Anti-Freeze</h4>
@@ -643,8 +643,8 @@ export default function Home() {
                 </div>
 
                 {/* Contenu International */}
-                <div className="feature-card group flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5 hover:scale-[1.02] transition-all duration-300">
-                  <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0 transition-all duration-300 group-hover:bg-[#a855f7] group-hover:text-white group-hover:scale-110 group-hover:rotate-6">
+                <div className="feature-card flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5">
+                  <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0">
                     <Globe className="w-5 h-5" />
                   </div>
                   <h4 className="feature-title text-white font-bold text-lg">Contenu International</h4>
