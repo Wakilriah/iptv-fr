@@ -14,6 +14,7 @@ import {
   ArrowRight, Clock, Menu, X
 } from "lucide-react"
 import { AnimatedHero } from "@/components/AnimatedHero"
+import { TrendingVOD } from "@/components/TrendingVOD"
 
 import * as tiktokPixel from "@/lib/tiktokPixel"
 
@@ -174,6 +175,18 @@ export default function Home() {
             </a>
           </div>
 
+        </div>
+      </section>
+
+      {/* Films & Séries */}
+      <section id="films-series" className="py-20 bg-[#050505] scroll-mt-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-white mb-4">Films &amp; Séries Disponibles</h2>
+            <p className="text-gray-400 text-lg">Accédez à une bibliothèque immense de contenus en VOD</p>
+          </div>
+
+          <TrendingVOD />
         </div>
       </section>
 
