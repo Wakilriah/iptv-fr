@@ -29,12 +29,6 @@ const features = [
   "Stable 100%",
   "Support 24/7"
 ]
-const plans = [
-  { name: "3 mois",  price: "16.99", duration: "3 mois",  features, highlighted: false },
-  { name: "6 mois",  price: "24.99", duration: "6 mois",  features, highlighted: false },
-  { name: "12 mois", price: "35.99", duration: "12 mois", features, highlighted: true  },
-]
-
 const premiumFeatures = [
   "Qualité HD / Full HD / 4K",
   "Grand choix de Chaînes en direct",
@@ -42,6 +36,63 @@ const premiumFeatures = [
   "Compatible avec toutes les applications",
   "Stable 100%",
   "Support 24/7"
+]
+
+const vipFeatures = [
+  "Toutes vos Chaînes TV préférées",
+  "Le meilleur des Films, Séries, Sports",
+  "Qualité d'image 4K / Ultra HD",
+  "Catch Up / EPG",
+  "Mise à jour automatique",
+  "Serveur Stable à 100%"
+]
+
+const plans = [
+  {
+    name: "Standard",
+    price: "35.99",
+    duration: "12 mois (1 An)",
+    features,
+    highlighted: false,
+    badgeText: null,
+    badgeBg: "",
+    badgeTextColor: "",
+    textColor: "text-gray-300",
+    checkmarkBg: "bg-[#7c3aed]",
+    checkmarkColor: "text-white",
+    btnClass: "bg-[#7c3aed] hover:bg-[#6d28d9] text-white shadow-[0_0_15px_-5px_#a855f7]",
+    theme: "bg-[#151c2c] border border-white/10 hover:border-white/20"
+  },
+  {
+    name: "Premium 4K",
+    price: "50.99",
+    duration: "12 mois (1 An)",
+    features: premiumFeatures,
+    highlighted: true,
+    badgeText: "👑 LE PLUS POPULAIRE",
+    badgeBg: "bg-white",
+    badgeTextColor: "text-[#e11d48]",
+    textColor: "text-white",
+    checkmarkBg: "bg-green-500",
+    checkmarkColor: "text-white",
+    btnClass: "bg-white text-[#e11d48] hover:bg-gray-50 shadow-[0_0_30px_rgba(225,29,72,0.3)] border-none",
+    theme: "bg-gradient-to-b from-[#e11d48] to-[#9f1239] shadow-[0_0_40px_-10px_#e11d48]"
+  },
+  {
+    name: "VIP +",
+    price: "89.99",
+    duration: "12 mois (1 An)",
+    features: vipFeatures,
+    highlighted: false,
+    badgeText: "👑 ACCÈS VIP PREMIUM",
+    badgeBg: "bg-white",
+    badgeTextColor: "text-[#d97706]",
+    textColor: "text-white/90",
+    checkmarkBg: "bg-white",
+    checkmarkColor: "text-[#b45309]",
+    btnClass: "bg-white text-[#b45309] hover:bg-gray-50 shadow-[0_0_30px_rgba(245,158,11,0.3)] border border-[#fbbf24]/20",
+    theme: "bg-gradient-to-b from-[#f59e0b] to-[#b45309] shadow-[0_0_50px_-10px_#f59e0b] border border-[#fbbf24]/30"
+  }
 ]
 
 const POPULAR_CHANNELS = [
@@ -96,20 +147,7 @@ const renderChannelIcon = (name: string) => {
   }
 }
 
-const premiumPlans = [
-  { name: "3 mois",  price: "25.99", duration: "3 mois",  features: premiumFeatures, highlighted: false },
-  { name: "6 mois",  price: "35.99", duration: "6 mois",  features: premiumFeatures, highlighted: false },
-  { name: "12 mois", price: "55.99", duration: "12 mois", features: premiumFeatures, highlighted: true  },
-]
-
-const vipFeatures = [
-  "Toutes vos Chaînes TV préférées",
-  "Le meilleur des Films, Séries, Sports",
-  "Qualité d'image 4K / Ultra HD",
-  "Catch Up / EPG",
-  "Mise à jour automatique",
-  "Serveur Stable à 100%"
-]
+// Config parsed successfully
 
 export default function Home() {
 
@@ -259,20 +297,12 @@ export default function Home() {
             <p className="text-gray-300 text-base md:text-xl leading-relaxed font-medium">
               Choisissez notre abonnement Premium 4K <strong className="text-[#a855f7]">Match Ce Soir Fr</strong> et plongez dans une expérience de divertissement total. Profitez d'un accès à des milliers de chaînes de Sport en Direct, Films Récents, Séries TV, et Divertissement en Famille, le tout en qualité exceptionnelle HD, UHD et 4K. Conçu pour les utilisateurs exigeants, cet abonnement vous offre une stabilité parfaite, une qualité d’image irréprochable et une grande variété de contenus.
             </p>
-            <div className="mt-12 relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl group max-w-2xl mx-auto">
-              <img 
-                src="/packs-banner.webp" 
-                alt="Nos Packs Abonnement Premium - Match Ce Soir Fr" 
-                className="w-full h-auto object-contain rounded-3xl transition-transform duration-700 group-hover:scale-[1.02]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-            </div>
           </div>
 
           {/* Title */}
-          <div id="tarifs" className="text-center mb-10 border-t border-white/5 pt-12 scroll-mt-16">
-            <h3 className="text-3xl md:text-5xl font-black mb-4 text-white tracking-tight">Abonnement Standard</h3>
-            <p className="text-gray-400 text-base max-w-2xl mx-auto">Paiement unique, activation immédiate, sans aucun contrat.</p>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-5xl font-black mb-4 text-white tracking-tight">Nos Tarifs &amp; Abonnements</h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">Choisissez le forfait de 1 an qui vous convient. Paiement unique, sans aucun engagement.</p>
           </div>
 
           {/* Trust badges */}
@@ -284,7 +314,7 @@ export default function Home() {
               <Shield className="w-4 h-4" /> Paiement sécurisé
             </span>
             <span className="trust-badge px-5 py-2 bg-orange-500 text-white rounded-full text-sm font-bold flex items-center gap-2 shadow-lg">
-              <Zap className="w-4 h-4" /> Livraison rapide
+              <Zap className="w-4 h-4" /> Activation immédiate
             </span>
           </div>
 
@@ -295,16 +325,6 @@ export default function Home() {
               50% { box-shadow: 0 0 0 6px rgba(239,68,68,0), 0 0 24px rgba(239,68,68,0.6); }
             }
             .badge-pulse { animation: badgePulse 2s ease-in-out infinite; }
-            .channel-card {
-              transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-              position: relative;
-              transform: scale(1) !important;
-            }
-            .channel-card:hover {
-              transform: scale(1.15) !important;
-              border-color: #a855f7 !important;
-              z-index: 50 !important;
-            }
             .trust-badge {
               transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
               cursor: pointer;
@@ -314,41 +334,38 @@ export default function Home() {
               box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.3) !important;
             }
           `}</style>
-          <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+          
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch">
             {plans.map((plan) => (
               <div
                 key={plan.name}
-                className={`relative flex flex-col rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
-                  plan.highlighted
-                    ? "bg-gradient-to-b from-[#7c3aed] to-[#5b21b6] shadow-[0_0_40px_-10px_#a855f7]"
-                    : "bg-[#151c2c] border border-white/10 hover:border-white/20"
-                }`}
+                className={`relative flex flex-col rounded-3xl transition-all duration-300 hover:-translate-y-1 ${plan.theme}`}
               >
                 {/* Popular badge */}
-                {plan.highlighted && (
+                {plan.badgeText && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
-                    <span className="badge-pulse bg-red-500 text-white text-xs font-black px-5 py-2 rounded-full uppercase tracking-widest whitespace-nowrap flex items-center gap-2 shadow-xl">
-                      👑 LE PLUS POPULAIRE
+                    <span className={`badge-pulse ${plan.badgeBg} ${plan.badgeTextColor} text-xs font-black px-5 py-2 rounded-full uppercase tracking-widest whitespace-nowrap flex items-center gap-2 shadow-xl`}>
+                      {plan.badgeText}
                     </span>
                   </div>
                 )}
 
-                <div className={`p-7 flex flex-col flex-1 ${plan.highlighted ? "pt-8" : ""}`}>
+                <div className={`p-7 flex flex-col flex-1 ${plan.badgeText ? "pt-8" : ""}`}>
                   {/* Header */}
                   <div className="text-center mb-6 pb-6 border-b border-white/10">
-                    <h3 className={`text-xl font-black mb-1 ${plan.highlighted ? "text-white" : "text-white"}`}>
-                      Standard {plan.name}
+                    <h3 className="text-2xl font-black mb-1 text-white">
+                      {plan.name}
                     </h3>
                     <p className={`text-xs font-semibold tracking-widest uppercase mb-4 ${plan.highlighted ? "text-white/70" : "text-gray-500"}`}>
-                      1 ÉCRAN
+                      1 AN • 1 ÉCRAN
                     </p>
                     <div className="flex justify-center items-start gap-0.5">
-                      <span className={`text-2xl font-bold mt-2 ${plan.highlighted ? "text-white" : "text-white/90"}`}>€</span>
-                      <span className={`font-black leading-none tracking-tighter ${
-                        plan.highlighted ? "text-6xl sm:text-7xl text-white" : "text-5xl sm:text-6xl text-white"
-                      }`}>{plan.price.split('.')[0]}</span>
+                      <span className="text-2xl font-bold mt-2 text-white">€</span>
+                      <span className="font-black leading-none tracking-tighter text-6xl sm:text-7xl text-white">
+                        {plan.price.split('.')[0]}
+                      </span>
                       {plan.price.includes('.') && (
-                        <span className={`text-2xl font-bold mt-2 ${plan.highlighted ? "text-white" : "text-white/90"}`}>
+                        <span className="text-2xl font-bold mt-2 text-white">
                           ,{plan.price.split('.')[1]}
                         </span>
                       )}
@@ -360,127 +377,23 @@ export default function Home() {
                   <ul className="space-y-3 mb-8 flex-1">
                     {plan.features.map((f, i) => (
                       <li key={i} className="flex items-center gap-3">
-                        <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0">
-                          <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                        <div className={`w-5 h-5 rounded-full ${plan.checkmarkBg} flex items-center justify-center shrink-0`}>
+                          <svg className={`w-3 h-3 ${plan.checkmarkColor}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                           </svg>
                         </div>
-                        <span className={`text-sm font-medium ${plan.highlighted ? "text-white" : "text-gray-300"}`}>{f}</span>
+                        <span className={`text-sm font-medium ${plan.textColor}`}>{f}</span>
                       </li>
                     ))}
                   </ul>
 
                   {/* CTA */}
                   <PricingCTA
-                    planName={"Standard " + plan.name}
+                    planName={plan.name + " 12 mois"}
                     planPrice={plan.price}
                     planDuration={plan.duration}
                     highlighted={plan.highlighted}
-                  />
-
-                  {/* Footer note */}
-                  <p className={`text-center text-xs mt-4 ${plan.highlighted ? "text-white/60" : "text-gray-600"}`}>
-                    Paiement unique • Sans engagement
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Premium Pricing Section */}
-      <section id="abonnements-premium" className="py-24 bg-[#080808] relative border-t border-white/5">
-        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#ef4444]/6 blur-[120px] rounded-full pointer-events-none" />
-        <div className="container mx-auto px-4 relative z-10">
-
-          {/* Title */}
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-4 py-1.5 text-sm font-semibold text-red-400 mb-4">
-              🔥 LE CHOIX SUPRÊME
-            </div>
-            <h2 className="text-4xl md:text-6xl font-black mb-4 text-white tracking-tight">Premium 4K</h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              L&apos;expérience fluide ultime avec +75 000 chaînes mondiales et une bibliothèque de vidéos et programmes géante.
-            </p>
-          </div>
-
-          {/* Trust badges */}
-          <div className="flex flex-wrap justify-center gap-3 mb-14">
-            <span className="trust-badge px-5 py-2 bg-green-500 text-white rounded-full text-sm font-bold flex items-center gap-2 shadow-lg">
-              <CheckCircle2 className="w-4 h-4" /> Support Client Réactif
-            </span>
-            <span className="trust-badge px-5 py-2 bg-[#e11d48] text-white rounded-full text-sm font-bold flex items-center gap-2 shadow-lg">
-              <Shield className="w-4 h-4" /> Stable à 100%
-            </span>
-            <span className="trust-badge px-5 py-2 bg-orange-500 text-white rounded-full text-sm font-bold flex items-center gap-2 shadow-lg">
-              <Zap className="w-4 h-4" /> Support H24
-            </span>
-          </div>
-
-          {/* Cards */}
-          <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
-            {premiumPlans.map((plan) => (
-              <div
-                key={plan.name}
-                className={`relative flex flex-col rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
-                  plan.highlighted
-                    ? "bg-gradient-to-b from-[#e11d48] to-[#9f1239] shadow-[0_0_40px_-10px_#e11d48]"
-                    : "bg-[#181112] border border-white/10 hover:border-red-500/20"
-                }`}
-              >
-                {/* Popular badge */}
-                {plan.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
-                    <span className="badge-pulse bg-white text-[#e11d48] text-xs font-black px-5 py-2 rounded-full uppercase tracking-widest whitespace-nowrap flex items-center gap-2 shadow-xl">
-                      👑 LE PLUS POPULAIRE
-                    </span>
-                  </div>
-                )}
-
-                <div className={`p-7 flex flex-col flex-1 ${plan.highlighted ? "pt-8" : ""}`}>
-                  {/* Header */}
-                  <div className="text-center mb-6 pb-6 border-b border-white/10">
-                    <h3 className="text-xl font-black mb-1 text-white">
-                      Premium {plan.name}
-                    </h3>
-                    <p className={`text-xs font-semibold tracking-widest uppercase mb-4 ${plan.highlighted ? "text-white/70" : "text-gray-500"}`}>
-                      1 ÉCRAN
-                    </p>
-                    <div className="flex justify-center items-start gap-0.5">
-                      <span className={`text-2xl font-bold mt-2 ${plan.highlighted ? "text-white" : "text-white/90"}`}>€</span>
-                      <span className={`font-black leading-none tracking-tighter ${
-                        plan.highlighted ? "text-6xl sm:text-7xl text-white" : "text-5xl sm:text-6xl text-white"
-                      }`}>{plan.price.split('.')[0]}</span>
-                      {plan.price.includes('.') && (
-                        <span className={`text-2xl font-bold mt-2 ${plan.highlighted ? "text-white" : "text-white/90"}`}>
-                          ,{plan.price.split('.')[1]}
-                        </span>
-                      )}
-                    </div>
-                    <p className={`text-sm mt-2 ${plan.highlighted ? "text-white/70" : "text-gray-500"}`}>{plan.duration}</p>
-                  </div>
-
-                  {/* Features */}
-                  <ul className="space-y-3 mb-8 flex-1">
-                    {plan.features.map((f, i) => (
-                      <li key={i} className="flex items-center gap-3">
-                        <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0">
-                          <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                        </div>
-                        <span className={`text-sm font-medium ${plan.highlighted ? "text-white" : "text-gray-300"}`}>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* CTA */}
-                  <PricingCTA
-                    planName={"Premium " + plan.name}
-                    planPrice={plan.price}
-                    planDuration={plan.duration}
-                    highlighted={plan.highlighted}
+                    className={plan.btnClass}
                   >
                     ACHETER
                   </PricingCTA>
@@ -492,85 +405,6 @@ export default function Home() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* VIP Pricing Section */}
-      <section id="abonnement-vip" className="py-24 bg-[#040404] relative border-t border-white/5">
-        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#f59e0b]/5 blur-[120px] rounded-full pointer-events-none" />
-        <div className="container mx-auto px-4 relative z-10">
-
-          {/* Title */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#f59e0b]/30 bg-[#f59e0b]/10 px-4 py-1.5 text-sm font-semibold text-[#f59e0b] mb-4">
-              ✨ OFFRE ÉLITE
-            </div>
-            <h2 className="text-2xl sm:text-4xl md:text-6xl font-black mb-4 text-white tracking-tight">VIP +</h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Le abonnement de haute qualité pour regarder la TV en direct et contenus en 4K/FHD, vidéos, programmes et sport en streaming fluide.
-            </p>
-          </div>
-
-          {/* Single Centered VIP Card */}
-          <div className="max-w-md mx-auto">
-            <div className="relative flex flex-col rounded-3xl bg-gradient-to-b from-[#f59e0b] to-[#b45309] shadow-[0_0_50px_-10px_#f59e0b] p-8 border border-[#fbbf24]/30 hover:scale-[1.02] transition-transform duration-300">
-              
-              {/* Gold Crown popular badge */}
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
-                <span className="bg-white text-[#d97706] text-xs font-black px-6 py-2.5 rounded-full uppercase tracking-widest whitespace-nowrap flex items-center gap-2 shadow-xl">
-                  👑 ACCÈS VIP PREMIUM
-                </span>
-              </div>
-
-              <div className="flex flex-col flex-1 pt-4">
-                {/* Header */}
-                <div className="text-center mb-6 pb-6 border-b border-white/20">
-                  <h3 className="text-2xl font-black mb-1 text-white">
-                    VIP+ (12 mois)
-                  </h3>
-                  <p className="text-xs font-semibold tracking-widest uppercase mb-4 text-white/80">
-                    ACCÈS EXCLUSIF • 1 AN
-                  </p>
-                  <div className="flex justify-center items-start gap-0.5">
-                    <span className="text-2xl font-bold mt-2 text-white">€</span>
-                    <span className="font-black leading-none tracking-tighter text-7xl text-white">89</span>
-                    <span className="text-2xl font-bold mt-2 text-white">,99</span>
-                  </div>
-                  <p className="text-sm mt-2 text-white/80">Paiement annuel unique</p>
-                </div>
-
-                {/* Features */}
-                <ul className="space-y-4 mb-8 flex-1">
-                  {vipFeatures.map((f, i) => (
-                    <li key={i} className="flex items-center gap-3">
-                      <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm">
-                        <svg className="w-3.5 h-3.5 text-[#b45309]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <span className="text-sm font-semibold text-white">{f}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA */}
-                <PricingCTA
-                  planName="VIP+ (12 mois)"
-                  planPrice="89.99"
-                  planDuration="12 mois"
-                  highlighted={true}
-                  className="bg-white text-[#b45309] hover:bg-gray-100 shadow-[0_0_40px_-10px_#f59e0b] hover:shadow-[0_0_60px_-10px_#f59e0b]"
-                >
-                  Devenir VIP 🚀
-                </PricingCTA>
-
-                {/* Footer note */}
-                <p className="text-center text-xs mt-4 text-white/70">
-                  Activation prioritaire • Sans engagement
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
