@@ -63,17 +63,6 @@ export function AnimatedHero() {
           Match Ce Soir Fr
         </div>
 
-        {/* Google Rating Badge */}
-        <div className="flex justify-center items-center mt-2 select-none">
-          <Image 
-            src="/google-rating.png" 
-            alt="Google 4.9 avis clients" 
-            width={260} 
-            height={65} 
-            className="h-10 sm:h-12 w-auto object-contain"
-          />
-        </div>
-
         <p className="text-lg md:text-2xl text-gray-300 max-w-5xl mt-8 md:mt-12 leading-relaxed font-medium px-2">
           Découvrez <strong className="text-white font-bold">Votre Portail de Divertissement en Famille</strong> avec <strong className="text-[#a855f7] font-black">Match Ce Soir Fr</strong>.<br />
           <strong className="text-white font-bold">Football, Sports en Direct, Films, et Séries TV</strong> réunis en un seul endroit. Profitez d'un <strong className="text-[#a855f7]">Streaming Haute Qualité</strong> avec une <strong>Activation Rapide</strong>, un <strong>Paiement Sécurisé</strong> et un <strong>Support 24/7</strong>. Demandez un essai dès maintenant !
@@ -105,13 +94,24 @@ export function AnimatedHero() {
         </div>
 
         {/* Trust signals */}
-        <div className="flex items-center justify-center mt-2 text-sm">
+        <div className="flex flex-col items-center gap-4 mt-2">
           {/* 7-day guarantee */}
           <div className="flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-sm rounded-full px-3 sm:px-5 py-2.5 text-gray-300 text-xs sm:text-sm">
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-green-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
             </svg>
             <span><strong className="text-white">Support Premium</strong> — Équipe technique à votre écoute 7j/7 pour vous assister.</span>
+          </div>
+          
+          {/* Google Rating Badge */}
+          <div className="flex justify-center items-center select-none">
+            <Image 
+              src="/google-rating.png" 
+              alt="Google 4.9 avis clients" 
+              width={260} 
+              height={65} 
+              className="h-10 sm:h-12 w-auto object-contain"
+            />
           </div>
         </div>
 
