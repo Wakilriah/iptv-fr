@@ -1,8 +1,15 @@
+import posthog from "posthog-js";
+
 export const TIKTOK_PIXEL_ID = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID || "D95SB63C77UDVJEHBPK0";
+
+interface TikTokQueue {
+  page: () => void;
+  track: (event: string, data?: unknown) => void;
+}
 
 declare global {
   interface Window {
-    ttq: any;
+    ttq?: TikTokQueue;
   }
 }
 
@@ -16,17 +23,15 @@ export const page = () => {
   }
 };
 
-export const track = (event: string, data?: Record<string, any>) => {
+const trackTikTok = (event: string, data?: Record<string, unknown>) => {
   if (typeof window !== "undefined") {
     if (!window.ttq || typeof window.ttq.track !== "function") {
-      // Retry in 500ms if script hasn't loaded yet
-      setTimeout(() => track(event, data), 500);
+      setTimeout(() => trackTikTok(event, data), 500);
       return;
     }
 
     if (data) {
-      // Remove top-level undefined, null, or empty string fields
-      const cleanData: Record<string, any> = {};
+      const cleanData: Record<string, unknown> = {};
       for (const [key, val] of Object.entries(data)) {
         if (val !== undefined && val !== null && val !== "") {
           cleanData[key] = val;
@@ -35,6 +40,28 @@ export const track = (event: string, data?: Record<string, any>) => {
       window.ttq.track(event, Object.keys(cleanData).length > 0 ? cleanData : undefined);
     } else {
       window.ttq.track(event);
+    }
+  }
+};
+
+export const track = (event: string, data?: Record<string, unknown>) => {
+  if (typeof window !== "undefined") {
+    // 1. Track TikTok
+    trackTikTok(event, data);
+
+    // 2. Track PostHog
+    if (process.env.NEXT_PUBLIC_POSTHOG_KEY) {
+      if (data) {
+        const cleanData: Record<string, unknown> = {};
+        for (const [key, val] of Object.entries(data)) {
+          if (val !== undefined && val !== null && val !== "") {
+            cleanData[key] = val;
+          }
+        }
+        posthog.capture(event, cleanData);
+      } else {
+        posthog.capture(event);
+      }
     }
   }
 };

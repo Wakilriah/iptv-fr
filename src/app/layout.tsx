@@ -71,11 +71,11 @@ export const metadata: Metadata = {
     },
   },
 };
-
 import { MotionProvider } from "@/components/MotionProvider";
 import { OrderModalProvider } from "@/context/OrderModalContext";
 import TikTokPixel from "@/components/TikTokPixel";
 import { Suspense } from "react";
+import { PostHogProvider } from "@/components/PostHogProvider";
 
 export default function RootLayout({
   children,
@@ -87,15 +87,18 @@ export default function RootLayout({
       <head>
       </head>
       <body className="min-h-full flex flex-col bg-[#050505] text-white font-sans">
-        <Suspense fallback={null}>
-          <TikTokPixel />
-        </Suspense>
-        <MotionProvider>
-          <OrderModalProvider>
-            {children}
-          </OrderModalProvider>
-        </MotionProvider>
+        <PostHogProvider>
+          <Suspense fallback={null}>
+            <TikTokPixel />
+          </Suspense>
+          <MotionProvider>
+            <OrderModalProvider>
+              {children}
+            </OrderModalProvider>
+          </MotionProvider>
+        </PostHogProvider>
       </body>
     </html>
   );
 }
+
