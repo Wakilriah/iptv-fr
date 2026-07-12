@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { m, AnimatePresence } from "framer-motion"
 import { Star, Film, Tv, Play, AlertCircle, Sparkles, Flame, Shield, Clock, Compass, Zap, Crown, Smile } from "lucide-react"
 import Image from "next/image"
 

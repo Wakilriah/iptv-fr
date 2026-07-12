@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { m } from "framer-motion"
 import { Mail, Lock, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -44,10 +43,7 @@ export default function AdminLogin() {
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#9333ea]/10 blur-[80px] md:blur-[120px] rounded-full pointer-events-none" />
 
-      <m.div
-        initial={{ opacity: 0, y: 30, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.5 }}
+      <div
         className="w-full max-w-md relative z-10"
       >
         <div className="bg-[#0d121f] border border-white/10 rounded-3xl p-8 shadow-2xl relative">
@@ -127,7 +123,7 @@ export default function AdminLogin() {
             </Button>
           </form>
         </div>
-      </m.div>
+      </div>
     </main>
   )
 }

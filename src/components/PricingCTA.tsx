@@ -1,6 +1,5 @@
 "use client"
 
-import { m } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { useOrderModal } from "@/context/OrderModalContext"
 
@@ -24,7 +23,7 @@ export function PricingCTA({
   const { openModal } = useOrderModal()
 
   return (
-    <m.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} className="w-full">
+    <div className="w-full">
       <Button
         onClick={() => openModal(planName, planPrice, planDuration)}
         className={`w-full font-bold text-base py-6 rounded-xl transition-shadow duration-300 ${
@@ -35,6 +34,6 @@ export function PricingCTA({
       >
         {children}
       </Button>
-    </m.div>
+    </div>
   )
 }

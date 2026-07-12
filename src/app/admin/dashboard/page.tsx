@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { m, AnimatePresence } from "framer-motion"
 import {
   TrendingUp, Users, Clock, Search, Trash2,
   LogOut, MessageCircle, Mail, Filter, Loader2, ShieldAlert,
@@ -382,28 +381,23 @@ export default function AdminDashboard() {
 
       {/* Toast Notification Container */}
       <div className="fixed top-6 right-6 z-50 flex flex-col gap-3 max-w-sm w-full">
-        <AnimatePresence>
-          {toasts.map(toast => (
-            <m.div
-              key={toast.id}
-              initial={{ opacity: 0, x: 50, scale: 0.9 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: 50, scale: 0.9 }}
-              className={`p-4 rounded-xl shadow-2xl border flex items-center justify-between gap-3 text-sm font-semibold backdrop-blur-md ${
-                toast.type === "error"
-                  ? "bg-red-500/10 border-red-500/30 text-red-400"
-                  : toast.type === "info"
-                  ? "bg-sky-500/10 border-sky-500/30 text-sky-400"
-                  : "bg-green-500/10 border-green-500/30 text-green-300"
-              }`}
-            >
-              <span>{toast.message}</span>
-              <button onClick={() => setToasts(prev => prev.filter(t => t.id !== toast.id))} className="text-gray-400 hover:text-white transition-colors" aria-label="Fermer">
-                <X className="w-4 h-4" />
-              </button>
-            </m.div>
-          ))}
-        </AnimatePresence>
+        {toasts.map(toast => (
+          <div
+            key={toast.id}
+            className={`p-4 rounded-xl shadow-2xl border flex items-center justify-between gap-3 text-sm font-semibold backdrop-blur-md ${
+              toast.type === "error"
+                ? "bg-red-500/10 border-red-500/30 text-red-400"
+                : toast.type === "info"
+                ? "bg-sky-500/10 border-sky-500/30 text-sky-400"
+                : "bg-green-500/10 border-green-500/30 text-green-300"
+            }`}
+          >
+            <span>{toast.message}</span>
+            <button onClick={() => setToasts(prev => prev.filter(t => t.id !== toast.id))} className="text-gray-400 hover:text-white transition-colors" aria-label="Fermer">
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        ))}
       </div>
 
       {/* Header */}
@@ -606,54 +600,49 @@ export default function AdminDashboard() {
             </div>
 
             {/* Bulk actions bar (shows when selectedIds has items) */}
-            <AnimatePresence>
-              {selectedIds.length > 0 && (
-                <m.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="bg-[#9333ea]/10 border border-[#a855f7]/30 rounded-xl p-4 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 z-20"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="bg-[#9333ea] text-white text-[11px] font-black px-2.5 py-1 rounded-full">
-                      {selectedIds.length} sélectionné(s)
-                    </span>
-                    <span className="text-xs text-gray-300 font-semibold">Actions groupées :</span>
-                  </div>
+            {selectedIds.length > 0 && (
+              <div
+                className="bg-[#9333ea]/10 border border-[#a855f7]/30 rounded-xl p-4 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 z-20"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="bg-[#9333ea] text-white text-[11px] font-black px-2.5 py-1 rounded-full">
+                    {selectedIds.length} sélectionné(s)
+                  </span>
+                  <span className="text-xs text-gray-300 font-semibold">Actions groupées :</span>
+                </div>
+                
+                <div className="flex flex-wrap gap-2.5 items-center">
+                  <select
+                    onChange={(e) => {
+                      if (e.target.value) handleBulkStatusChange(e.target.value)
+                      e.target.value = ""
+                    }}
+                    className="bg-[#070b14] border border-[#a855f7]/30 rounded-lg text-xs py-1.5 px-3 font-bold text-white focus:outline-none"
+                  >
+                    <option value="">Modifier Statut...</option>
+                    <option value="PENDING">En attente (Pending)</option>
+                    <option value="CONFIRMED">Confirmé (Confirmed)</option>
+                    <option value="COMPLETED">Livré (Completed)</option>
+                    <option value="CANCELLED">Annulé (Cancelled)</option>
+                  </select>
                   
-                  <div className="flex flex-wrap gap-2.5 items-center">
-                    <select
-                      onChange={(e) => {
-                        if (e.target.value) handleBulkStatusChange(e.target.value)
-                        e.target.value = ""
-                      }}
-                      className="bg-[#070b14] border border-[#a855f7]/30 rounded-lg text-xs py-1.5 px-3 font-bold text-white focus:outline-none"
-                    >
-                      <option value="">Modifier Statut...</option>
-                      <option value="PENDING">En attente (Pending)</option>
-                      <option value="CONFIRMED">Confirmé (Confirmed)</option>
-                      <option value="COMPLETED">Livré (Completed)</option>
-                      <option value="CANCELLED">Annulé (Cancelled)</option>
-                    </select>
-                    
-                    <button
-                      onClick={handleBulkDelete}
-                      className="bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white border border-red-500/20 rounded-lg text-xs py-1.5 px-3 font-bold flex items-center gap-1.5 transition-all"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                      Supprimer
-                    </button>
-                    
-                    <button
-                      onClick={() => setSelectedIds([])}
-                      className="text-gray-300 hover:text-white text-xs font-bold px-2 py-1 transition-colors"
-                    >
-                      Annuler
-                    </button>
-                  </div>
-                </m.div>
-              )}
-            </AnimatePresence>
+                  <button
+                    onClick={handleBulkDelete}
+                    className="bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white border border-red-500/20 rounded-lg text-xs py-1.5 px-3 font-bold flex items-center gap-1.5 transition-all"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    Supprimer
+                  </button>
+                  
+                  <button
+                    onClick={() => setSelectedIds([])}
+                    className="text-gray-300 hover:text-white text-xs font-bold px-2 py-1 transition-colors"
+                  >
+                    Annuler
+                  </button>
+                </div>
+              </div>
+            )}
 
             {/* Table */}
             {filteredOrders.length === 0 ? (
@@ -821,279 +810,246 @@ export default function AdminDashboard() {
       )}
 
       {/* Manual Order Creation Modal */}
-      <AnimatePresence>
-        {isAddModalOpen && (
-          <>
-            <m.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsAddModalOpen(false)}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
-            />
-            <div className="fixed inset-0 z-50 flex items-center justify-center px-4 pointer-events-none">
-              <m.div
-                initial={{ opacity: 0, scale: 0.95, y: 30 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 30 }}
-                className="bg-[#0d121f] border border-white/10 rounded-3xl w-full max-w-md p-6 pointer-events-auto shadow-2xl relative"
-              >
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-0.5 bg-gradient-to-r from-transparent via-[#a855f7] to-transparent" />
-                
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-black text-white uppercase">Ajouter manuellement</h2>
-                  <button onClick={() => setIsAddModalOpen(false)} className="text-gray-400 hover:text-white p-1" aria-label="Fermer">
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-
-                <form onSubmit={handleCreateOrder} className="space-y-4">
-                  <div>
-                    <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
-                      Nom complet
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={newOrderForm.fullname}
-                      onChange={(e) => setNewOrderForm(prev => ({ ...prev, fullname: e.target.value }))}
-                      placeholder="Jean Dupont"
-                      className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-sm font-semibold"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
-                      Adresse Email
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={newOrderForm.email}
-                      onChange={(e) => setNewOrderForm(prev => ({ ...prev, email: e.target.value }))}
-                      placeholder="jean.dupont@email.com"
-                      className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-sm font-semibold"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
-                      Téléphone (ex: +33600000000)
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={newOrderForm.phone}
-                      onChange={(e) => setNewOrderForm(prev => ({ ...prev, phone: e.target.value }))}
-                      placeholder="+33 6 12 34 56 78"
-                      className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-sm font-semibold"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
-                        Forfait
-                      </label>
-                      <select
-                        value={newOrderForm.planName}
-                        onChange={(e) => {
-                          const name = e.target.value
-                          let price = "0"
-                          if (name.includes("3 mois") && name.includes("Premium")) price = "25.99"
-                          else if (name.includes("6 mois") && name.includes("Premium")) price = "35.99"
-                          else if (name.includes("12 mois") && name.includes("Premium")) price = "55.99"
-                          else if (name.includes("3 mois")) price = "16.99"
-                          else if (name.includes("6 mois")) price = "24.99"
-                          else if (name.includes("12 mois")) price = "35.99"
-                          else if (name.includes("VIP")) price = "89.99"
-                          
-                          setNewOrderForm(prev => ({ ...prev, planName: name, planPrice: price }))
-                        }}
-                        className="w-full px-3 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-xs font-bold"
-                      >
-                        <option value="Essai Découverte 1H">Essai Découverte 1H</option>
-                        <option value="Abonnement Standard (3 mois)">Standard (3 mois)</option>
-                        <option value="Abonnement Standard (6 mois)">Standard (6 mois)</option>
-                        <option value="Abonnement Standard (12 mois)">Standard (12 mois)</option>
-                        <option value="Abonnement Premium (3 mois)">Premium (3 mois)</option>
-                        <option value="Abonnement Premium (6 mois)">Premium (6 mois)</option>
-                        <option value="Abonnement Premium (12 mois)">Premium (12 mois)</option>
-                        <option value="Abonnement VIP+ (12 mois)">VIP+ (12 mois)</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
-                        Tarif (€)
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={newOrderForm.planPrice}
-                        onChange={(e) => setNewOrderForm(prev => ({ ...prev, planPrice: e.target.value }))}
-                        className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-sm font-semibold"
-                      />
-                    </div>
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full py-5 font-bold bg-[#9333ea] hover:bg-[#7e22ce] text-white rounded-xl mt-4"
-                  >
-                    Ajouter le Lead
-                  </Button>
-                </form>
-              </m.div>
-            </div>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* Detailed Order View Drawer */}
-      <AnimatePresence>
-        {selectedOrder && (
-          <>
-            <m.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedOrder(null)}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40"
-            />
-            <m.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-full max-w-md bg-[#0d121f] border-l border-white/10 p-6 overflow-y-auto z-40 shadow-2xl flex flex-col justify-between"
+      {isAddModalOpen && (
+        <>
+          <div
+            onClick={() => setIsAddModalOpen(false)}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+          />
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-4 pointer-events-none">
+            <div
+              className="bg-[#0d121f] border border-white/10 rounded-3xl w-full max-w-md p-6 pointer-events-auto shadow-2xl relative"
             >
-              <div>
-                <div className="flex justify-between items-center mb-8 pb-4 border-b border-white/5">
-                  <div>
-                    <h2 className="text-lg font-black uppercase text-[#a855f7]">Détails du Lead</h2>
-                    <p className="text-[10px] text-gray-400 font-bold font-mono">ID: {selectedOrder.id}</p>
-                  </div>
-                  <button onClick={() => setSelectedOrder(null)} className="text-gray-400 hover:text-white p-1 rounded-full hover:bg-white/5" aria-label="Fermer">
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-
-                <div className="space-y-6">
-                  {/* Client Info Card */}
-                  <div className="space-y-4">
-                    <h3 className="text-xs font-black uppercase tracking-wider text-gray-300">Informations Client</h3>
-                    
-                    <div className="bg-[#070b14] border border-white/5 rounded-2xl p-4 space-y-3">
-                      <div>
-                        <span className="text-[10px] uppercase text-gray-400 font-bold block">Nom complet</span>
-                        <span className="text-white font-bold text-base">{selectedOrder.fullname}</span>
-                      </div>
-                      
-                      <div>
-                        <span className="text-[10px] uppercase text-gray-400 font-bold block">Adresse e-mail</span>
-                        <span className="text-white font-semibold text-sm">{selectedOrder.email}</span>
-                      </div>
-
-                      <div>
-                        <span className="text-[10px] uppercase text-gray-400 font-bold block">Numéro de téléphone</span>
-                        <span className="text-white font-semibold text-sm">{selectedOrder.phone}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Order Details Card */}
-                  <div className="space-y-4">
-                    <h3 className="text-xs font-black uppercase tracking-wider text-gray-300">Détails de la Demande</h3>
-                    
-                    <div className="bg-[#070b14] border border-white/5 rounded-2xl p-4 space-y-3">
-                      <div>
-                        <span className="text-[10px] uppercase text-gray-400 font-bold block">Forfait</span>
-                        <span className="text-white font-bold text-sm">{selectedOrder.planName}</span>
-                      </div>
-                      
-                      <div>
-                        <span className="text-[10px] uppercase text-gray-400 font-bold block">Prix</span>
-                        <span className="text-[#a855f7] font-black text-lg">
-                          {parseFloat(selectedOrder.planPrice) === 0 ? "Offert (Test 1H)" : `${selectedOrder.planPrice}€`}
-                        </span>
-                      </div>
-
-                      <div>
-                        <span className="text-[10px] uppercase text-gray-400 font-bold block">Date de création</span>
-                        <span className="text-gray-300 font-semibold text-xs flex items-center gap-1.5 mt-0.5">
-                          <Calendar className="w-3.5 h-3.5 text-gray-400" />
-                          {new Date(selectedOrder.createdAt).toLocaleString("fr-FR", {
-                            weekday: "long",
-                            day: "2-digit",
-                            month: "long",
-                            year: "numeric",
-                            hour: "2-digit",
-                            minute: "2-digit"
-                          })}
-                        </span>
-                      </div>
-
-                      <div>
-                        <span className="text-[10px] uppercase text-gray-400 font-bold block mb-1">Modifier le Statut</span>
-                        <select
-                          value={selectedOrder.status}
-                          onChange={(e) => {
-                            handleUpdateStatus(selectedOrder.id, e.target.value)
-                            setSelectedOrder(prev => prev ? { ...prev, status: e.target.value } : null)
-                          }}
-                          className={`border rounded-xl text-xs py-2 px-3.5 font-black uppercase tracking-wider focus:outline-none bg-[#050505] w-full mt-1 cursor-pointer ${
-                            selectedOrder.status === "PENDING"
-                              ? "text-amber-400 border-amber-400/20"
-                              : selectedOrder.status === "CONFIRMED"
-                              ? "text-[#a855f7] border-[#a855f7]/20"
-                              : selectedOrder.status === "COMPLETED"
-                              ? "text-green-300 border-green-400/20"
-                              : "text-red-400 border-red-400/20"
-                          }`}
-                        >
-                          <option value="PENDING">Pending (En Attente)</option>
-                          <option value="CONFIRMED">Confirmed (Confirmé)</option>
-                          <option value="COMPLETED">Completed (Livré)</option>
-                          <option value="CANCELLED">Cancelled (Annulé)</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Action buttons footer */}
-              <div className="pt-6 border-t border-white/5 space-y-3">
-                <a
-                  href={`https://wa.me/${selectedOrder.phone.replace(/[^0-9]/g, "")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-4.5 rounded-xl bg-green-500 text-white font-black text-center flex items-center justify-center gap-2 hover:bg-green-600 transition-colors shadow-lg shadow-green-500/10"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  Contacter sur WhatsApp
-                </a>
-                
-                <a
-                  href={`mailto:${selectedOrder.email}?subject=Abonnement Premium Match Ce Soir&body=Bonjour ${selectedOrder.fullname},`}
-                  className="w-full py-4.5 rounded-xl bg-sky-500 text-white font-black text-center flex items-center justify-center gap-2 hover:bg-sky-600 transition-colors shadow-lg shadow-sky-500/10"
-                >
-                  <Mail className="w-5 h-5" />
-                  Envoyer un e-mail
-                </a>
-
-                <button
-                  onClick={() => handleDeleteOrder(selectedOrder.id)}
-                  className="w-full py-4 rounded-xl border border-red-500/20 hover:bg-red-500/5 hover:text-red-400 text-red-500 font-bold transition-all"
-                >
-                  Supprimer ce Lead
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-0.5 bg-gradient-to-r from-transparent via-[#a855f7] to-transparent" />
+              
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-black text-white uppercase">Ajouter manuellement</h2>
+                <button onClick={() => setIsAddModalOpen(false)} className="text-gray-400 hover:text-white p-1" aria-label="Fermer">
+                  <X className="w-5 h-5" />
                 </button>
               </div>
-            </m.div>
-          </>
-        )}
-      </AnimatePresence>
+
+              <form onSubmit={handleCreateOrder} className="space-y-4">
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
+                    Nom complet
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={newOrderForm.fullname}
+                    onChange={(e) => setNewOrderForm(prev => ({ ...prev, fullname: e.target.value }))}
+                    placeholder="Jean Dupont"
+                    className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-sm font-semibold"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
+                    Adresse Email
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={newOrderForm.email}
+                    onChange={(e) => setNewOrderForm(prev => ({ ...prev, email: e.target.value }))}
+                    placeholder="jean.dupont@email.com"
+                    className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-sm font-semibold"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
+                    Téléphone (ex: +33600000000)
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={newOrderForm.phone}
+                    onChange={(e) => setNewOrderForm(prev => ({ ...prev, phone: e.target.value }))}
+                    placeholder="+33 6 12 34 56 78"
+                    className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-sm font-semibold"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
+                      Forfait
+                    </label>
+                    <select
+                      value={newOrderForm.planName}
+                      onChange={(e) => {
+                        const name = e.target.value
+                        let price = "0"
+                        if (name.includes("3 mois") && name.includes("Premium")) price = "25.99"
+                        else if (name.includes("6 mois") && name.includes("Premium")) price = "35.99"
+                        else if (name.includes("12 mois") && name.includes("Premium")) price = "55.99"
+                        else if (name.includes("3 mois")) price = "16.99"
+                        else if (name.includes("6 mois")) price = "24.99"
+                        else if (name.includes("12 mois")) price = "35.99"
+                        else if (name.includes("VIP")) price = "89.99"
+                        
+                        setNewOrderForm(prev => ({ ...prev, planName: name, planPrice: price }))
+                      }}
+                      className="w-full px-3 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-xs font-bold"
+                    >
+                      <option value="Essai Découverte 1H">Essai Découverte 1H</option>
+                      <option value="Abonnement Standard (3 mois)">Standard (3 mois)</option>
+                      <option value="Abonnement Standard (6 mois)">Standard (6 mois)</option>
+                      <option value="Abonnement Standard (12 mois)">Standard (12 mois)</option>
+                      <option value="Abonnement Premium (3 mois)">Premium (3 mois)</option>
+                      <option value="Abonnement Premium (6 mois)">Premium (6 mois)</option>
+                      <option value="Abonnement Premium (12 mois)">Premium (12 mois)</option>
+                      <option value="Abonnement VIP+ (12 mois)">VIP+ (12 mois)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-black uppercase tracking-wider text-gray-300 block mb-1">
+                      Tarif (€)
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={newOrderForm.planPrice}
+                      onChange={(e) => setNewOrderForm(prev => ({ ...prev, planPrice: e.target.value }))}
+                      className="w-full px-4 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-sm font-semibold"
+                    />
+                  </div>
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full py-5 font-bold bg-[#9333ea] hover:bg-[#7e22ce] text-white rounded-xl mt-4"
+                >
+                  Ajouter le Lead
+                </Button>
+              </form>
+            </div>
+          </div>
+        </>
+      )}
+
+      {selectedOrder && (
+        <>
+          <div
+            onClick={() => setSelectedOrder(null)}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40"
+          />
+          <div
+            className="fixed top-0 right-0 h-full w-full max-w-md bg-[#0d121f] border-l border-white/10 p-6 overflow-y-auto z-40 shadow-2xl flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex justify-between items-center mb-8 pb-4 border-b border-white/5">
+                <div>
+                  <h2 className="text-lg font-black uppercase text-[#a855f7]">Détails du Lead</h2>
+                  <p className="text-[10px] text-gray-400 font-bold font-mono">ID: {selectedOrder.id}</p>
+                </div>
+                <button onClick={() => setSelectedOrder(null)} className="text-gray-400 hover:text-white p-1" aria-label="Fermer">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              <div className="space-y-6">
+                {/* Client Info */}
+                <div>
+                  <h3 className="text-[10px] font-black uppercase tracking-widest text-[#a855f7] mb-3">Informations Client</h3>
+                  <div className="bg-[#070b14] border border-white/5 rounded-2xl p-4 space-y-3.5">
+                    <div>
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">Nom Complet</span>
+                      <span className="text-white text-sm font-extrabold">{selectedOrder.fullname}</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">Adresse E-mail</span>
+                      <span className="text-white text-sm font-extrabold break-all">{selectedOrder.email}</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">Téléphone</span>
+                      <span className="text-white text-sm font-extrabold">{selectedOrder.phone}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Order Details */}
+                <div>
+                  <h3 className="text-[10px] font-black uppercase tracking-widest text-[#a855f7] mb-3">Détails Forfait</h3>
+                  <div className="bg-[#070b14] border border-white/5 rounded-2xl p-4 space-y-3.5">
+                    <div>
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">Nom du Pack</span>
+                      <span className="text-white text-sm font-extrabold">{selectedOrder.planName}</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">Tarif</span>
+                      <span className="text-white text-sm font-extrabold">{selectedOrder.planPrice} €</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block font-mono">Date de création</span>
+                      <span className="text-gray-300 text-xs font-semibold">{new Date(selectedOrder.createdAt).toLocaleString()}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Actions & Status */}
+                <div>
+                  <h3 className="text-[10px] font-black uppercase tracking-widest text-[#a855f7] mb-3">Statut &amp; Suivi</h3>
+                  <div className="bg-[#070b14] border border-white/5 rounded-2xl p-4 space-y-4">
+                    <div>
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-2">Modifier le Statut</span>
+                      <select
+                        value={selectedOrder.status}
+                        onChange={(e) => handleUpdateStatus(selectedOrder.id, e.target.value)}
+                        className={`w-full px-3 py-2 bg-[#070b14] border rounded-xl font-extrabold text-xs focus:outline-none focus:ring-1 focus:ring-[#9333ea] ${
+                          selectedOrder.status === "PENDING"
+                            ? "text-yellow-400 border-yellow-400/20"
+                            : selectedOrder.status === "CONFIRMED"
+                            ? "text-sky-400 border-sky-400/20"
+                            : selectedOrder.status === "COMPLETED"
+                            ? "text-green-300 border-green-400/20"
+                            : "text-red-400 border-red-400/20"
+                        }`}
+                      >
+                        <option value="PENDING">Pending (En Attente)</option>
+                        <option value="CONFIRMED">Confirmed (Confirmé)</option>
+                        <option value="COMPLETED">Completed (Livré)</option>
+                        <option value="CANCELLED">Cancelled (Annulé)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Action buttons footer */}
+            <div className="pt-6 border-t border-white/5 space-y-3">
+              <a
+                href={`https://wa.me/${selectedOrder.phone.replace(/[^0-9]/g, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-4.5 rounded-xl bg-green-500 text-white font-black text-center flex items-center justify-center gap-2 hover:bg-green-600 transition-colors shadow-lg shadow-green-500/10"
+              >
+                <MessageCircle className="w-5 h-5" />
+                Contacter sur WhatsApp
+              </a>
+              
+              <a
+                href={`mailto:${selectedOrder.email}?subject=Abonnement Premium Match Ce Soir&body=Bonjour ${selectedOrder.fullname},`}
+                className="w-full py-4.5 rounded-xl bg-sky-500 text-white font-black text-center flex items-center justify-center gap-2 hover:bg-sky-600 transition-colors shadow-lg shadow-sky-500/10"
+              >
+                <Mail className="w-5 h-5" />
+                Envoyer un e-mail
+              </a>
+
+              <button
+                onClick={() => handleDeleteOrder(selectedOrder.id)}
+                className="w-full py-4 rounded-xl border border-red-500/20 hover:bg-red-500/5 hover:text-red-400 text-red-500 font-bold transition-all"
+              >
+                Supprimer ce Lead
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </main>
   )
 }

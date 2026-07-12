@@ -71,7 +71,6 @@ export const metadata: Metadata = {
     },
   },
 };
-import { MotionProvider } from "@/components/MotionProvider";
 import { OrderModalProvider } from "@/context/OrderModalContext";
 import TikTokPixel from "@/components/TikTokPixel";
 import { Suspense } from "react";
@@ -91,11 +90,9 @@ export default function RootLayout({
           <Suspense fallback={null}>
             <TikTokPixel />
           </Suspense>
-          <MotionProvider>
-            <OrderModalProvider>
-              {children}
-            </OrderModalProvider>
-          </MotionProvider>
+          <OrderModalProvider>
+            {children}
+          </OrderModalProvider>
         </PostHogProvider>
       </body>
     </html>

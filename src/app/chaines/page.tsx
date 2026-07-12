@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { m, AnimatePresence } from "framer-motion"
 import { Search, Globe, Tv, Film, Compass, User, ArrowLeft, Check, AlertCircle, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
@@ -149,10 +148,8 @@ export default function ChannelsPage() {
             ) : (
               <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {searchResults.map((result, i) => (
-                  <m.div
+                  <div
                     key={i}
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
                     className="bg-[#0d121f] border border-white/5 rounded-3xl p-6 space-y-4"
                   >
                     <div className="flex justify-between items-center pb-3 border-b border-white/5">
@@ -182,7 +179,7 @@ export default function ChannelsPage() {
                         )
                       })}
                     </ul>
-                  </m.div>
+                  </div>
                 ))}
               </div>
             )}
@@ -214,11 +211,8 @@ export default function ChannelsPage() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {currentCountryData &&
                 Object.entries(currentCountryData.channelTypes).map(([category, channels]) => (
-                  <m.div
+                  <div
                     key={category}
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3 }}
                     className="bg-[#0d121f] border border-white/5 rounded-3xl p-6 space-y-4 hover:border-[#a855f7]/30 transition-all duration-300 group"
                   >
                     <div className="flex items-center justify-between pb-4 border-b border-white/5">
@@ -255,7 +249,7 @@ export default function ChannelsPage() {
                         )
                       })}
                     </ul>
-                  </m.div>
+                  </div>
                 ))}
             </div>
           </div>

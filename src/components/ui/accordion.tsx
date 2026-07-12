@@ -1,7 +1,6 @@
 "use client"
 
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion"
-import { m } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 
@@ -40,15 +39,13 @@ function AccordionTrigger({
         )}
         {...props}
       >
-        <m.span
-          whileHover={{ scale: 1.01, color: "#ffffff" }}
-          whileTap={{ scale: 0.98 }}
-          className="flex flex-1 items-center justify-between w-full origin-left transition-colors duration-300 cursor-pointer"
+        <span
+          className="flex flex-1 items-center justify-between w-full origin-left transition-colors duration-300 cursor-pointer hover:text-white"
         >
           {children}
           <ChevronDownIcon data-slot="accordion-trigger-icon" className="pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden" />
           <ChevronUpIcon data-slot="accordion-trigger-icon" className="pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline" />
-        </m.span>
+        </span>
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   )

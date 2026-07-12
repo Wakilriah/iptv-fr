@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { m, AnimatePresence } from "framer-motion"
 import { X, User, Mail, Phone, CheckCircle2, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import * as tiktokPixel from "@/lib/tiktokPixel"
@@ -87,185 +86,159 @@ export function OrderModal({ isOpen, onClose, planName, planPrice, planDuration 
     }, 600)
   }
 
+  if (!isOpen) return null
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          {/* Backdrop */}
-          <m.div
-            key="backdrop"
-            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-          />
+    <>
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
+        onClick={onClose}
+      />
 
-          {/* Modal */}
-          <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
-            <m.div
-              key="modal"
-              className="relative w-full max-w-md bg-[#0d121f] border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
-              initial={{ opacity: 0, y: 60, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 40, scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 280, damping: 28 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Purple glow top */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-1 bg-gradient-to-r from-transparent via-[#a855f7] to-transparent" />
+      {/* Modal */}
+      <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+        <div
+          className="relative w-full max-w-md bg-[#0d121f] border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Purple glow top */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-1 bg-gradient-to-r from-transparent via-[#a855f7] to-transparent" />
 
-              {/* Header */}
-              <div className="px-8 pt-8 pb-6 border-b border-white/5">
-                <button
-                  onClick={onClose}
-                  className="absolute top-5 right-5 text-gray-400 hover:text-white transition-colors p-1 rounded-full hover:bg-white/5"
-                 aria-label="Fermer">
-                  <X className="w-5 h-5" />
-                </button>
-                <div className="inline-flex items-center gap-2 rounded-full border border-[#a855f7]/30 bg-[#9333ea]/10 px-3 py-1 text-xs font-semibold text-[#a855f7] mb-4">
-                  {planPrice === "0" || planName.toLowerCase().includes("essai") ? "Essai Découverte" : "Commander"}
-                </div>
-                <h3 className="text-2xl font-black text-white">
-                  {planPrice === "0" || planName.toLowerCase().includes("essai") ? "Demander votre essai" : "Finaliser votre commande"}
-                </h3>
-                <div className="text-gray-300 text-sm mt-1 flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5">
-                  <span>Forfait sélectionné :</span>
-                  <span className="text-white font-semibold">{planName}</span>
-                  <span className="text-gray-400">—</span>
-                  <span className="text-xl md:text-2xl font-black text-[#a855f7]">
-                    {planPrice !== "0" && planPrice !== "Gratuit" ? `${planPrice}€` : "Gratuit"}
-                  </span>
-                </div>
-              </div>
-
-              {/* Body */}
-              <div className="px-8 py-6">
-                <AnimatePresence mode="wait">
-                  {!submitted ? (
-                    <m.form
-                      key="form"
-                      onSubmit={handleSubmit}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="space-y-5"
-                    >
-                      {/* Full Name */}
-                      <div>
-                        <label htmlFor="fullname" className="text-sm font-semibold text-gray-300 mb-2 block">Nom complet</label>
-                        <div className="relative">
-                          <User aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                          <input
-                            id="fullname"
-                            name="fullname"
-                            autoComplete="name"
-                            type="text"
-                            placeholder="Jean Dupont"
-                            value={form.fullname}
-                            onChange={(e) => setForm({ ...form, fullname: e.target.value })}
-                            className={`w-full bg-[#070b14] border ${errors.fullname ? "border-red-500/60" : "border-white/10 focus:ring-2 focus:ring-[#9333ea] focus:border-transparent"} rounded-xl pl-11 pr-4 py-3 text-white text-sm placeholder:text-gray-400 outline-none transition-colors`}
-                          />
-                        </div>
-                        {errors.fullname && <p className="text-red-400 text-xs mt-1">{errors.fullname}</p>}
-                      </div>
-
-                      {/* Email */}
-                      <div>
-                        <label htmlFor="email" className="text-sm font-semibold text-gray-300 mb-2 block">Adresse e-mail</label>
-                        <div className="relative">
-                          <Mail aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                          <input
-                            id="email"
-                            name="email"
-                            autoComplete="email"
-                            type="email"
-                            placeholder="jean@exemple.fr"
-                            value={form.email}
-                            onChange={(e) => setForm({ ...form, email: e.target.value })}
-                            className={`w-full bg-[#070b14] border ${errors.email ? "border-red-500/60" : "border-white/10 focus:ring-2 focus:ring-[#9333ea] focus:border-transparent"} rounded-xl pl-11 pr-4 py-3 text-white text-sm placeholder:text-gray-400 outline-none transition-colors`}
-                          />
-                        </div>
-                        {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
-                      </div>
-
-                      {/* Phone */}
-                      <div>
-                        <label htmlFor="phone" className="text-sm font-semibold text-gray-300 mb-2 block">Numéro de téléphone</label>
-                        <div className="relative">
-                          <Phone aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                          <input
-                            id="phone"
-                            name="phone"
-                            autoComplete="tel"
-                            type="tel"
-                            placeholder="+33 6 00 00 00 00"
-                            value={form.phone}
-                            onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                            className={`w-full bg-[#070b14] border ${errors.phone ? "border-red-500/60" : "border-white/10 focus:ring-2 focus:ring-[#9333ea] focus:border-transparent"} rounded-xl pl-11 pr-4 py-3 text-white text-sm placeholder:text-gray-400 outline-none transition-colors`}
-                          />
-                        </div>
-                        {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
-                      </div>
-
-                      {/* Guarantee Badge */}
-                      <div className="relative flex items-center gap-3 rounded-2xl border border-green-500/20 bg-green-500/5 px-4 py-3 overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 via-transparent to-transparent pointer-events-none" />
-                        <div className="shrink-0 w-9 h-9 rounded-xl bg-green-500/15 border border-green-500/30 flex items-center justify-center">
-                          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="text-green-400 font-bold text-sm">Support Premium</p>
-                          <p className="text-gray-300 text-xs leading-snug">Équipe technique disponible et à votre écoute pour vous accompagner à tout moment.</p>
-                        </div>
-                      </div>
-
-                      <m.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full mt-2">
-                        <Button
-                          type="submit"
-                          disabled={loading}
-                          className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-[#050505] rounded-xl py-6 text-base font-bold shadow-[0_0_20px_-5px_#25D366] hover:shadow-[0_0_30px_5px_#25D366] transition-shadow duration-300"
-                        >
-                          {loading ? (
-                            <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Traitement en cours...</>
-                          ) : (
-                            <>{planPrice === "0" || planName.toLowerCase().includes("essai") ? "Obtenir mon Essai 🚀" : "Commander via WhatsApp 🚀"}</>
-                          )}
-                        </Button>
-                      </m.div>
-
-                      <p className="text-center text-xs text-gray-400">
-                        {planPrice === "0" || planName.toLowerCase().includes("essai") ? "Vous serez redirigé vers WhatsApp pour recevoir votre lien." : "Vous serez redirigé vers WhatsApp avec votre commande pré-remplie."}
-                      </p>
-                    </m.form>
-                  ) : (
-                    <m.div
-                      key="success"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ type: "spring", stiffness: 200 }}
-                      className="flex flex-col items-center py-8 gap-4 text-center"
-                    >
-                      <m.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ type: "spring", stiffness: 300, delay: 0.1 }}
-                      >
-                        <CheckCircle2 className="w-20 h-20 text-green-300" />
-                      </m.div>
-                      <h4 className="text-2xl font-black text-white">Commande enregistrée !</h4>
-                      <p className="text-gray-300 text-sm">Redirection vers WhatsApp...</p>
-                    </m.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </m.div>
+          {/* Header */}
+          <div className="px-8 pt-8 pb-6 border-b border-white/5">
+            <button
+              onClick={onClose}
+              className="absolute top-5 right-5 text-gray-400 hover:text-white transition-colors p-1 rounded-full hover:bg-white/5"
+             aria-label="Fermer">
+              <X className="w-5 h-5" />
+            </button>
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#a855f7]/30 bg-[#9333ea]/10 px-3 py-1 text-xs font-semibold text-[#a855f7] mb-4">
+              {planPrice === "0" || planName.toLowerCase().includes("essai") ? "Essai Découverte" : "Commander"}
+            </div>
+            <h3 className="text-2xl font-black text-white">
+              {planPrice === "0" || planName.toLowerCase().includes("essai") ? "Demander votre essai" : "Finaliser votre commande"}
+            </h3>
+            <div className="text-gray-300 text-sm mt-1 flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5">
+              <span>Forfait sélectionné :</span>
+              <span className="text-white font-semibold">{planName}</span>
+              <span className="text-gray-400">—</span>
+              <span className="text-xl md:text-2xl font-black text-[#a855f7]">
+                {planPrice !== "0" && planPrice !== "Gratuit" ? `${planPrice}€` : "Gratuit"}
+              </span>
+            </div>
           </div>
-        </>
-      )}
-    </AnimatePresence>
+
+          {/* Body */}
+          <div className="px-8 py-6">
+            {!submitted ? (
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-5"
+              >
+                {/* Full Name */}
+                <div>
+                  <label htmlFor="fullname" className="text-sm font-semibold text-gray-300 mb-2 block">Nom complet</label>
+                  <div className="relative">
+                    <User aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input
+                      id="fullname"
+                      name="fullname"
+                      autoComplete="name"
+                      type="text"
+                      placeholder="Jean Dupont"
+                      value={form.fullname}
+                      onChange={(e) => setForm({ ...form, fullname: e.target.value })}
+                      className={`w-full bg-[#070b14] border ${errors.fullname ? "border-red-500/60" : "border-white/10 focus:ring-2 focus:ring-[#9333ea] focus:border-transparent"} rounded-xl pl-11 pr-4 py-3 text-white text-sm placeholder:text-gray-400 outline-none transition-colors`}
+                    />
+                  </div>
+                  {errors.fullname && <p className="text-red-400 text-xs mt-1">{errors.fullname}</p>}
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label htmlFor="email" className="text-sm font-semibold text-gray-300 mb-2 block">Adresse e-mail</label>
+                  <div className="relative">
+                    <Mail aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input
+                      id="email"
+                      name="email"
+                      autoComplete="email"
+                      type="email"
+                      placeholder="jean@exemple.fr"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      className={`w-full bg-[#070b14] border ${errors.email ? "border-red-500/60" : "border-white/10 focus:ring-2 focus:ring-[#9333ea] focus:border-transparent"} rounded-xl pl-11 pr-4 py-3 text-white text-sm placeholder:text-gray-400 outline-none transition-colors`}
+                    />
+                  </div>
+                  {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
+                </div>
+
+                {/* Phone */}
+                <div>
+                  <label htmlFor="phone" className="text-sm font-semibold text-gray-300 mb-2 block">Numéro de téléphone</label>
+                  <div className="relative">
+                    <Phone aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input
+                      id="phone"
+                      name="phone"
+                      autoComplete="tel"
+                      type="tel"
+                      placeholder="+33 6 00 00 00 00"
+                      value={form.phone}
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                      className={`w-full bg-[#070b14] border ${errors.phone ? "border-red-500/60" : "border-white/10 focus:ring-2 focus:ring-[#9333ea] focus:border-transparent"} rounded-xl pl-11 pr-4 py-3 text-white text-sm placeholder:text-gray-400 outline-none transition-colors`}
+                    />
+                  </div>
+                  {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
+                </div>
+
+                {/* Guarantee Badge */}
+                <div className="relative flex items-center gap-3 rounded-2xl border border-green-500/20 bg-green-500/5 px-4 py-3 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 via-transparent to-transparent pointer-events-none" />
+                  <div className="shrink-0 w-9 h-9 rounded-xl bg-green-500/15 border border-green-500/30 flex items-center justify-center">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-green-400 font-bold text-sm">Support Premium</p>
+                    <p className="text-gray-300 text-xs leading-snug">Équipe technique disponible et à votre écoute pour vous accompagner à tout moment.</p>
+                  </div>
+                </div>
+
+                <div className="w-full mt-2">
+                  <Button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-[#050505] rounded-xl py-6 text-base font-bold shadow-[0_0_20px_-5px_#25D366] hover:shadow-[0_0_30px_5px_#25D366] transition-shadow duration-300"
+                  >
+                    {loading ? (
+                      <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Traitement en cours...</>
+                    ) : (
+                      <>{planPrice === "0" || planName.toLowerCase().includes("essai") ? "Obtenir mon Essai 🚀" : "Commander via WhatsApp 🚀"}</>
+                    )}
+                  </Button>
+                </div>
+
+                <p className="text-center text-xs text-gray-400">
+                  {planPrice === "0" || planName.toLowerCase().includes("essai") ? "Vous serez redirigé vers WhatsApp pour recevoir votre lien." : "Vous serez redirigé vers WhatsApp avec votre commande pré-remplie."}
+                </p>
+              </form>
+            ) : (
+              <div
+                className="flex flex-col items-center py-8 gap-4 text-center"
+              >
+                <div>
+                  <CheckCircle2 className="w-20 h-20 text-green-300" />
+                </div>
+                <h4 className="text-2xl font-black text-white">Commande enregistrée !</h4>
+                <p className="text-gray-300 text-sm">Redirection vers WhatsApp...</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
   )
 }

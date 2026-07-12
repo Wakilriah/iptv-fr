@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { m, AnimatePresence } from "framer-motion"
 import { MessageCircle, Menu, X } from "lucide-react"
 import * as tiktokPixel from "@/lib/tiktokPixel"
 
@@ -39,18 +38,16 @@ export function Header() {
           </nav>
           
           <div className="flex items-center gap-2">
-            <m.a
+            <a
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
               className="bg-[#25D366] hover:bg-[#25D366]/90 text-white w-10 h-10 sm:w-auto p-0 sm:px-5 sm:py-2.5 flex items-center justify-center gap-2 rounded-full font-semibold shadow-[0_0_15px_-3px_#25D366] hover:shadow-[0_0_25px_5px_#25D366] transition-shadow duration-300 shrink-0 cursor-pointer text-sm"
               aria-label="Contacter sur WhatsApp"
             >
               <MessageCircle className="w-5 h-5" />
               <span className="hidden sm:inline">WhatsApp</span>
-            </m.a>
+            </a>
             
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -64,52 +61,46 @@ export function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <m.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="fixed top-16 left-0 right-0 bottom-0 z-40 bg-[#050505]/95 backdrop-blur-lg xl:hidden overflow-y-auto"
-          >
-            <nav className="flex flex-col items-center gap-1 py-6 px-4">
-              {[
-                { label: "Accueil", href: "#hero" },
-                { label: "Chaînes", href: "/chaines" },
+      {mobileMenuOpen && (
+        <div
+          className="fixed top-16 left-0 right-0 bottom-0 z-40 bg-[#050505]/95 backdrop-blur-lg xl:hidden overflow-y-auto"
+        >
+          <nav className="flex flex-col items-center gap-1 py-6 px-4">
+            {[
+              { label: "Accueil", href: "#hero" },
+              { label: "Chaînes", href: "/chaines" },
 
-                { label: "Installation", href: "#comment-installer" },
-                { label: "Nos Packs", href: "#abonnements" },
-                { label: "Tarifs", href: "#tarifs" },
-                { label: "Compatibilité", href: "#compatibilite" },
-                { label: "Avantages", href: "#fonctionnalites" },
-                { label: "FAQ", href: "#faq" },
-                { label: "Contact", href: "#contact" },
-              ].map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center py-3 text-lg text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors font-medium"
-                >
-                  {link.label}
-                </a>
-              ))}
+              { label: "Installation", href: "#comment-installer" },
+              { label: "Nos Packs", href: "#abonnements" },
+              { label: "Tarifs", href: "#tarifs" },
+              { label: "Compatibilité", href: "#compatibilite" },
+              { label: "Avantages", href: "#fonctionnalites" },
+              { label: "FAQ", href: "#faq" },
+              { label: "Contact", href: "#contact" },
+            ].map((link) => (
               <a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
+                key={link.href}
+                href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="mt-4 w-full flex items-center justify-center bg-[#25D366] hover:bg-[#25D366]/90 text-white gap-2 rounded-full font-semibold shadow-[0_0_15px_-3px_#25D366] py-3 text-base cursor-pointer text-center"
-                aria-label="Contacter sur WhatsApp"
+                className="w-full text-center py-3 text-lg text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors font-medium"
               >
-                <MessageCircle className="w-5 h-5" />
-                Contactez-nous sur WhatsApp
+                {link.label}
               </a>
-            </nav>
-          </m.div>
-        )}
-      </AnimatePresence>
+            ))}
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mt-4 w-full flex items-center justify-center bg-[#25D366] hover:bg-[#25D366]/90 text-white gap-2 rounded-full font-semibold shadow-[0_0_15px_-3px_#25D366] py-3 text-base cursor-pointer text-center"
+              aria-label="Contacter sur WhatsApp"
+            >
+              <MessageCircle className="w-5 h-5" />
+              Contactez-nous sur WhatsApp
+            </a>
+          </nav>
+        </div>
+      )}
     </>
   )
 }
