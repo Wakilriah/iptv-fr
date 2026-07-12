@@ -114,7 +114,7 @@ export function OrderModal({ isOpen, onClose, planName, planPrice, planDuration 
               <X className="w-5 h-5" />
             </button>
             <div className="inline-flex items-center gap-2 rounded-full border border-[#a855f7]/30 bg-[#9333ea]/10 px-3 py-1 text-xs font-semibold text-[#a855f7] mb-4">
-              {planPrice === "0" || planName.toLowerCase().includes("essai") ? "Essai Découverte" : "Commander"}
+              {planPrice === "0" || planName.toLowerCase().includes("essai") ? "Essai gratuit" : "Commander"}
             </div>
             <h3 className="text-2xl font-black text-white">
               {planPrice === "0" || planName.toLowerCase().includes("essai") ? "Demander votre essai" : "Finaliser votre commande"}

@@ -116,7 +116,7 @@ export const searchChannels = () => {
 
 export const clickTestButton = () => {
   track("ClickButton", { 
-    button_name: "Essai Découverte 1H" 
+    button_name: "1 heure d'essai gratuit" 
   });
 };
 

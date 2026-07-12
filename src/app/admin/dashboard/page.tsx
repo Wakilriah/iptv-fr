@@ -894,7 +894,7 @@ export default function AdminDashboard() {
                       }}
                       className="w-full px-3 py-2.5 bg-[#070b14] border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:border-transparent text-xs font-bold"
                     >
-                      <option value="Essai Découverte 1H">Essai Découverte 1H</option>
+                      <option value="1 heure d'essai gratuit">1 heure d'essai gratuit</option>
                       <option value="Abonnement Standard (3 mois)">Standard (3 mois)</option>
                       <option value="Abonnement Standard (6 mois)">Standard (6 mois)</option>
                       <option value="Abonnement Standard (12 mois)">Standard (12 mois)</option>

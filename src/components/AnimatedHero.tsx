@@ -46,7 +46,7 @@ export function AnimatedHero() {
         {/* Badge */}
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-yellow-500/50 bg-yellow-500/10 px-6 py-2.5 text-base font-bold text-yellow-400 backdrop-blur-sm shadow-[0_0_15px_rgba(234,179,8,0.15)]">
-            <Star className="w-5 h-5 fill-yellow-400" /> Essai Découverte
+            <Star className="w-5 h-5 fill-yellow-400" /> Meilleur IPTV Abonnement en France
           </div>
         </div>
 
@@ -63,6 +63,17 @@ export function AnimatedHero() {
           Match Ce Soir Fr
         </div>
 
+        {/* Google Rating Badge */}
+        <div className="flex justify-center items-center mt-2 select-none">
+          <Image 
+            src="/google-rating.png" 
+            alt="Google 4.9 avis clients" 
+            width={260} 
+            height={65} 
+            className="h-10 sm:h-12 w-auto object-contain"
+          />
+        </div>
+
         <p className="text-lg md:text-2xl text-gray-300 max-w-5xl mt-8 md:mt-12 leading-relaxed font-medium px-2">
           Découvrez <strong className="text-white font-bold">Votre Portail de Divertissement en Famille</strong> avec <strong className="text-[#a855f7] font-black">Match Ce Soir Fr</strong>.<br />
           <strong className="text-white font-bold">Football, Sports en Direct, Films, et Séries TV</strong> réunis en un seul endroit. Profitez d'un <strong className="text-[#a855f7]">Streaming Haute Qualité</strong> avec une <strong>Activation Rapide</strong>, un <strong>Paiement Sécurisé</strong> et un <strong>Support 24/7</strong>. Demandez un essai dès maintenant !
@@ -73,10 +84,10 @@ export function AnimatedHero() {
           <div className="flex flex-col items-center w-full sm:w-auto">
             <div className="w-full">
               <Button
-                onClick={() => openModal("Essai Découverte 1H", "Gratuit", "1 heure")}
+                onClick={() => openModal("1 heure d'essai gratuit", "Gratuit", "1 heure")}
                 className="w-full bg-[#9333ea] hover:bg-[#7e22ce] text-white rounded-full px-6 sm:px-10 py-5 sm:py-7 text-lg sm:text-xl font-bold shadow-[0_0_40px_-10px_#a855f7] hover:shadow-[0_0_60px_-10px_#a855f7] transition-shadow"
               >
-                Essai Découverte 1H
+                1 heure d'essai gratuit
               </Button>
             </div>
             <span className="text-[11px] sm:text-xs text-gray-400 mt-2.5 font-medium text-center">
@@ -88,7 +99,7 @@ export function AnimatedHero() {
               href="#tarifs"
               className="inline-flex items-center justify-center w-full rounded-full border border-white/20 hover:bg-white/5 text-white bg-transparent backdrop-blur-sm px-6 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl font-bold transition-colors select-none text-center"
             >
-              Voir les Tarifs
+              Choisir mon Abonnement
             </a>
           </div>
         </div>

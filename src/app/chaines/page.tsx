@@ -86,8 +86,8 @@ export default function ChannelsPage() {
             className="bg-[#25D366] hover:bg-[#25D366]/90 text-[#050505] gap-1 sm:gap-2 rounded-full font-semibold px-3 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm shadow-[0_0_15px_-3px_#25D366] hover:shadow-[0_0_25px_5px_#25D366] transition-all inline-flex items-center shrink-0"
             aria-label="Obtenir un essai d'une heure sur WhatsApp"
           >
-            <span className="sm:hidden">Essai 1H</span>
-            <span className="hidden sm:inline">Essai Découverte 1H</span>
+            <span className="sm:hidden">Essai gratuit</span>
+            <span className="hidden sm:inline">1 heure d'essai gratuit</span>
           </a>
         </div>
       </header>
