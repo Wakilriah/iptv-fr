@@ -42,7 +42,12 @@ export function AnimatedHero() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] md:w-[900px] md:h-[900px] bg-[#9333ea]/25 blur-2xl md:blur-[150px] rounded-full pointer-events-none" />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center space-y-12 mt-12 px-4 md:px-8">
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center space-y-8 mt-12 px-4 md:px-8">
+        {/* Special Offer Text */}
+        <div className="text-center font-bold text-xs sm:text-sm md:text-base text-yellow-400 bg-yellow-500/10 border border-yellow-500/25 px-5 py-2.5 rounded-full max-w-2xl mx-auto tracking-wide select-none animate-pulse shadow-[0_0_15px_rgba(234,179,8,0.1)]">
+          🎁 Offre spéciale : Profitez d&apos;un contenu de haute qualité en choisissant le plan annuel – Profitez-en maintenant !
+        </div>
+
         {/* Badge */}
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-yellow-500/50 bg-yellow-500/10 px-6 py-2.5 text-base font-bold text-yellow-400 backdrop-blur-sm shadow-[0_0_15px_rgba(234,179,8,0.15)]">

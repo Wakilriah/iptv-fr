@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header"
 import { TopBanner } from "@/components/TopBanner"
 import { KeyStats } from "@/components/KeyStats"
+import { InlineTimer } from "@/components/InlineTimer"
 import { PricingCTA } from "@/components/PricingCTA"
 import { HomeTracker } from "@/components/HomeTracker"
 import { Card, CardContent } from "@/components/ui/card"
@@ -155,8 +156,6 @@ export default function Home() {
 
   return (
     <main className="flex-1 flex flex-col bg-[#050505]">
-
-      <TopBanner />
       <Header />
 
       {/* Hero */}
@@ -309,6 +308,9 @@ export default function Home() {
             <h2 className="text-3xl md:text-5xl font-black mb-4 text-white tracking-tight">Nos Tarifs &amp; Abonnements</h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">Choisissez le forfait de 1 an qui vous convient. Paiement unique, sans aucun engagement.</p>
           </div>
+
+          {/* Timer */}
+          <InlineTimer />
 
           {/* Trust badges */}
           <div className="flex flex-wrap justify-center gap-3 mb-14">
