@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { useOrderModal } from "@/context/OrderModalContext"
 import { Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -10,6 +11,39 @@ const NeonChannelShowcase = dynamic(() => import("@/components/NeonChannelShowca
 
 export function AnimatedHero() {
   const { openModal } = useOrderModal()
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    isExpired: false
+  })
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    const targetDate = new Date("2026-07-19T23:59:59").getTime()
+
+    const updateTimer = () => {
+      const now = new Date().getTime()
+      const difference = targetDate - now
+
+      if (difference <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true })
+      } else {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24))
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000)
+        setTimeLeft({ days, hours, minutes, seconds, isExpired: false })
+      }
+    }
+
+    updateTimer()
+    const interval = setInterval(updateTimer, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
   return (
     <section className="relative pt-20 md:pt-32 pb-20 md:pb-40 flex flex-col items-center justify-center min-h-[70vh] md:min-h-[85vh] text-center px-4 overflow-hidden border-b border-white/5">
       {/* Background Image & Overlay */}
@@ -43,10 +77,30 @@ export function AnimatedHero() {
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center space-y-8 mt-12 px-4 md:px-8">
-        {/* Special Offer Text */}
-        <div className="text-center font-bold text-xs sm:text-sm md:text-base text-yellow-400 bg-yellow-500/10 border border-yellow-500/25 px-5 py-2.5 rounded-full max-w-2xl mx-auto tracking-wide select-none animate-pulse shadow-[0_0_15px_rgba(234,179,8,0.1)]">
-          🎁 Offre spéciale : Profitez d&apos;un contenu de haute qualité en choisissant le plan annuel – Profitez-en maintenant !
-        </div>
+        {/* Special Offer Text with Live Timer */}
+        {(!mounted || !timeLeft.isExpired) && (
+          <div className="text-center font-bold text-xs sm:text-sm md:text-base text-yellow-400 bg-yellow-500/10 border border-yellow-500/25 px-5 py-3 rounded-2xl max-w-3xl mx-auto tracking-wide select-none shadow-[0_0_20px_rgba(234,179,8,0.15)] flex flex-col md:flex-row items-center justify-center gap-3">
+            <span>
+              🎁 Offre spéciale : Profitez d&apos;un contenu de haute qualité en choisissant le plan annuel – <strong className="underline decoration-yellow-500/60 decoration-2">Profitez-en maintenant !</strong>
+            </span>
+            {mounted ? (
+              <div className="inline-flex items-center gap-1 bg-[#050505] border border-yellow-500/40 text-white px-3 py-1 rounded-full text-[10px] sm:text-xs font-black shadow-[0_0_12px_rgba(234,179,8,0.3)]">
+                <span className="text-yellow-400 font-extrabold animate-pulse">⏳</span>
+                <span className="text-yellow-300 drop-shadow-[0_0_5px_rgba(234,179,8,0.6)]">{timeLeft.days}j</span>
+                <span className="text-white/40">:</span>
+                <span className="text-yellow-300 drop-shadow-[0_0_5px_rgba(234,179,8,0.6)]">{timeLeft.hours.toString().padStart(2, "0")}h</span>
+                <span className="text-white/40">:</span>
+                <span className="text-yellow-300 drop-shadow-[0_0_5px_rgba(234,179,8,0.6)]">{timeLeft.minutes.toString().padStart(2, "0")}m</span>
+                <span className="text-white/40">:</span>
+                <span className="text-yellow-400 font-black drop-shadow-[0_0_8px_rgba(234,179,8,0.9)] animate-pulse">{timeLeft.seconds.toString().padStart(2, "0")}s</span>
+              </div>
+            ) : (
+              <div className="inline-flex items-center gap-1 bg-[#050505] border border-yellow-500/40 text-white px-3 py-1 rounded-full text-[10px] sm:text-xs font-black opacity-50">
+                ⏳ --j : --h : --m : --s
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Badge */}
         <div>
