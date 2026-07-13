@@ -45,14 +45,14 @@ export function AnimatedHero() {
     return () => clearInterval(interval)
   }, [])
   return (
-    <section className="relative pt-12 md:pt-20 pb-12 md:pb-24 flex flex-col items-center justify-center min-h-[55vh] md:min-h-[70vh] text-center px-4 overflow-hidden border-b border-white/5">
+    <section className="relative pt-4 md:pt-6 pb-12 md:pb-24 flex flex-col items-center justify-center min-h-[55vh] md:min-h-[70vh] text-center px-4 overflow-hidden border-b border-white/5">
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0">
           {/* Desktop Image */}
           <div className="hidden md:block absolute inset-0">
             <Image
-              src="/hero-psg-4k.jpg"
+              src="/hero-psg-calm.jpg"
               alt="Famille regardant un match PSG en direct"
               fill
               sizes="(max-width: 768px) 1px, 100vw"
@@ -76,7 +76,7 @@ export function AnimatedHero() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] md:w-[900px] md:h-[900px] bg-[#9333ea]/25 blur-2xl md:blur-[150px] rounded-full pointer-events-none" />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center space-y-6 mt-4 md:mt-6 px-4 md:px-8">
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center space-y-6 mt-0 md:mt-2 px-4 md:px-8">
         {/* Special Offer Text with Live Timer */}
         {(!mounted || !timeLeft.isExpired) && (
           <div className="text-center font-bold text-xs sm:text-sm md:text-base text-yellow-400 bg-yellow-500/10 border border-yellow-500/25 px-5 py-3 rounded-2xl max-w-3xl mx-auto tracking-wide select-none shadow-[0_0_20px_rgba(234,179,8,0.15)] flex flex-col md:flex-row items-center justify-center gap-3">
