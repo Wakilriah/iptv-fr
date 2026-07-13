@@ -1,0 +1,13 @@
+--- TIKTOK COMPLIANCE V2 MATCHES ---
+MATCH in C:\Users\hp\Desktop\projects\iptv-fr\src\data\channels.json:11 -> "enfants": ["Disney Channel", "Nickelodeon", "Cartoon Network"]
+MATCH in C:\Users\hp\Desktop\projects\iptv-fr\src\data\channels.json:40 -> "vidéos": ["Sky Cinema", "Prime Video Channels"],
+MATCH in C:\Users\hp\Desktop\projects\iptv-fr\src\data\channels.json:55 -> "enfants": ["Gulli", "Disney Channel France"]
+MATCH in C:\Users\hp\Desktop\projects\iptv-fr\src\data\channels.json:77 -> "enfants": ["Pogo", "Cartoon Network India", "Disney India"]
+MATCH in C:\Users\hp\Desktop\projects\iptv-fr\src\data\channels.json:88 -> "enfants": ["Cartoon Network Brasil", "Disney Channel Brasil", "Nickelodeon Bras
+MATCH in C:\Users\hp\Desktop\projects\iptv-fr\src\data\channels.json:121 -> "enfants": ["Canal 5", "Cartoon Network Mexico", "Disney Channel Mexico", "Nicke
+MATCH in C:\Users\hp\Desktop\projects\iptv-fr\src\data\channels.json:143 -> "enfants": ["Clan", "Boing", "Disney Channel Spain", "Nickelodeon Spain"]
+MATCH in C:\Users\hp\Desktop\projects\iptv-fr\src\data\channels.json:154 -> "enfants": ["Rai Yoyo", "Cartoonito", "Disney Channel Italy", "Nickelodeon Italy
+MATCH in C:\Users\hp\Desktop\projects\iptv-fr\src\data\channels.json:165 -> "enfants": ["Zappelin", "Nickelodeon Netherlands", "Disney Channel Netherlands"]
+MATCH in C:\Users\hp\Desktop\projects\iptv-fr\src\data\channels.json:176 -> "enfants": ["SVT Barn", "Nickelodeon Sweden", "Disney Channel Sweden"]
+MATCH in C:\Users\hp\Desktop\projects\iptv-fr\src\data\channels.json:187 -> "enfants": ["DR Ramasjang", "Nickelodeon Denmark", "Disney Channel Denmark"]
+MATCH in C:\Users\hp\Desktop\projects\iptv-fr\src\data\channels.json:198 -> "enfants": ["NRK Super", "Nickelodeon Norway", "Disney Channel Norway"]

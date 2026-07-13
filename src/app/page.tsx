@@ -1,4 +1,6 @@
 import { Header } from "@/components/Header"
+import { TopBanner } from "@/components/TopBanner"
+import { KeyStats } from "@/components/KeyStats"
 import { PricingCTA } from "@/components/PricingCTA"
 import { HomeTracker } from "@/components/HomeTracker"
 import { Card, CardContent } from "@/components/ui/card"
@@ -154,6 +156,7 @@ export default function Home() {
   return (
     <main className="flex-1 flex flex-col bg-[#050505]">
 
+      <TopBanner />
       <Header />
 
       {/* Hero */}
@@ -247,6 +250,8 @@ export default function Home() {
         </div>
       </section>
 
+      <KeyStats />
+
       {/* Films & Séries */}
       <section id="films-series" className="py-20 bg-[#050505] scroll-mt-16">
         <div className="container mx-auto px-4">
@@ -300,7 +305,7 @@ export default function Home() {
           </div>
 
           {/* Title */}
-          <div className="text-center mb-10">
+          <div id="tarifs" className="text-center mb-10 scroll-mt-20">
             <h2 className="text-3xl md:text-5xl font-black mb-4 text-white tracking-tight">Nos Tarifs &amp; Abonnements</h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">Choisissez le forfait de 1 an qui vous convient. Paiement unique, sans aucun engagement.</p>
           </div>
@@ -437,7 +442,7 @@ export default function Home() {
                 <div className="feature-icon w-14 h-14 rounded-2xl bg-[#8c52ff] flex items-center justify-center shadow-[0_8px_24px_rgba(140,82,255,0.45)] mb-4">
                   {device.icon}
                 </div>
-                <span className="feature-title text-white font-black text-sm md:text-base leading-none">{device.name}</span>
+                <span className="feature-title text-[#0d1929] font-black text-sm md:text-base leading-none">{device.name}</span>
               </div>
             ))}
           </div>
@@ -474,59 +479,59 @@ export default function Home() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
                 {/* Prix */}
-                <div className="feature-card flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5">
+                <div className="feature-card flex flex-col gap-3 bg-white text-gray-900 p-6 rounded-2xl shadow-sm border border-black/5">
                   <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
-                  <h4 className="feature-title text-white font-bold text-lg">Prix Imbattables</h4>
-                  <p className="text-gray-700 text-sm leading-relaxed">Brise les barrières avec des tarifs qui défient toute concurrence, sans jamais compromettre la qualité ou le service.</p>
+                  <h4 className="feature-title text-[#0d1929] font-bold text-lg">Prix Imbattables</h4>
+                  <p className="text-gray-600 text-sm leading-relaxed">Brise les barrières avec des tarifs qui défient toute concurrence, sans jamais compromettre la qualité ou le service.</p>
                 </div>
 
                 {/* Support 24/7 */}
-                <div className="feature-card flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5">
+                <div className="feature-card flex flex-col gap-3 bg-white text-gray-900 p-6 rounded-2xl shadow-sm border border-black/5">
                   <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0">
                     <HeadphonesIcon className="w-5 h-5" />
                   </div>
-                  <h4 className="feature-title text-white font-bold text-lg">Support 24/7</h4>
-                  <p className="text-gray-700 text-sm leading-relaxed">Notre équipe est disponible 24h/24 et 7j/7 pour répondre à vos questions, vous guider dans l&apos;installation et résoudre tout problème technique.</p>
+                  <h4 className="feature-title text-[#0d1929] font-bold text-lg">Support 24/7</h4>
+                  <p className="text-gray-600 text-sm leading-relaxed">Notre équipe est disponible 24h/24 et 7j/7 pour répondre à vos questions, vous guider dans l&apos;installation et résoudre tout problème technique.</p>
                 </div>
 
                 {/* Chaînes & VOD */}
-                <div className="feature-card flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5">
+                <div className="feature-card flex flex-col gap-3 bg-white text-gray-900 p-6 rounded-2xl shadow-sm border border-black/5">
                   <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0">
                     <Tv className="w-5 h-5" />
                   </div>
-                  <h4 className="feature-title text-white font-bold text-lg">Chaînes Premium: Sports, Films, Famille</h4>
-                  <p className="text-gray-700 text-sm leading-relaxed">Chaînes françaises, belges, suisses, arabes, sportives, documentaires et programmes enfants — une sélection pour chacun. Notre bibliothèque de Films et Séries TV est mise à jour quotidiennement en VF et VOSTFR.</p>
+                  <h4 className="feature-title text-[#0d1929] font-bold text-lg">Chaînes Premium: Sports, Films, Famille</h4>
+                  <p className="text-gray-600 text-sm leading-relaxed">Chaînes françaises, belges, suisses, arabes, sportives, documentaires et programmes enfants — une sélection pour chacun. Notre bibliothèque de Films et Séries TV est mise à jour quotidiennement en VF et VOSTFR.</p>
                 </div>
 
                 {/* HD & Stabilité */}
-                <div className="feature-card flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5">
+                <div className="feature-card flex flex-col gap-3 bg-white text-gray-900 p-6 rounded-2xl shadow-sm border border-black/5">
                   <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0">
                     <MonitorPlay className="w-5 h-5" />
                   </div>
-                  <h4 className="feature-title text-white font-bold text-lg">Qualité HD & 4K UHD</h4>
-                  <p className="text-gray-700 text-sm leading-relaxed">Imaginez une clarté d&apos;image si parfaite qu&apos;elle vous transporte au cœur de l&apos;action. Oubliez les interruptions — votre confort est notre priorité.</p>
+                  <h4 className="feature-title text-[#0d1929] font-bold text-lg">Qualité HD & 4K UHD</h4>
+                  <p className="text-gray-600 text-sm leading-relaxed">Imaginez une clarté d&apos;image si parfaite qu&apos;elle vous transporte au cœur de l&apos;action. Oubliez les interruptions — votre confort est notre priorité.</p>
                 </div>
 
                 {/* Anti-Freeze */}
-                <div className="feature-card flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5">
+                <div className="feature-card flex flex-col gap-3 bg-white text-gray-900 p-6 rounded-2xl shadow-sm border border-black/5">
                   <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0">
                     <Shield className="w-5 h-5" />
                   </div>
-                  <h4 className="feature-title text-white font-bold text-lg">Technologie Anti-Freeze</h4>
-                  <p className="text-gray-700 text-sm leading-relaxed">Serveurs européens surpuissants garantissant une diffusion fluide et sans buffering, même pendant les pics de trafic.</p>
+                  <h4 className="feature-title text-[#0d1929] font-bold text-lg">Technologie Anti-Freeze</h4>
+                  <p className="text-gray-600 text-sm leading-relaxed">Serveurs européens surpuissants garantissant une diffusion fluide et sans buffering, même pendant les pics de trafic.</p>
                 </div>
 
                 {/* Contenu International */}
-                <div className="feature-card flex flex-col gap-3 bg-white text-white p-6 rounded-2xl shadow-sm border border-black/5">
+                <div className="feature-card flex flex-col gap-3 bg-white text-gray-900 p-6 rounded-2xl shadow-sm border border-black/5">
                   <div className="feature-icon w-11 h-11 rounded-xl bg-[#a855f7]/10 flex items-center justify-center text-[#a855f7] shrink-0">
                     <Globe className="w-5 h-5" />
                   </div>
-                  <h4 className="feature-title text-white font-bold text-lg">Contenu International</h4>
-                  <p className="text-gray-700 text-sm leading-relaxed">En tant que abonnement de haute qualité, notre plateforme vous donne un accès illimité à une bibliothèque mondiale de contenus, disponible partout et à tout moment.</p>
+                  <h4 className="feature-title text-[#0d1929] font-bold text-lg">Contenu International</h4>
+                  <p className="text-gray-600 text-sm leading-relaxed">En tant que abonnement de haute qualité, notre plateforme vous donne un accès illimité à une bibliothèque mondiale de contenus, disponible partout et à tout moment.</p>
                 </div>
 
               </div>

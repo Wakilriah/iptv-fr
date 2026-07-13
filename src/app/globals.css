@@ -155,14 +155,14 @@
 }
 
 .feature-title {
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  color: #0d1929 !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   transform-origin: left center;
   display: inline-block;
 }
 
 .feature-card:hover .feature-title {
-  color: #0d1929 !important;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .channel-card {
