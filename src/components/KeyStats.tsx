@@ -18,6 +18,11 @@ export function KeyStats() {
       desc: "Compatibilité mondiale pour répondre à tous vos besoins."
     },
     {
+      number: "+700",
+      title: "Clients satisfaits",
+      desc: "Une communauté d'abonnés fidèles qui nous font confiance au quotidien."
+    },
+    {
       number: "100%",
       title: "Disponibilité garantie",
       desc: "Un service IPTV fiable et stable, disponible 24h/24 et 7j/7."
@@ -31,7 +36,7 @@ export function KeyStats() {
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[350px] h-[350px] bg-purple-600/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-8 lg:gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 sm:gap-8 lg:gap-6 max-w-7xl mx-auto">
           {stats.map((stat, i) => (
             <div 
               key={i} 
