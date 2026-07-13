@@ -52,7 +52,7 @@ export function AnimatedHero() {
           {/* Desktop Image */}
           <div className="hidden md:block absolute inset-0">
             <Image
-              src="/hero-psg.webp"
+              src="/hero-psg-4k.jpg"
               alt="Famille regardant un match PSG en direct"
               fill
               sizes="(max-width: 768px) 1px, 100vw"
